@@ -1,10 +1,10 @@
-package dao;
+package bus;
 
 import java.util.List;
 
 import dto.KhachHang;
 
-public interface KhachHangDao {
+public interface KhachHangService{
 	public List<KhachHang> getTatCaKhachHang();
 	public boolean themKhachHang(KhachHang khachHang);
 	public boolean capNhatThongTinKhachHang(KhachHang khachHang);

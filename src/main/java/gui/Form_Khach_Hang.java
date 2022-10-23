@@ -1,12 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,29 +10,31 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JRadioButton;
-import com.toedter.calendar.JDateChooserBeanInfo;
 
+import bus.KhachHangService;
+import bus.KhachHangServiceImpl;
 import dao.ConectDatabase;
-import dao.KhachHangDao;
-import dao.impl.KhachHangImpl;
 import dto.KhachHang;
 import handle.RoundJTextField;
 
-import com.toedter.calendar.JDateChooser;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class Form_Khach_Hang extends JFrame {
+public class Form_Khach_Hang extends JFrame implements ActionListener, MouseListener{
 
 	public static JPanel contentPane;
 	private JTextField textMaKhachHang;
@@ -46,8 +44,16 @@ public class Form_Khach_Hang extends JFrame {
 	private DefaultTableModel dataModelKhachHang;
 	private JScrollPane scrollKhachHang;
 	private JTextField textTimKiem;
-	public KhachHangDao khachHangDao = new KhachHangImpl();
-
+	private KhachHangService khachHangService = new KhachHangServiceImpl();
+	private JRadioButton rdbtnNam;
+	private JRadioButton rdbtnNu;
+	private JButton btnXoaRong;
+	private JButton btnThem;
+	private ButtonGroup btnGroupGioiTinh;
+	private JButton btnXoa;
+	private JButton btnSua;
+	private JButton btnTimKiem;
+	private JButton btnHoanTac;
 	/**
 	 * Launch the application.
 	 */
@@ -113,15 +119,16 @@ public class Form_Khach_Hang extends JFrame {
 		lblGioiTinh.setBounds(466, 35, 83, 14);
 		panelThongTinKhachHang.add(lblGioiTinh);
 		
-		JRadioButton rdbtnNam = new JRadioButton("Nam");
+		rdbtnNam = new JRadioButton("Nam");
 		rdbtnNam.setBounds(555, 31, 60, 23);
 		panelThongTinKhachHang.add(rdbtnNam);
+		rdbtnNam.setSelected(true);
 		
-		JRadioButton rdbtnNu = new JRadioButton("Nữ");
+		rdbtnNu = new JRadioButton("Nữ");
 		rdbtnNu.setBounds(636, 31, 47, 23);
 		panelThongTinKhachHang.add(rdbtnNu);
 		
-		ButtonGroup btnGroupGioiTinh = new ButtonGroup();
+		btnGroupGioiTinh = new ButtonGroup();
 		btnGroupGioiTinh.add(rdbtnNam);
 		btnGroupGioiTinh.add(rdbtnNu);
 		
@@ -139,27 +146,27 @@ public class Form_Khach_Hang extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnThem = new JButton("Thêm");
+		btnThem = new JButton("Thêm");
 		btnThem.setBounds(58, 11, 89, 23);
 		panel.add(btnThem);
 		
-		JButton btnXoa = new JButton("Xóa");
+		btnXoa = new JButton("Xóa");
 		btnXoa.setBounds(186, 11, 89, 23);
 		panel.add(btnXoa);
 		
-		JButton btnSua = new JButton("Sửa");
+		btnSua = new JButton("Sửa");
 		btnSua.setBounds(321, 11, 89, 23);
 		panel.add(btnSua);
 		
-		JButton btnXoaRong = new JButton("Xóa Rỗng");
+		btnXoaRong = new JButton("Xóa Rỗng");
 		btnXoaRong.setBounds(451, 11, 89, 23);
 		panel.add(btnXoaRong);
 		
-		JButton btnHoanTac = new JButton("Hoàn Tác");
+		btnHoanTac = new JButton("Hoàn Tác");
 		btnHoanTac.setBounds(579, 11, 89, 23);
 		panel.add(btnHoanTac);
 		
-		JButton btnTimKiem = new JButton("Tìm Kiếm");
+		btnTimKiem = new JButton("Tìm Kiếm");
 		btnTimKiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -179,7 +186,38 @@ public class Form_Khach_Hang extends JFrame {
 		panelDanhSachKhachHang.setLayout(null);
 		
 		String[] tieuDe = new String[]  { "Mã Khách Hàng", "Tên Khách Hàng", "Giới Tính", "Số Điện Thoại" ,"Chọn"};
-		dataModelKhachHang = new DefaultTableModel(tieuDe, 0);
+		dataModelKhachHang = new DefaultTableModel(tieuDe, 0) {
+	        public Class<?> getColumnClass(int column)
+            {
+              switch(column)
+              {
+              case 0:
+                return String.class;
+              case 1:
+                return String.class;
+              case 2:
+                return String.class;
+              case 3:
+                return String.class;
+              case 4:
+                return Boolean.class;
+                default:
+                  return String.class;
+              }
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               /* Set the 11th column as editable and rest non-
+                    editable */
+                if(column==4){
+                    return true;
+                }else{
+//all other columns to false
+               return false;
+                }
+            }
+		};
 		scrollKhachHang = new JScrollPane();
 		scrollKhachHang.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollKhachHang.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -189,18 +227,198 @@ public class Form_Khach_Hang extends JFrame {
 		tableKhachHang.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollKhachHang.setViewportView(tableKhachHang);	
 		
+		btnXoaRong.addActionListener(this);
+		btnThem.addActionListener(this);
+		btnXoa.addActionListener(this);
+		btnSua.addActionListener(this);
+		btnTimKiem.addActionListener(this);
+		btnHoanTac.addActionListener(this);
+		tableKhachHang.addMouseListener(this);
+		
 		docDuLieu();
 		
 	}
 	
+  
+	
 	public void docDuLieu() {
-		ArrayList<KhachHang> dsKH = khachHangDao.getAllKhachHang();
+		List<KhachHang> dsKH = khachHangService.getTatCaKhachHang();
 		dataModelKhachHang.setRowCount(0);
 		for(KhachHang kh : dsKH) {
-			System.out.println(kh);
 			dataModelKhachHang.addRow(new Object[] {
-					kh.getMaKhachHang(), kh.getTenKhachHang(), kh.getSoDienThoai(), kh.isGioiTinh()
+					kh.getMaKhachHang(), kh.getTenKhachHang(), kh.isGioiTinh() == true ? "Nam" : "Nữ", kh.getSoDienThoai()
 			});
 		}
+	}
+	
+	private void xoaRong() {
+		textMaKhachHang.setText("");
+		textTenKhachHang.setText("");
+		textSoDienThoai.setText("");
+		rdbtnNam.setSelected(true);
+		textTimKiem.setText("");
+		textMaKhachHang.setEditable(true);
+	}
+	
+	public boolean themMoiKhachHang() {
+		KhachHang khachHang = null;
+		String maKhachHang = textMaKhachHang.getText().trim();
+		String tenKhachHang = textTenKhachHang.getText().trim();
+		String soDienThoai = textSoDienThoai.getText().trim();
+		boolean gioiTinh = false;
+		if (rdbtnNam.isSelected()) {
+			gioiTinh = true;
+		}
+		khachHang = new KhachHang(maKhachHang, tenKhachHang, soDienThoai, gioiTinh);
+		boolean kq = khachHangService.themKhachHang(khachHang);    
+		return kq;
+	}
+	
+	public void timKiemKhachHang(String noidungTim) {
+		List<KhachHang> khachHangs = khachHangService.timKiemKhachHang(noidungTim);
+		dataModelKhachHang.getDataVector().removeAllElements();
+			for (KhachHang kh : khachHangs) {
+				dataModelKhachHang.addRow(new Object[] {
+						kh.getMaKhachHang(), kh.getTenKhachHang(), kh.isGioiTinh() == true ? "Nam" : "Nữ", kh.getSoDienThoai()				
+			});
+		}
+			
+		tableKhachHang.setModel(dataModelKhachHang);
+	}
+
+	
+	public boolean capNhatKhachHang() {
+		boolean kq = false;
+		int row = tableKhachHang.getSelectedRow();
+		KhachHang kh;
+		String maKhachHang = textMaKhachHang.getText().trim();
+		String tenKhachHang = textTenKhachHang.getText().trim();
+		String soDienThoai = textSoDienThoai.getText().trim();
+		boolean gioiTinh = false;
+		if (rdbtnNam.isSelected()) {
+			gioiTinh = true;
+		}
+		
+		
+		kh = new KhachHang(maKhachHang, tenKhachHang, soDienThoai, gioiTinh);
+		kq = khachHangService.capNhatThongTinKhachHang(kh);
+		
+			if (kq) {
+				tableKhachHang.setValueAt(textMaKhachHang.getText(), row, 0);
+				tableKhachHang.setValueAt(textTenKhachHang.getText(), row, 1);
+				tableKhachHang.setValueAt(textSoDienThoai.getText(), row, 3);
+				Xoadata();
+				docDuLieu();
+				tableKhachHang.clearSelection();
+			}
+
+		return kq;
+	}
+	
+	public boolean xoaKhachHang() {
+		Boolean kq = false;
+		String maKH = "";
+		DefaultTableModel model = (DefaultTableModel) tableKhachHang.getModel();
+	    for (int i=0;i<model.getRowCount();i++) {
+	    	  maKH = (String) model.getValueAt(i, 0);
+	          Boolean checked=(Boolean)model.getValueAt(i,4);
+	          
+	          if (checked!=null && checked) {
+	        	   kq = khachHangService.xoaKhachHang(maKH);
+	               model.removeRow(i);
+	               i--;
+	          }
+	    }
+	    	
+	    
+		return kq;
+	}
+	
+	private void Xoadata() {
+		dataModelKhachHang.getDataVector().removeAllElements();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object o = e.getSource();
+		if (o.equals(btnXoaRong)) {
+			xoaRong();
+		} else if (o.equals(btnThem)) {
+			Boolean kq = themMoiKhachHang();
+			docDuLieu();
+			xoaRong();
+		} else if (o.equals(btnXoa)) {
+			 Boolean kq = xoaKhachHang();
+			 docDuLieu();
+			 xoaRong();
+			
+		} else if (o.equals(btnTimKiem)) {
+			String noidungTim = textTimKiem.getText().trim();
+			if (noidungTim.equalsIgnoreCase("")) {
+				JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin tìm kiếm !", "Thông báo",
+						JOptionPane.ERROR_MESSAGE, new ImageIcon("./HinhAnh/IconChucNang/warning.png"));
+			} else {
+				timKiemKhachHang(noidungTim);
+			}	
+		} else if (o.equals(btnSua)) {
+			Boolean kq = capNhatKhachHang();
+			xoaRong();
+			
+		} else if (o.equals(btnHoanTac)) {
+			docDuLieu();
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+//		int row = tableKhachHang.getSelectedRow();
+//		textMaKhachHang.setText(dataModelKhachHang.getValueAt(row, 0).toString());
+//		textTenKhachHang.setText(dataModelKhachHang.getValueAt(row, 1).toString());
+//		textSoDienThoai.setText(dataModelKhachHang.getValueAt(row, 3).toString());
+//		textMaKhachHang.setEditable(false);
+		
+		int row = tableKhachHang.getSelectedRow();
+		String maKH = dataModelKhachHang.getValueAt(row, 0).toString();
+		try {
+			KhachHang kh = khachHangService.layThongTinKhachHangTheoMaKhachHang(maKH);
+			textMaKhachHang.setText(maKH + "");
+			textTenKhachHang.setText(kh.getTenKhachHang());
+			textSoDienThoai.setText(kh.getSoDienThoai());
+			if (kh.isGioiTinh() == true) {
+				rdbtnNam.setSelected(true);
+			} else {
+				rdbtnNu.setSelected(true);
+			}
+			textMaKhachHang.setEditable(false);
+
+		} catch (Exception e2) {
+			System.out.println("error mouse clicked");
+			e2.printStackTrace();
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

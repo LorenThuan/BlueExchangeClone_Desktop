@@ -32,11 +32,11 @@ import javax.swing.JCheckBox;
 
 public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListener {
 
-	private JPanel contentPane;
+	public static JPanel contentPane;
 	private JTextField txtTaiKhoan;
 	private JPasswordField pwdMatkhau;
 	private JButton btnDangNhap;
-	private JButton btnXoaRong;
+	private JButton btnThoat;
 	
 	public static boolean TrangThaiDangNhapNhanVien = false;
 	public static boolean TrangThaiDangNhapQuanLy = false;
@@ -107,11 +107,11 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		btnDangNhap.setBounds(371, 256, 123, 30);
 		contentPane.add(btnDangNhap);
 
-		btnXoaRong = new JButton("Xóa Rỗng");
-		btnXoaRong.setIcon(new ImageIcon("Hinh\\iconReset.png"));
-		btnXoaRong.setFont(new Font("Arial", Font.BOLD, 13));
-		btnXoaRong.setBounds(504, 256, 97, 30);
-		contentPane.add(btnXoaRong);
+		btnThoat = new JButton("Thoát");
+		btnThoat.setIcon(new ImageIcon("Hinh\\iconReset.png"));
+		btnThoat.setFont(new Font("Arial", Font.BOLD, 13));
+		btnThoat.setBounds(504, 256, 97, 30);
+		contentPane.add(btnThoat);
 		
 		JLabel lblQuenMatKhau = new JLabel("Bạn quên mật khẩu ?");
 		lblQuenMatKhau.addMouseListener(new MouseAdapter() {
@@ -136,7 +136,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 				chckbxHienMatKhau.setBackground(Color.WHITE);
 				chckbxHienMatKhau.setBounds(370, 204, 231, 23);
 				contentPane.add(chckbxHienMatKhau);
-		btnXoaRong.addActionListener(this);
+		btnThoat.addActionListener(this);
 		btnDangNhap.addActionListener(this);
 		txtTaiKhoan.requestFocus();
 		this.addKeyListener(this);
@@ -254,7 +254,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Object obj = e.getSource();
-		if (obj.equals(btnXoaRong)) {
+		if (obj.equals(btnThoat)) {
 			txtTaiKhoan.setText("");
 			pwdMatkhau.setText("");
 			txtTaiKhoan.requestFocus();

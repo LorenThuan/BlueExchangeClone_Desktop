@@ -1,11 +1,14 @@
 package dto;
 
+import java.io.Serializable;
+import java.util.Vector;
+
 /**
  * @author Loren Thuan
  * @version 1.0
  * @created 23-Thg9-2022 8:28:40 CH
  */
-public class KhachHang {
+public class KhachHang implements Serializable{
 
 	private String maKhachHang;
 	private String tenKhachHang;
@@ -24,14 +27,21 @@ public class KhachHang {
 	 * @param soDienThoai
 	 * @param gioiTinh
 	 */
-	public KhachHang(String maKhachHang, String tenKhachHang, String soDienThoai, boolean gioiTinh){
-
-	}
+	
 
 
 	public KhachHang(String maKhachHang) {
 		super();
 		this.maKhachHang = maKhachHang;
+	}
+
+
+	public KhachHang(String maKhachHang, String tenKhachHang, String soDienThoai, Boolean gioiTinh) {
+		super();
+		this.maKhachHang = maKhachHang;
+		this.tenKhachHang = tenKhachHang;
+		this.soDienThoai = soDienThoai;
+		this.gioiTinh = gioiTinh;
 	}
 
 
@@ -65,6 +75,7 @@ public class KhachHang {
 	}
 
 
+
 	public boolean isGioiTinh() {
 		return gioiTinh;
 	}
@@ -73,7 +84,6 @@ public class KhachHang {
 	public void setGioiTinh(boolean gioiTinh) {
 		this.gioiTinh = gioiTinh;
 	}
-
 
 	@Override
 	public String toString() {
