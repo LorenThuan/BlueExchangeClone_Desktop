@@ -246,7 +246,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		dataModelKhachHang.setRowCount(0);
 		for(KhachHang kh : dsKH) {
 			dataModelKhachHang.addRow(new Object[] {
-					kh.getMaKhachHang(), kh.getTenKhachHang(), kh.isGioiTinh() == true ? "Nam" : "Nữ", kh.getSoDienThoai()
+					kh.getMaKhachHang(), kh.getTenKhachHang().trim(), kh.isGioiTinh() == true ? "Nam" : "Nữ", kh.getSoDienThoai().trim()
 			});
 		}
 	}
