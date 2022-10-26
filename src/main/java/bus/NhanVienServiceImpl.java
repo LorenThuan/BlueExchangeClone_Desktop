@@ -5,6 +5,7 @@ import java.util.List;
 import dao.NhanVienDao;
 import dao.impl.NhanVienImpl;
 import dto.NhanVien;
+import dto.TaiKhoan;
 
 public class NhanVienServiceImpl implements NhanVienService{
 	private NhanVienDao nhanVienDao = new NhanVienImpl();
@@ -37,5 +38,15 @@ public class NhanVienServiceImpl implements NhanVienService{
 	public NhanVien layThongTinNhanVienTheoMaNhanVien(String maNhanVien) {
 		return nhanVienDao.layThongTinNhanVienTheoMaNhanVien(maNhanVien);
 	}
+
+
+
+//	@Override
+//	public void phanQuyenDangNhap(String tenDangNhap, String matKhau) {
+//		nhanVienDao.phanQuyenDangNhap(tenDangNhap, matKhau);
+//		
+//	}
+
+	
 
 }

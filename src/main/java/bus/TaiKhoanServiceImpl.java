@@ -10,5 +10,9 @@ public class TaiKhoanServiceImpl implements TaiKhoanService{
 	public boolean themTaiKhoan(TaiKhoan taiKhoan) {
 		return taiKhoanDao.themTaiKhoan(taiKhoan);
 	}
+	@Override
+	public TaiKhoan layThongTinTaKhoanTheoMaTaiKhoan(String maTaiKhoan) {
+		return taiKhoanDao.layThongTinTaKhoanTheoMaTaiKhoan(maTaiKhoan);
+	}
 
 }

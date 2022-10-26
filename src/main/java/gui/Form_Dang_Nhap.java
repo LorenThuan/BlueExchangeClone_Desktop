@@ -23,6 +23,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.event.AncestorListener;
+
+import bus.NhanVienService;
+import bus.NhanVienServiceImpl;
+import bus.TaiKhoanService;
+import bus.TaiKhoanServiceImpl;
+import dao.ConectDatabase;
+import dto.NhanVien;
+import dto.TaiKhoan;
+
 import javax.swing.event.AncestorEvent;
 import java.awt.Label;
 import java.awt.Toolkit;
@@ -33,31 +42,22 @@ import javax.swing.JCheckBox;
 public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListener {
 
 	public static JPanel contentPane;
-	private JTextField txtTaiKhoan;
-	private JPasswordField pwdMatkhau;
+	public static JTextField txtTaiKhoan;
+	public static JPasswordField pwdMatkhau;
 	private JButton btnDangNhap;
 	private JButton btnThoat;
 	
 	public static boolean TrangThaiDangNhapNhanVien = false;
 	public static boolean TrangThaiDangNhapQuanLy = false;
 	public static String usernameToGetNhanVien = "";
-	/**
-	 * Launch the application.
-	 */
-//		public static void main(String[] args) {
-//			EventQueue.invokeLater(new Runnable() {
-//				public void run() {
-//					try {
-//						FrmDangNhap frame = new FrmDangNhap();
-//						frame.setVisible(true);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			});
-//		}
+	
+	public static TaiKhoan taiKhoan = new TaiKhoan();
+	public static NhanVien nhanVien = new NhanVien();
+	
+	private NhanVienService nhanVienService = new NhanVienServiceImpl();
+
 	public static void main(String[] args) {
-		Form_Dang_Nhap a= new Form_Dang_Nhap();
+		Form_Dang_Nhap a = new Form_Dang_Nhap();
 		a.setVisible(true);
 	}
 
@@ -65,6 +65,13 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	 * Create the frame.
 	 */
 	public Form_Dang_Nhap() {
+//		DAO
+		try {
+			ConectDatabase.getInstance().connect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 650, 370);
 		setLocationRelativeTo(null);
@@ -140,124 +147,95 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		btnDangNhap.addActionListener(this);
 		txtTaiKhoan.requestFocus();
 		this.addKeyListener(this);
-	}
-
-	public boolean KiemTraDuLieu() {
-		String tenUser = txtTaiKhoan.getText();
 		
-		// Tên đăng nhập phải là chữ hoặc số và không có kí tự đặc biệt, yêu cầu từ 3
-		// đến 20 kí tự
-		boolean match = tenUser.matches("[a-zA-z0-9 ]{3,20}");
-		if (match != true) {
-			JOptionPane.showMessageDialog(this, "Tên Đăng Nhập, Hoặc Mật Khẩu Sai.");
-//			lblMessLoiUser.setText("Lỗi: Tên đăng Nhập (Không Chứa Ký Tự đặt Biệt,Tối Thiểu 3-20 Ký Tự)");
-			return false;
-		} else
-			return true;
 	}
 
-	public void loadTaiKhoan(String tenDangNhap, String matKhau) {
+	
+	public void phanQuyenDangNhap(String tenDangNhap, String matKhau) {
 		try {
-//			Connection con = ConectDatabase.getInstance().getConnection();
-			PreparedStatement stmt = null;
-			String sql = "select t.tenTaiKhoan, t.matKhau, n.loaiNhanVien\r\n"
-					+ "from dbo.TaiKhoan t join dbo.NhanVien n on t.tenTaiKhoan = n.tenTaiKhoan \r\n"
-					+ "where t.tenTaiKhoan=? and t.matKhau=?";
-
-//			stmt = con.prepareStatement(sql);
-			stmt.setString(1, tenDangNhap);
-			stmt.setString(2, matKhau);
-			ResultSet rs = stmt.executeQuery();
+			PreparedStatement preStm = null;
+			Connection con = ConectDatabase.getInstance().getConnection();
+			String sql = "SELECT  tk.[maNhanVien], [matKhau], [chucVu]      \r\n"
+					+ "FROM            Nhan_Vien nv INNER JOIN\r\n"
+					+ "                         Tai_Khoan tk ON nv.maNhanVien = tk.maNhanVien\r\n"
+					+ "						 where tk.[maNhanVien] = ? and [matKhau] = ?\r\n"
+					+ "group by tk.[maNhanVien], [matKhau], [chucVu]\r\n"
+					+ "";
+			preStm = con.prepareStatement(sql);
+			preStm.setString(1, tenDangNhap );
+			preStm.setString(2, matKhau);
+			ResultSet rs = preStm.executeQuery();
 			while (rs.next()) {
-				String ten = rs.getString(1).trim();
-				String mk = rs.getString(2).trim();
-				String loaiTk = rs.getString(3).trim();
-//				taiKhoan = new TaiKhoan(ten, mk, loaiTk);
+				String tenTaiKhoan = rs.getString(1).trim();
+				String matKhauNV = rs.getString(2).trim();
+				String chucVu = rs.getString(3).trim();
+				nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(tenTaiKhoan);
+				taiKhoan.setNhanVien(nhanVien);
+				taiKhoan.setMatKhau(matKhauNV);
+				nhanVien.setChucVu(chucVu);
+				System.out.println(taiKhoan);
+				System.out.println(nhanVien);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
+		
 	}
 
-//	public boolean kiemTraDangNhap(String tenDangNhap, String matKhau) {
-//		if (tenDangNhap.equalsIgnoreCase(tenTaiKhoanAdmin) && matKhau.equalsIgnoreCase(matKhauAdmin)) {
-//			TrangThaiDangNhapNhanVien = true;
-//			TrangThaiDangNhapQuanLy = true;
-//			return true;
-//		} else if (taiKhoan.getTenTaiKhoan().equalsIgnoreCase(tenDangNhap)
-//				&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
-//				&& taiKhoan.getLoaiTaiKhoan().equalsIgnoreCase("NV")) {
-//			TrangThaiDangNhapNhanVien = true;
-//			return true;
-//		} else if (taiKhoan.getTenTaiKhoan().equalsIgnoreCase(tenDangNhap)
-//				&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
-//				&& taiKhoan.getLoaiTaiKhoan().equalsIgnoreCase("QL")) {
-//			TrangThaiDangNhapQuanLy = true;
-//			return true;
-//		}
-//
-//		return false;
-//	}
+	public boolean kiemTraDangNhap(String tenDangNhap, String matKhau) {
+		 if (taiKhoan.getNhanVien().getMaNhanVien().equalsIgnoreCase(tenDangNhap)
+				&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
+				&& nhanVien.getChucVu().equalsIgnoreCase("NVBH")) {
+			TrangThaiDangNhapNhanVien = true;
+			return true;
+		} else if (taiKhoan.getNhanVien().getMaNhanVien().equalsIgnoreCase(tenDangNhap)
+				&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
+				&& nhanVien.getChucVu().equalsIgnoreCase("NVQL")) {
+			TrangThaiDangNhapQuanLy = true;
+			return true;
+		}
 
-//	public boolean kiemTraDangNhapAdmin(String tenDangNhap, String matKhau) {
-//		if (tenDangNhap.equalsIgnoreCase(tenTaiKhoanAdmin) && matKhau.equalsIgnoreCase(matKhauAdmin)) {
-//			TrangThaiDangNhapNhanVien = true;
-//			TrangThaiDangNhapQuanLy = true;
-//			return true;
-//		}
-//		return false;
-//	}
+		return false;
+	}
+	
+	public void logIn() {
+		try {
+			
+				String tenDN = txtTaiKhoan.getText().trim();
+				String matKhau = pwdMatkhau.getText().trim();
+				phanQuyenDangNhap(tenDN, matKhau);
+				if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapNhanVien == true) {
+					usernameToGetNhanVien = txtTaiKhoan.getText();
+					System.out.println("1 " + usernameToGetNhanVien);
+					Form_Man_Hinh_Chinh formManHinhChinh = new Form_Man_Hinh_Chinh();
+					formManHinhChinh.mnNhanVien.setEnabled(false);
+					formManHinhChinh.mntmThongKeDoanhThu.setEnabled(false);
+					formManHinhChinh.mntmThongKeKhachHang.setEnabled(false);
+					formManHinhChinh.mntmThongKeSanPhamBanChay.setEnabled(false);
+					formManHinhChinh.setVisible(true);
+					this.setVisible(false);
+				} else if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapQuanLy == true) {
+					usernameToGetNhanVien = txtTaiKhoan.getText();
+					System.out.println("2 " + usernameToGetNhanVien);
+					Form_Man_Hinh_Chinh formManHinhChinh = new Form_Man_Hinh_Chinh();
+					formManHinhChinh.setVisible(true);
+					this.setVisible(false);
+				}
+					
+			}
+	
+		catch (Exception e2) {
+			JOptionPane.showMessageDialog(this, "Tên Đăng Nhập, Hoặc Mật Khẩu Sai.");
+	}
+}
 
-//	public void logIn() {
-//		try {
-//			if (KiemTraDuLieu()) {
-//				String tenDN = txtTaiKhoan.getText().trim();
-//				@SuppressWarnings("deprecation")
-//				String matKhau = pwdMatkhau.getText().trim();
-//				loadTaiKhoan(tenDN, matKhau);
-//				if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapNhanVien == true
-//						&& TrangThaiDangNhapQuanLy == true) {
-//					usernameToGetNhanVien = txtTaiKhoan.getText();
-//					System.out.println("1 " + usernameToGetNhanVien);
-//					FrmManHinhChinh frmManHinhChinh = new FrmManHinhChinh();
-//					frmManHinhChinh.setVisible(true);
-//					this.setVisible(false);
-//				} else if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapNhanVien == true) {
-//					usernameToGetNhanVien = txtTaiKhoan.getText();
-//					System.out.println("2 " + usernameToGetNhanVien);
-//					FrmManHinhChinh frmManHinhChinh = new FrmManHinhChinh();
-//					frmManHinhChinh.mntmQuanLySP.setEnabled(false);
-//					frmManHinhChinh.mnNhanVien.setEnabled(false);
-//					frmManHinhChinh.mntmThongKeTinhTrangSP.setEnabled(false);
-//					frmManHinhChinh.mntmThongKeDoanhThu.setEnabled(false);
-//					frmManHinhChinh.setVisible(true);
-//					this.setVisible(false);
-//				} else if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapQuanLy == true) {
-//					usernameToGetNhanVien = txtTaiKhoan.getText();
-//					System.out.println("3 " + usernameToGetNhanVien);
-//					FrmManHinhChinh frmManHinhChinh = new FrmManHinhChinh();
-////					frmManHinhChinh.mnLapHoaDon.setEnabled(false);
-//					frmManHinhChinh.setVisible(true);
-
-//					this.setVisible(false);
-//				}
-//
-//				else
-//					JOptionPane.showMessageDialog(this, "Tên Đăng Nhập, Hoặc Mật Khẩu Sai.");
-//			}
-//		} catch (Exception e2) {
-//			JOptionPane.showMessageDialog(this, "Tên Đăng Nhập, Hoặc Mật Khẩu Sai.");
-//		}
-//	}
 
 	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Object obj = e.getSource();
 		if (obj.equals(btnThoat)) {
-			txtTaiKhoan.setText("");
-			pwdMatkhau.setText("");
-			txtTaiKhoan.requestFocus();
+			System.exit(0);
 		} else if (obj.equals(btnDangNhap)) {
 			if(txtTaiKhoan.getText().equalsIgnoreCase("")) {
 				JOptionPane.showMessageDialog(btnDangNhap, "Tài khoản không được  để trống");
@@ -268,7 +246,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 				return;
 			}
 				
-//			logIn();
+			logIn();
 		}
 	}
 

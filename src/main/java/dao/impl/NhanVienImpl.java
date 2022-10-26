@@ -10,6 +10,7 @@ import java.util.List;
 import dao.ConectDatabase;
 import dao.NhanVienDao;
 import dto.NhanVien;
+import dto.TaiKhoan;
 
 
 public class NhanVienImpl implements NhanVienDao{
@@ -165,5 +166,36 @@ public class NhanVienImpl implements NhanVienDao{
 		}
 		return nhanVien;
 	}
+
+//	@Override
+//	public void phanQuyenDangNhap(String tenDangNhap, String matKhau) {
+//		try {
+//			NhanVien nhanVien = null;
+//			TaiKhoan taiKhoan = null;
+//			con = ConectDatabase.getInstance().getConnection();
+//			String sql = "SELECT  tk.[maNhanVien], [matKhau], [chucVu]      \r\n"
+//					+ "FROM            Nhan_Vien nv INNER JOIN\r\n"
+//					+ "                         Tai_Khoan tk ON nv.maNhanVien = tk.maNhanVien\r\n"
+//					+ "						 where tk.[maNhanVien] = ? and [matKhau] = ?\r\n"
+//					+ "group by tk.[maNhanVien], [matKhau], [chucVu]\r\n"
+//					+ "";
+//			preStm = con.prepareStatement(sql);
+//			preStm.setString(1, tenDangNhap);
+//			preStm.setString(2, matKhau);
+//			rs = preStm.executeQuery();
+//			while (rs.next()) {
+//				String tenTaiKhoan = rs.getString(1).trim();
+//				String matKhauNV = rs.getString(2).trim();
+//				String chucVu = rs.getString(3).trim();
+//				nhanVien = layThongTinNhanVienTheoMaNhanVien(tenDangNhap);
+//				taiKhoan.setNhanVien(nhanVien);
+//				taiKhoan = new TaiKhoan(matKhauNV);
+//				nhanVien.setChucVu(chucVu);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 }

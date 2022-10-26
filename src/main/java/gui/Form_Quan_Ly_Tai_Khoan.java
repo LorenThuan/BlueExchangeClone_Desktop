@@ -18,6 +18,15 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JRadioButton;
 import com.toedter.calendar.JDateChooserBeanInfo;
+
+import bus.NhanVienService;
+import bus.NhanVienServiceImpl;
+import bus.TaiKhoanService;
+import bus.TaiKhoanServiceImpl;
+import dao.ConectDatabase;
+import dto.NhanVien;
+import dto.TaiKhoan;
+
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -33,10 +42,11 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame {
 	public static JPanel contentPane;
 	private JTextField textMaNhanVien;
 	private JTextField textTenNhanVien;
-	private DefaultTableModel dataModelKhachHang;
 	private JPasswordField passwordNhanVien;
 	private JTextField textEmail;
-
+	private JComboBox<String> comboBox;
+	private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
+	private NhanVienService nhanVienService = new NhanVienServiceImpl();
 	/**
 	 * Launch the application.
 	 */
@@ -57,6 +67,13 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame {
 	 * Create the frame.
 	 */
 	public Form_Quan_Ly_Tai_Khoan() {
+		//DAO
+				try {
+					ConectDatabase.getInstance().connect();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -108,9 +125,11 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame {
 		
 		
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.setEnabled(false);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nhân Viên Quản Lý", "Nhân Viên Bán Hàng"}));
+//		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nhân Viên Quản Lý", "Nhân Viên Bán Hàng"}));
+		comboBox.addItem("Nhân Viên Quản Lý");
+		comboBox.addItem("Nhân Viên Bán Hàng");
 		comboBox.setBounds(555, 87, 197, 22);
 		panelThongTinTaiKhoan.add(comboBox);
 		
@@ -141,8 +160,17 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame {
 		btnXoa.setBounds(233, 11, 121, 23);
 		panel.add(btnXoa);
 		
-		String[] tieuDe = new String[]  { "Mã Khách Hàng", "Tên Khách Hàng", "Giới Tính", "Số Điện Thoại" ,"Chọn"};
-		dataModelKhachHang = new DefaultTableModel(tieuDe, 0);
-		
+		loadDuLieu();
+	}
+	
+	
+	public void loadDuLieu() {
+		TaiKhoan taiKhoan = taiKhoanService.layThongTinTaKhoanTheoMaTaiKhoan(Form_Dang_Nhap.txtTaiKhoan.getText().trim());
+		NhanVien nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(taiKhoan.getNhanVien().getMaNhanVien());
+		textMaNhanVien.setText(taiKhoan.getNhanVien().getMaNhanVien());
+		passwordNhanVien.setText(taiKhoan.getMatKhau());
+		textEmail.setText(nhanVien.getEmail());
+		comboBox.getModel().setSelectedItem(nhanVien.getChucVu());
+		textTenNhanVien.setText(nhanVien.getTenNhanVien());
 	}
 }

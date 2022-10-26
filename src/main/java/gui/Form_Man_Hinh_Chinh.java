@@ -51,10 +51,14 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	private Form_Quan_Ly_Tai_Khoan form_Quan_Ly_Tai_Khoan = new Form_Quan_Ly_Tai_Khoan();
 	private Form_Dang_Nhap form_Dang_Nhap = new Form_Dang_Nhap();
 	public static JTabbedPane tabbedPane;
-	private JMenuItem mntmQuanLyTaiKhoan;
+	public static JMenuItem mntmQuanLyTaiKhoan;
 	private JMenuItem mntmDangXuat;
-	private JMenu mnKhachHang;
-	private JMenu mnNhanVien;
+	public static JMenu mnKhachHang;
+	public static JMenu mnNhanVien;
+	public static JMenuItem mntmThongKeDoanhThu;
+	public static JMenuItem mntmThongKeSanPhamBanChay;
+	public static JMenuItem mntmThongKeKhachHang;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -151,17 +155,17 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnThongKe.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarThongKe.add(mnThongKe);
 		
-		JMenuItem mntmThongKeDoanhThu = new JMenuItem("Thống kê doanh thu");
+		mntmThongKeDoanhThu = new JMenuItem("Thống kê doanh thu");
 		mntmThongKeDoanhThu.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\growth.png"));
 		mntmThongKeDoanhThu.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeDoanhThu);
 		
-		JMenuItem mntmThongKeSanPhamBanChay = new JMenuItem("Thống kê sản phẩm bán chạy");
+		mntmThongKeSanPhamBanChay = new JMenuItem("Thống kê sản phẩm bán chạy");
 		mntmThongKeSanPhamBanChay.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\sell.png"));
 		mntmThongKeSanPhamBanChay.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeSanPhamBanChay);
 		
-		JMenuItem mntmThongKeKhachHang = new JMenuItem("Thống kê khách hàng");
+		mntmThongKeKhachHang = new JMenuItem("Thống kê khách hàng");
 		mntmThongKeKhachHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\diagram.png"));
 		mntmThongKeKhachHang.setBackground(new Color(240, 240, 240));
 		mntmThongKeKhachHang.setForeground(new Color(0, 0, 0));

@@ -30,16 +30,18 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
-public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
+public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 4988454772471512347L;
 	private JPanel contentPane;
 	private static JTextField textMaNhanVien;
 	private JPasswordField pwdMatKhau;
-	private JButton btnThem;
+	private JButton btnDoiMatKhau;
 
 	private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
 	private NhanVienService nhanVienService = new NhanVienServiceImpl();
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -47,7 +49,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Form_Cap_Mat_Khau frame = new Form_Cap_Mat_Khau();
+					Form_Doi_Mat_Khau frame = new Form_Doi_Mat_Khau();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +61,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public Form_Cap_Mat_Khau() {
+	public Form_Doi_Mat_Khau() {
 		//DAO
 		try {
 			ConectDatabase.getInstance().connect();
@@ -68,7 +70,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 		}
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(100, 100, 600, 432);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,46 +83,65 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 		contentPane.add(pnTieuDe);
 		pnTieuDe.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("CẤP MẬT KHẨU");
+		JLabel lblNewLabel = new JLabel("ĐỔI MẬT KHẨU");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(156, 0, 259, 55);
 		pnTieuDe.add(lblNewLabel);
 
 		JPanel pnThemTK = new JPanel();
-		pnThemTK.setBounds(10, 75, 566, 278);
+		pnThemTK.setBounds(10, 75, 566, 318);
 		pnThemTK.setBackground(new Color(91,165,156));
 		contentPane.add(pnThemTK);
 		pnThemTK.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel("Tài Khoản:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(60, 70, 103, 25);
+		lblNewLabel_1.setBounds(60, 11, 103, 25);
 		pnThemTK.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("Mật Khẩu:");
+		JLabel lblNewLabel_2 = new JLabel("Mật Khẩu cũ:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(60, 150, 103, 25);
+		lblNewLabel_2.setBounds(60, 65, 103, 25);
 		pnThemTK.add(lblNewLabel_2);
 
 		textMaNhanVien = new JTextField();
-		textMaNhanVien.setEditable(false);
 		textMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textMaNhanVien.setBounds(200, 70, 300, 25);
+		textMaNhanVien.setBounds(200, 11, 300, 25);
 		pnThemTK.add(textMaNhanVien);
 		textMaNhanVien.setColumns(10);
 
 		pwdMatKhau = new JPasswordField();
 		pwdMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pwdMatKhau.setBounds(200, 150, 300, 25);
+		pwdMatKhau.setBounds(200, 65, 300, 25);
 		pnThemTK.add(pwdMatKhau);
 
-		btnThem = new JButton("Thêm");
-		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnThem.setBounds(246, 207, 105, 39);
-		pnThemTK.add(btnThem);
+		btnDoiMatKhau = new JButton("Đổi mật khẩu");
+		btnDoiMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnDoiMatKhau.setBounds(210, 268, 141, 39);
+		pnThemTK.add(btnDoiMatKhau);
+		
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		passwordField.setBounds(200, 119, 300, 25);
+		pnThemTK.add(passwordField);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Mật Khẩu mới:");
+		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2_1.setBounds(60, 119, 103, 25);
+		pnThemTK.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("Nhập lại mật khẩu mới:");
+		lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2_1_1.setBounds(10, 179, 153, 25);
+		pnThemTK.add(lblNewLabel_2_1_1);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		passwordField_1.setBounds(200, 179, 300, 25);
+		pnThemTK.add(passwordField_1);
 
-		btnThem.addActionListener(this);
+		btnDoiMatKhau.addActionListener(this);
 		
 		themNhanVienAndShowMaNhanVien();
 	}
@@ -128,7 +149,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj.equals(btnThem)) {
+		if (obj.equals(btnDoiMatKhau)) {
 			try {
 				String password = String.valueOf(pwdMatKhau.getPassword());
 				TaiKhoan taiKhoan = new TaiKhoan(password);
@@ -146,7 +167,6 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 
 	public void themNhanVienAndShowMaNhanVien() {
 		try {
-			textMaNhanVien.setText(Form_Nhan_Vien.textMaNhanVien.getText().trim());
 //			Boolean themNV = Form_Nhan_Vien.themMoiNhanVien();
 //			Form_Nhan_Vien.docDuLieu();
 		} catch (Exception e) {

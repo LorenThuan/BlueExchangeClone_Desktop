@@ -3,6 +3,8 @@ package dao;
 import java.util.List;
 
 import dto.NhanVien;
+import dto.TaiKhoan;
+
 
 public interface NhanVienDao {
 	public List<NhanVien> getTatCaNhanVien();
@@ -11,4 +13,5 @@ public interface NhanVienDao {
 	public boolean xoaNhanVien(String maNhanVien);
 	public List<NhanVien> timKiemNhanVien(String noiDungTim);
 	public NhanVien layThongTinNhanVienTheoMaNhanVien(String maNhanVien);
+//	public void phanQuyenDangNhap(String tenDangNhap, String matKhau);
 }

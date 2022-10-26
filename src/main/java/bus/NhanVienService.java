@@ -3,6 +3,7 @@ package bus;
 import java.util.List;
 
 import dto.NhanVien;
+import dto.TaiKhoan;
 
 public interface NhanVienService{
 	public List<NhanVien> getTatCaNhanVien();
@@ -11,4 +12,5 @@ public interface NhanVienService{
 	public boolean xoaNhanVien(String maNhanVien);
 	public List<NhanVien> timKiemNhanVien(String noiDungTim);
 	public NhanVien layThongTinNhanVienTheoMaNhanVien(String maNhanVien);
+//	public void phanQuyenDangNhap(String tenDangNhap, String matKhau);
 }
