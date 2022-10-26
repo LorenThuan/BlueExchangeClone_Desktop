@@ -26,22 +26,19 @@ public class SanPham {
 
 	}	
 
-	public SanPham(String maSanPham, String tenSanPham, String mota, double donGia, String hinhAnh, int soLuong,
-			double giamGia, String mauSac, String gioiTinh, String kichThuoc, String trangThai, String chatLieu) {
+	
+	
+
+	public SanPham(String maSanPham, String tenSanPham, double donGia, String trangThai) {
 		super();
 		this.maSanPham = maSanPham;
 		this.tenSanPham = tenSanPham;
-		this.mota = mota;
 		this.donGia = donGia;
-		this.hinhAnh = hinhAnh;
-		this.soLuong = soLuong;
-		this.giamGia = giamGia;
-		this.mauSac = mauSac;
-		this.gioiTinh = gioiTinh;
-		this.kichThuoc = kichThuoc;
 		this.trangThai = trangThai;
-		this.chatLieu = chatLieu;
 	}
+
+
+
 
 	@Override
 	public String toString() {
@@ -49,6 +46,118 @@ public class SanPham {
 				+ donGia + ", hinhAnh=" + hinhAnh + ", soLuong=" + soLuong + ", giamGia=" + giamGia + ", mauSac="
 				+ mauSac + ", gioiTinh=" + gioiTinh + ", kichThuoc=" + kichThuoc + ", trangThai=" + trangThai
 				+ ", chatLieu=" + chatLieu + "]";
+	}
+
+	public String getMaSanPham() {
+		return maSanPham;
+	}
+
+	public void setMaSanPham(String maSanPham) {
+		this.maSanPham = maSanPham;
+	}
+
+	public String getTenSanPham() {
+		return tenSanPham;
+	}
+
+	public void setTenSanPham(String tenSanPham) {
+		this.tenSanPham = tenSanPham;
+	}
+
+	public String getMota() {
+		return mota;
+	}
+
+	public void setMota(String mota) {
+		this.mota = mota;
+	}
+
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
+	}
+
+	public String getHinhAnh() {
+		return hinhAnh;
+	}
+
+	public void setHinhAnh(String hinhAnh) {
+		this.hinhAnh = hinhAnh;
+	}
+
+	public int getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
+	}
+
+	public double getGiamGia() {
+		return giamGia;
+	}
+
+	public void setGiamGia(double giamGia) {
+		this.giamGia = giamGia;
+	}
+
+	public String getMauSac() {
+		return mauSac;
+	}
+
+	public void setMauSac(String mauSac) {
+		this.mauSac = mauSac;
+	}
+
+	public String getGioiTinh() {
+		return gioiTinh;
+	}
+
+	public void setGioiTinh(String gioiTinh) {
+		this.gioiTinh = gioiTinh;
+	}
+
+	public String getKichThuoc() {
+		return kichThuoc;
+	}
+
+	public void setKichThuoc(String kichThuoc) {
+		this.kichThuoc = kichThuoc;
+	}
+
+	public String getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(String trangThai) {
+		this.trangThai = trangThai;
+	}
+
+	public String getChatLieu() {
+		return chatLieu;
+	}
+
+	public void setChatLieu(String chatLieu) {
+		this.chatLieu = chatLieu;
+	}
+
+	public LoaiSanPham getLoaiSanPham() {
+		return loaiSanPham;
+	}
+
+	public void setLoaiSanPham(LoaiSanPham loaiSanPham) {
+		this.loaiSanPham = loaiSanPham;
+	}
+
+	public NhaCungCap getNhaCungCap() {
+		return nhaCungCap;
+	}
+
+	public void setNhaCungCap(NhaCungCap nhaCungCap) {
+		this.nhaCungCap = nhaCungCap;
 	}
 	
 	
