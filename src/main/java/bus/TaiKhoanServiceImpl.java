@@ -14,5 +14,13 @@ public class TaiKhoanServiceImpl implements TaiKhoanService{
 	public TaiKhoan layThongTinTaKhoanTheoMaTaiKhoan(String maTaiKhoan) {
 		return taiKhoanDao.layThongTinTaKhoanTheoMaTaiKhoan(maTaiKhoan);
 	}
+	@Override
+	public String layMaNhanVienTheoEmail(String email) {
+		return taiKhoanDao.layMaNhanVienTheoEmail(email);
+	}
+	@Override
+	public boolean doiMatKhau(TaiKhoan taiKhoan) {
+		return taiKhoanDao.doiMatKhau(taiKhoan);
+	}
 
 }

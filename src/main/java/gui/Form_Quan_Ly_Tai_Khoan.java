@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -37,16 +39,19 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 
-public class Form_Quan_Ly_Tai_Khoan extends JFrame {
+public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 
 	public static JPanel contentPane;
-	private JTextField textMaNhanVien;
+	public static JTextField textMaNhanVien;
 	private JTextField textTenNhanVien;
 	private JPasswordField passwordNhanVien;
 	private JTextField textEmail;
 	private JComboBox<String> comboBox;
+	private JLabel lbHienMatKhau;
 	private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
 	private NhanVienService nhanVienService = new NhanVienServiceImpl();
+	private JButton btnDoiMatKhau;
+	private JButton btnThoat;
 	/**
 	 * Launch the application.
 	 */
@@ -119,6 +124,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame {
 		panelThongTinTaiKhoan.add(lblMatKhau);
 		
 		passwordNhanVien = new JPasswordField();
+		passwordNhanVien.setEchoChar('•');
 		passwordNhanVien.setEditable(false);
 		passwordNhanVien.setBounds(555, 32, 197, 20);
 		panelThongTinTaiKhoan.add(passwordNhanVien);
@@ -143,34 +149,64 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame {
 		textEmail.setBounds(947, 32, 197, 20);
 		panelThongTinTaiKhoan.add(textEmail);
 		
-		JCheckBox chckbxHienMatKhau = new JCheckBox("Hiện mật khẩu");
-		chckbxHienMatKhau.setBounds(555, 57, 197, 23);
+		JCheckBox chckbxHienMatKhau = new JCheckBox();
+		chckbxHienMatKhau.setBounds(555, 57, 21, 23);
+		chckbxHienMatKhau.addActionListener(new ActionListener() {
+			   public void actionPerformed(ActionEvent e) {
+			    if(chckbxHienMatKhau.isSelected()){
+			    	lbHienMatKhau.setText("Ẩn mật khẩu");
+			     passwordNhanVien.setEchoChar((char)0);
+			    }else{
+			    	lbHienMatKhau.setText("Hiện mật khẩu");
+			    passwordNhanVien.setEchoChar('•');
+			    }
+			   }
+			  });
+		
 		panelThongTinTaiKhoan.add(chckbxHienMatKhau);
+		
+		lbHienMatKhau = new JLabel("Hiện mật khẩu");
+		lbHienMatKhau.setBounds(591, 57, 161, 23);
+		panelThongTinTaiKhoan.add(lbHienMatKhau);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(457, 232, 401, 45);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnDoiMatKhau = new JButton("Đổi mật khẩu");
+		btnDoiMatKhau = new JButton("Đổi mật khẩu");
 		btnDoiMatKhau.setBounds(40, 11, 159, 23);
 		panel.add(btnDoiMatKhau);
 		
-		JButton btnXoa = new JButton("Đăng xuất");
-		btnXoa.setBounds(233, 11, 121, 23);
-		panel.add(btnXoa);
+		btnThoat = new JButton("Thoát");
+		btnThoat.setBounds(233, 11, 121, 23);
+		panel.add(btnThoat);
+		
+		btnDoiMatKhau.addActionListener(this);
+		btnThoat.addActionListener(this);
 		
 		loadDuLieu();
 	}
-	
+
 	
 	public void loadDuLieu() {
 		TaiKhoan taiKhoan = taiKhoanService.layThongTinTaKhoanTheoMaTaiKhoan(Form_Dang_Nhap.txtTaiKhoan.getText().trim());
 		NhanVien nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(taiKhoan.getNhanVien().getMaNhanVien());
 		textMaNhanVien.setText(taiKhoan.getNhanVien().getMaNhanVien());
-		passwordNhanVien.setText(taiKhoan.getMatKhau());
+		passwordNhanVien.setText(taiKhoan.getMatKhau().trim());
 		textEmail.setText(nhanVien.getEmail());
 		comboBox.getModel().setSelectedItem(nhanVien.getChucVu());
 		textTenNhanVien.setText(nhanVien.getTenNhanVien());
 	}
+
+@Override
+public void actionPerformed(ActionEvent e) {
+	Object o = e.getSource();
+	if (o.equals(btnDoiMatKhau)) {
+		new Form_Doi_Mat_Khau().setVisible(true);
+	} else if (o.equals(btnThoat)) {
+		System.exit(0);
+	}
+	
+}
 }

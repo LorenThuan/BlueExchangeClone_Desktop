@@ -30,12 +30,10 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
-public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
+public class Form_Reset_Password extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 4988454772471512347L;
 	private JPanel contentPane;
-	private static JTextField textMaNhanVien;
-	private JPasswordField pwdMatKhauCu;
 	private JButton btnDoiMatKhau;
 
 	private TaiKhoanService taiKhoanService = new TaiKhoanServiceImpl();
@@ -49,7 +47,7 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Form_Doi_Mat_Khau frame = new Form_Doi_Mat_Khau();
+					Form_Reset_Password frame = new Form_Reset_Password();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +59,7 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public Form_Doi_Mat_Khau() {
+	public Form_Reset_Password() {
 		//DAO
 		try {
 			ConectDatabase.getInstance().connect();
@@ -94,93 +92,62 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 		contentPane.add(pnThemTK);
 		pnThemTK.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("Tài Khoản:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(60, 11, 103, 25);
-		pnThemTK.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("Mật Khẩu cũ:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(60, 65, 103, 25);
-		pnThemTK.add(lblNewLabel_2);
-
-		textMaNhanVien = new JTextField();
-		textMaNhanVien.setEditable(false);
-		textMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textMaNhanVien.setBounds(200, 11, 300, 25);
-		pnThemTK.add(textMaNhanVien);
-		textMaNhanVien.setColumns(10);
-
-		pwdMatKhauCu = new JPasswordField();
-		pwdMatKhauCu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pwdMatKhauCu.setBounds(200, 65, 300, 25);
-		pnThemTK.add(pwdMatKhauCu);
-
 		btnDoiMatKhau = new JButton("Đổi mật khẩu");
 		btnDoiMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnDoiMatKhau.setBounds(210, 268, 141, 39);
+		btnDoiMatKhau.setBounds(210, 163, 141, 39);
 		pnThemTK.add(btnDoiMatKhau);
 		
 		pwdMatKhauMoi = new JPasswordField();
 		pwdMatKhauMoi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pwdMatKhauMoi.setBounds(200, 119, 300, 25);
+		pwdMatKhauMoi.setBounds(200, 27, 300, 25);
 		pnThemTK.add(pwdMatKhauMoi);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Mật Khẩu mới:");
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2_1.setBounds(60, 119, 103, 25);
+		lblNewLabel_2_1.setBounds(65, 27, 103, 25);
 		pnThemTK.add(lblNewLabel_2_1);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Nhập lại mật khẩu mới:");
 		lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2_1_1.setBounds(10, 179, 153, 25);
+		lblNewLabel_2_1_1.setBounds(15, 96, 153, 25);
 		pnThemTK.add(lblNewLabel_2_1_1);
 		
 		pwdNhapLaiMatKhauMoi = new JPasswordField();
 		pwdNhapLaiMatKhauMoi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pwdNhapLaiMatKhauMoi.setBounds(200, 179, 300, 25);
+		pwdNhapLaiMatKhauMoi.setBounds(200, 96, 300, 25);
 		pnThemTK.add(pwdNhapLaiMatKhauMoi);
 
 		btnDoiMatKhau.addActionListener(this);
-		ShowMaNhanVien();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if (obj.equals(btnDoiMatKhau)) {
-			doiMatKhau();
-		}
-	}
-
-	public void ShowMaNhanVien() {
-		try {
-			textMaNhanVien.setText(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
-//			Boolean themNV = Form_Nhan_Vien.themMoiNhanVien();
-//			Form_Nhan_Vien.docDuLieu();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void doiMatKhau() {
-		TaiKhoan taiKhoan1 = null;
-		NhanVien nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
-		TaiKhoan taiKhoan = taiKhoanService.layThongTinTaKhoanTheoMaTaiKhoan(nhanVien.getMaNhanVien());
-		String pwdMKCu = String.valueOf(pwdMatKhauCu.getPassword());
-		String pwdMKMoi = String.valueOf(pwdMatKhauMoi.getPassword());
-		String pwdMKNhapLai = String.valueOf(pwdNhapLaiMatKhauMoi.getPassword());
-		System.out.println(taiKhoan.getMatKhau());	
-		if (pwdMKCu.equalsIgnoreCase(taiKhoan.getMatKhau().trim()) && pwdMKNhapLai.equalsIgnoreCase(pwdMKMoi.trim())) {
-			try {
-				taiKhoan1 = new TaiKhoan(pwdMKMoi);
-				taiKhoan1.setNhanVien(nhanVien);
-				Boolean kq = taiKhoanService.doiMatKhau(taiKhoan1);
-				this.setVisible(false);
-			} catch (Exception e2) {
-				JOptionPane.showMessageDialog(null, "Thêm tài khoản bị lỗi !");
-				e2.printStackTrace();
+			if (pwdMatKhauMoi.getText().trim() == "" || pwdNhapLaiMatKhauMoi.getText().trim() == "") {
+				JOptionPane.showMessageDialog(null, "Vui lòng không để trống");
+			} else if (pwdMatKhauMoi.getText().trim().equals(pwdNhapLaiMatKhauMoi.getText().trim())) {
+				checkDoiMk();
 			}
 		}
 	}
+
+	public void checkDoiMk() {
+		TaiKhoan taiKhoan = null;
+		NhanVien nhanVien = null;
+		try {
+			taiKhoan = new TaiKhoan(pwdMatKhauMoi.getText().trim());
+			nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(Form_Gui_Ma_Xac_Thuc.maNhanVien);
+			taiKhoan.setNhanVien(nhanVien);
+			Boolean kq = taiKhoanService.doiMatKhau(taiKhoan);
+			JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công");
+			Form_Dang_Nhap form_Dang_Nhap = new Form_Dang_Nhap();
+			form_Dang_Nhap.setVisible(true);
+			this.setVisible(false);
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, e2);
+		}
+	}
+	
+
 }

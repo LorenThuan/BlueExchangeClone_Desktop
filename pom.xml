@@ -41,7 +41,24 @@
 			<version>8.2.2.jre11</version>
 </dependency>	
 
+
+<dependency>
+  <groupId>com.sun.mail</groupId>
+  <artifactId>jakarta.mail</artifactId>
+  <version>1.6.3</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+</dependency>
+
+
  </dependencies>
+
+
 
   
 </project>

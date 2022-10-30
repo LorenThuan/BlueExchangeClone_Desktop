@@ -53,5 +53,46 @@ public class TaiKhoanImpl implements TaiKhoanDao{
 		}
 		return taiKhoan;
 	}
+	@Override
+	public String layMaNhanVienTheoEmail(String email) {
+		String maNhanVien = null;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "SELECT  Tai_Khoan.maNhanVien  \r\n"
+					+ "FROM            Nhan_Vien INNER JOIN\r\n"
+					+ "                         Tai_Khoan ON Nhan_Vien.maNhanVien = Tai_Khoan.maNhanVien\r\n"
+					+ "WHERE email = ?\r\n"
+					+ "GROUP BY Tai_Khoan.maNhanVien";
+			preStm = con.prepareStatement(sql);
+			preStm.setString(1, email);
+			rs = preStm.executeQuery();
+			while (rs.next()) {
+				maNhanVien = rs.getString(1);
+	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return maNhanVien;
+	}
+	@Override
+	public boolean doiMatKhau(TaiKhoan taiKhoan) {
+		boolean n = false;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "Update Tai_Khoan set matKhau = ? where maNhanVien = ?";
+			
+			preStm = con.prepareStatement(sql);
+			preStm.setString(1, taiKhoan.getMatKhau());;
+			preStm.setString(2, taiKhoan.getNhanVien().getMaNhanVien()); 
+			
+			n = preStm.executeUpdate() > 0;
+			
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		} finally {
+		}
+		return n;
+	}
 
 }

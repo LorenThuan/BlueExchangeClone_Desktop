@@ -4,18 +4,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-
-
+import java.awt.KeyboardFocusManager;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Connection;
@@ -37,9 +42,11 @@ import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JCheckBox;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 
-public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListener {
+
+public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListener, MouseListener {
 
 	public static JPanel contentPane;
 	public static JTextField txtTaiKhoan;
@@ -50,9 +57,11 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	public static boolean TrangThaiDangNhapNhanVien = false;
 	public static boolean TrangThaiDangNhapQuanLy = false;
 	public static String usernameToGetNhanVien = "";
+	private JLabel lblMatKhau;
 	
 	public static TaiKhoan taiKhoan = new TaiKhoan();
 	public static NhanVien nhanVien = new NhanVien();
+	private JLabel lblQuenMatKhau;
 	
 	private NhanVienService nhanVienService = new NhanVienServiceImpl();
 
@@ -64,6 +73,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	public Form_Dang_Nhap() {
 //		DAO
 		try {
@@ -81,29 +91,49 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("Hinh\\iconBook.png"));
-		JLabel lblIconTaiKhoan = new JLabel();
-		lblIconTaiKhoan.setIcon(new ImageIcon("Hinh\\iconUser.png"));
-		lblIconTaiKhoan.setBounds(345, 105, 30, 30);
-		contentPane.add(lblIconTaiKhoan);
 
 		JLabel lblImgNhaNam = new JLabel();
 		lblImgNhaNam.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\background\\BLUEEXCHANGE.jpg"));
 		lblImgNhaNam.setBounds(0, 0, 330, 333);
 		contentPane.add(lblImgNhaNam);
 
-		JLabel lblIconMatKhau = new JLabel();
-		lblIconMatKhau.setIcon(new ImageIcon("Hinh\\iconPassword.png"));
-		lblIconMatKhau.setBounds(345, 188, 30, 30);
-		contentPane.add(lblIconMatKhau);
-
 		txtTaiKhoan = new JTextField();
+		txtTaiKhoan.setText("Nhập mã nhân viên");
+		txtTaiKhoan.requestFocus();
 		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtTaiKhoan.setBounds(371, 105, 230, 30);
 		contentPane.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
-		txtTaiKhoan.requestFocus();
+		txtTaiKhoan.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtTaiKhoan.getText().equals("Nhập mã nhân viên")) {
+					txtTaiKhoan.setText("");
+					txtTaiKhoan.setForeground(new Color(0, 0, 0));
+				}
+			}
+		});
+		
+		txtTaiKhoan.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTaiKhoan.getText().equals("Nhập mã nhân viên")) {
+					txtTaiKhoan.setText("");
+//					txtTaiKhoan.setForeground(new Color(153, 153, 153));
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTaiKhoan.getText().equals("")) {
+					txtTaiKhoan.setText("Nhập mã nhân viên");
+					txtTaiKhoan.setForeground(new Color(153, 153, 153));
+				}	
+			}
+		});
 
 		pwdMatkhau = new JPasswordField();
+//		pwdMatkhau.setText("Nhập mật khẩu");
+		pwdMatkhau.setEchoChar('•');
 		pwdMatkhau.setBounds(371, 167, 230, 30);
 		contentPane.add(pwdMatkhau);
 		pwdMatkhau.setColumns(10);
@@ -120,7 +150,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		btnThoat.setBounds(504, 256, 97, 30);
 		contentPane.add(btnThoat);
 		
-		JLabel lblQuenMatKhau = new JLabel("Bạn quên mật khẩu ?");
+		lblQuenMatKhau = new JLabel("Bạn quên mật khẩu ?");
 		lblQuenMatKhau.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -138,14 +168,37 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 				contentPane.add(lblNewLabel);
 				lblNewLabel.setFont(new Font("Arial", Font.BOLD, 20));
 				
-				JCheckBox chckbxHienMatKhau = new JCheckBox("Hiện mật khẩu");
+				JCheckBox chckbxHienMatKhau = new JCheckBox();
 				chckbxHienMatKhau.setFont(new Font("Arial", Font.PLAIN, 13));
 				chckbxHienMatKhau.setBackground(Color.WHITE);
-				chckbxHienMatKhau.setBounds(370, 204, 231, 23);
+				chckbxHienMatKhau.setBounds(371, 215, 21, 23);
+				chckbxHienMatKhau.addActionListener(new ActionListener() {
+					   public void actionPerformed(ActionEvent e) {
+					    if(chckbxHienMatKhau.isSelected()){
+					    	lblMatKhau.setText("Ẩn mật khẩu");
+					     pwdMatkhau.setEchoChar((char)0);
+					    }else{
+					    	lblMatKhau.setText("Hiện mật khẩu");
+					    pwdMatkhau.setEchoChar('•');
+					    }
+					   }
+					  });
+				
 				contentPane.add(chckbxHienMatKhau);
+				
+				lblMatKhau = new JLabel("Hiện mật khẩu");
+				lblMatKhau.addMouseMotionListener(new MouseMotionAdapter() {
+					@Override
+					public void mouseMoved(MouseEvent e) {
+						lblQuenMatKhau.setCursor(Cursor  
+								.getPredefinedCursor(Cursor.HAND_CURSOR));
+					}
+				});
+				lblMatKhau.setBounds(408, 215, 193, 23);
+				contentPane.add(lblMatKhau);
 		btnThoat.addActionListener(this);
 		btnDangNhap.addActionListener(this);
-		txtTaiKhoan.requestFocus();
+		lblQuenMatKhau.addMouseListener(this);
 		this.addKeyListener(this);
 		
 	}
@@ -261,6 +314,37 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	}
 
 	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		Form_Gui_Ma_Xac_Thuc form_Gui_Ma_Xac_Thuc = new Form_Gui_Ma_Xac_Thuc();
+		this.setVisible(false);
+		form_Gui_Ma_Xac_Thuc.setVisible(true);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
