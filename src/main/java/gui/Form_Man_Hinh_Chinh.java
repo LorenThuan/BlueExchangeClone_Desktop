@@ -50,11 +50,14 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	private Form_Nhan_Vien form_Nhan_Vien = new Form_Nhan_Vien();
 	private Form_Quan_Ly_Tai_Khoan form_Quan_Ly_Tai_Khoan = new Form_Quan_Ly_Tai_Khoan();
 	private Form_Dang_Nhap form_Dang_Nhap = new Form_Dang_Nhap();
+	private Form_San_Pham form_San_Pham = new Form_San_Pham();
 	public static JTabbedPane tabbedPane;
 	private JMenuItem mntmQuanLyTaiKhoan;
 	private JMenuItem mntmDangXuat;
 	private JMenu mnKhachHang;
 	private JMenu mnNhanVien;
+	private JMenu mnSanPham;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -136,7 +139,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		JMenuBar menuBarSanPham = new JMenuBar();
 		toolBar.add(menuBarSanPham);
 		
-		JMenu mnSanPham = new JMenu("Sản Phẩm");
+		mnSanPham = new JMenu("Sản Phẩm");
 		mnSanPham.setPreferredSize(new Dimension(160, mnSanPham.getPreferredSize().height));
 		mnSanPham.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\iconSanPham.png"));
 		mnSanPham.setFont(new Font("Arial", Font.BOLD, 16));
@@ -235,6 +238,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mntmDangXuat.addActionListener(this);
 		mnKhachHang.addMenuListener(this);
 		mnNhanVien.addMenuListener(this);
+		mnSanPham.addMenuListener(this);
 
 	}
 
@@ -264,6 +268,11 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 			tabbedPane.add(form_Nhan_Vien.contentPane);
 			tabbedPane.setSelectedComponent(form_Nhan_Vien.contentPane);
 			tabbedPane.setVisible(true);
+		}else if (o.equals(mnSanPham)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_San_Pham.contentPane);
+			tabbedPane.setSelectedComponent(form_San_Pham.contentPane);
+			tabbedPane.setVisible(true);	
 		}
 		
 	}
