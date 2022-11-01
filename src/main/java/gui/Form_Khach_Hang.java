@@ -390,7 +390,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 			} else {
 				rdbtnNu.setSelected(true);
 			}
-			textMaKhachHang.setEditable(false);
+			textMaKhachHang.setEditable(true);
 
 		} catch (Exception e2) {
 			System.out.println("error mouse clicked");

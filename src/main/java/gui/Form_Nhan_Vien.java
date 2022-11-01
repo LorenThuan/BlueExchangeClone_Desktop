@@ -104,7 +104,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		
 		JPanel panelThongTinNhanVien = new JPanel();
 		panelThongTinNhanVien.setBorder(new TitledBorder(null, "Thông tin nhân viên", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelThongTinNhanVien.setBounds(49, 79, 1249, 130);
+		panelThongTinNhanVien.setBounds(39, 82, 1249, 130);
 		contentPane.add(panelThongTinNhanVien);
 		panelThongTinNhanVien.setLayout(null);
 		
@@ -128,15 +128,15 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(textTenNhanVien);
 		
 		JLabel lblGioiTinh = new JLabel("Giới Tính:");
-		lblGioiTinh.setBounds(466, 35, 83, 14);
+		lblGioiTinh.setBounds(427, 35, 83, 14);
 		panelThongTinNhanVien.add(lblGioiTinh);
 		
 		rdbtnNam = new JRadioButton("Nam");
-		rdbtnNam.setBounds(555, 31, 60, 23);
+		rdbtnNam.setBounds(520, 31, 60, 23);
 		panelThongTinNhanVien.add(rdbtnNam);
 		
 		rdbtnNu = new JRadioButton("Nữ");
-		rdbtnNu.setBounds(636, 31, 47, 23);
+		rdbtnNu.setBounds(594, 31, 47, 23);
 		panelThongTinNhanVien.add(rdbtnNu);
 		
 		btnGroupGioiTinh = new ButtonGroup();
@@ -146,33 +146,44 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		rdbtnNam.setSelected(true);
 		
 		JLabel lblNgaySinh = new JLabel("Ngày Sinh:");
-		lblNgaySinh.setBounds(870, 32, 83, 14);
+		lblNgaySinh.setBounds(769, 35, 83, 14);
 		panelThongTinNhanVien.add(lblNgaySinh);
 		
 		dateChonNgaySinh = new JDateChooser();
 		dateChonNgaySinh.setDateFormatString("yyyy-MM-dd");
-		dateChonNgaySinh.setBounds(979, 16, 123, 36);
+		dateChonNgaySinh.setBounds(871, 18, 123, 36);
 		panelThongTinNhanVien.add(dateChonNgaySinh);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(466, 91, 83, 14);
+		lblEmail.setBounds(427, 91, 83, 14);
 		panelThongTinNhanVien.add(lblEmail);
 		
 		textEmail = new JTextField();
 		textEmail.setColumns(10);
-		textEmail.setBounds(555, 88, 197, 20);
+		textEmail.setBounds(520, 88, 197, 20);
 		panelThongTinNhanVien.add(textEmail);
 		
 		JLabel lbTrangThai = new JLabel("Trạng Thái:");
-		lbTrangThai.setBounds(870, 91, 83, 14);
+		lbTrangThai.setBounds(769, 91, 83, 14);
 		panelThongTinNhanVien.add(lbTrangThai);
 		
 		comboBoxTrangThai = new JComboBox<String>();
 		comboBoxTrangThai.setEnabled(false);
 		comboBoxTrangThai.addItem("Đang làm việc");
 		comboBoxTrangThai.addItem("Thôi việc");
-		comboBoxTrangThai.setBounds(979, 83, 123, 30);
+		comboBoxTrangThai.setBounds(871, 83, 123, 30);
 		panelThongTinNhanVien.add(comboBoxTrangThai);
+		
+		JComboBox<String> comboBoxChucVu = new JComboBox<String>();
+		comboBoxChucVu.addItem("NVBH");
+		comboBoxChucVu.addItem("NVQL");
+		comboBoxChucVu.setEnabled(false);
+		comboBoxChucVu.setBounds(1105, 83, 123, 30);
+		panelThongTinNhanVien.add(comboBoxChucVu);
+		
+		JLabel lbChucVu = new JLabel("Chức vụ:");
+		lbChucVu.setBounds(1018, 91, 83, 14);
+		panelThongTinNhanVien.add(lbChucVu);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(126, 230, 1098, 45);

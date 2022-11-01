@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Objects;
+
 /**
  * @author Loren Thuan
  * @version 1.0
@@ -28,15 +30,25 @@ public class SanPham {
 
 	
 	
-
-	public SanPham(String maSanPham, String tenSanPham, double donGia, String trangThai) {
+	public SanPham(String maSanPham, String tenSanPham, String mota, double donGia, String hinhAnh, int soLuong,
+			double giamGia, String mauSac, String gioiTinh, String kichThuoc, String trangThai, String chatLieu,
+			LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap) {
 		super();
 		this.maSanPham = maSanPham;
 		this.tenSanPham = tenSanPham;
+		this.mota = mota;
 		this.donGia = donGia;
+		this.hinhAnh = hinhAnh;
+		this.soLuong = soLuong;
+		this.giamGia = giamGia;
+		this.mauSac = mauSac;
+		this.gioiTinh = gioiTinh;
+		this.kichThuoc = kichThuoc;
 		this.trangThai = trangThai;
+		this.chatLieu = chatLieu;
+		this.loaiSanPham = loaiSanPham;
+		this.nhaCungCap = nhaCungCap;
 	}
-
 
 
 
@@ -158,6 +170,27 @@ public class SanPham {
 
 	public void setNhaCungCap(NhaCungCap nhaCungCap) {
 		this.nhaCungCap = nhaCungCap;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(maSanPham);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SanPham other = (SanPham) obj;
+		return Objects.equals(maSanPham, other.maSanPham);
 	}
 	
 	
