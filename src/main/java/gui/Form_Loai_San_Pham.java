@@ -40,7 +40,7 @@ import java.awt.event.ActionEvent;
 
 public class Form_Loai_San_Pham extends JFrame {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
 	private JTextField textMaLoaiSanPham;
 	private JTextField textTenLoaiSanPham;
 	private JTable tableDanhSachLoaiSanPham;

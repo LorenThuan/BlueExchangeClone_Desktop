@@ -320,6 +320,8 @@ public class Form_San_Pham extends JFrame {
 			comboNhaCungCap.addItem(nhaCungCap.getMaNhaCungCap() + " " + nhaCungCap.getTenNhaCungCap());
 		}
 		
+	
+		
 		JButton btnThemLoaiSanPham = new JButton("+");
 		btnThemLoaiSanPham.setBounds(434, 435, 85, 21);
 		panelThongTinSanPham.add(btnThemLoaiSanPham);
@@ -329,7 +331,7 @@ public class Form_San_Pham extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Form_Loai_San_Pham().show();
+				new Form_Loai_San_Pham().setVisible(true);
 			}
 		});
 		
@@ -342,7 +344,7 @@ public class Form_San_Pham extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Form_Nha_Cung_Cap().show();
+				new Form_Nha_Cung_Cap().setVisible(true);
 			}
 		});
 		

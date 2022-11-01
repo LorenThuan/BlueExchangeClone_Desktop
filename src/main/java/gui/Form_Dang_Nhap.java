@@ -98,38 +98,37 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		contentPane.add(lblImgNhaNam);
 
 		txtTaiKhoan = new JTextField();
-		txtTaiKhoan.setText("Nhập mã nhân viên");
 		txtTaiKhoan.requestFocus();
 		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtTaiKhoan.setBounds(371, 105, 230, 30);
 		contentPane.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
-		txtTaiKhoan.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (txtTaiKhoan.getText().equals("Nhập mã nhân viên")) {
-					txtTaiKhoan.setText("");
-					txtTaiKhoan.setForeground(new Color(0, 0, 0));
-				}
-			}
-		});
+//		txtTaiKhoan.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				if (txtTaiKhoan.getText().equals("Nhập mã nhân viên")) {
+//					txtTaiKhoan.setText("");
+//					txtTaiKhoan.setForeground(new Color(0, 0, 0));
+//				}
+//			}
+//		});
 		
-		txtTaiKhoan.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTaiKhoan.getText().equals("Nhập mã nhân viên")) {
-					txtTaiKhoan.setText("");
+//		txtTaiKhoan.addFocusListener(new FocusAdapter() {
+//			@Override
+//			public void focusGained(FocusEvent e) {
+//				if (txtTaiKhoan.getText().equals("Nhập mã nhân viên")) {
+//					txtTaiKhoan.setText("");
+////					txtTaiKhoan.setForeground(new Color(153, 153, 153));
+//				}
+//			}
+//			@Override
+//			public void focusLost(FocusEvent e) {
+//				if (txtTaiKhoan.getText().equals("")) {
+//					txtTaiKhoan.setText("Nhập mã nhân viên");
 //					txtTaiKhoan.setForeground(new Color(153, 153, 153));
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTaiKhoan.getText().equals("")) {
-					txtTaiKhoan.setText("Nhập mã nhân viên");
-					txtTaiKhoan.setForeground(new Color(153, 153, 153));
-				}	
-			}
-		});
+//				}	
+//			}
+//		});
 
 		pwdMatkhau = new JPasswordField();
 //		pwdMatkhau.setText("Nhập mật khẩu");
@@ -252,11 +251,12 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	}
 	
 	public void logIn() {
-		try {
+	
 			
 				String tenDN = txtTaiKhoan.getText().trim();
 				String matKhau = pwdMatkhau.getText().trim();
 				phanQuyenDangNhap(tenDN, matKhau);
+				
 				if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapNhanVien == true) {
 					usernameToGetNhanVien = txtTaiKhoan.getText();
 					System.out.println("1 " + usernameToGetNhanVien);
@@ -275,11 +275,9 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 					this.setVisible(false);
 				}
 					
-			}
+			
 	
-		catch (Exception e2) {
-			JOptionPane.showMessageDialog(this, "Tên Đăng Nhập, Hoặc Mật Khẩu Sai.");
-	}
+		
 }
 
 

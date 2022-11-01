@@ -1,5 +1,6 @@
 package bus;
 
+import java.util.List;
 import java.util.Map;
 
 import dao.ThongKeDoanhThuDao;
@@ -12,8 +13,15 @@ public class ThongKeDoanhThuServiceImpl implements ThongKeDoanhThuService{
 	public double tinhTongTienBanDuocTheoThang(int thang, int nam) {
 		return thongKeDoanhThuDao.tinhTongTienBanDuocTheoThang(thang, nam);
 	}
+	
 	@Override
-	public Map<HoaDon, Double> layTatCaHoaDonTheoThangNam(int thang, int nam) {
+	public HoaDon layHoaDonTheoMa(String maHoaDon) {
+		return thongKeDoanhThuDao.layHoaDonTheoMa(maHoaDon);
+	}
+
+	@Override
+	public List<HoaDon> layTatCaHoaDonTheoThangNam(int thang, int nam) {
+		// TODO Auto-generated method stub
 		return thongKeDoanhThuDao.layTatCaHoaDonTheoThangNam(thang, nam);
 	}
 	

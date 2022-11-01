@@ -65,6 +65,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 	private JButton btnHoanTac;
 	private static JComboBox<String> comboBoxTrangThai;
 	private static JDateChooser dateChonNgaySinh;
+	private static JComboBox<String> comboBoxChucVu;
 
 	/**
 	 * Launch the application.
@@ -174,7 +175,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		comboBoxTrangThai.setBounds(871, 83, 123, 30);
 		panelThongTinNhanVien.add(comboBoxTrangThai);
 		
-		JComboBox<String> comboBoxChucVu = new JComboBox<String>();
+		comboBoxChucVu = new JComboBox<String>();
 		comboBoxChucVu.addItem("NVBH");
 		comboBoxChucVu.addItem("NVQL");
 		comboBoxChucVu.setEnabled(false);
@@ -313,6 +314,10 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			}
 			comboBoxTrangThai.setEnabled(true);
 			comboBoxTrangThai.getModel().setSelectedItem(nv.isTrangThai() == true ? "Đang làm việc" : "Thôi việc");
+			
+			comboBoxChucVu.setEnabled(true);
+			comboBoxChucVu.getModel().setSelectedItem(nv.getChucVu());
+			
 			textMaNhanVien.setEditable(false);
 
 		} catch (Exception e2) {
@@ -427,8 +432,9 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		if (comboBoxTrangThai.getSelectedItem().equals("Đang làm việc")) {
 			trangThai = true;
 		}
+		String chucVu = comboBoxChucVu.getSelectedItem().toString();
 		
-		nhanVien = new NhanVien(maNhanVien, email, ngaySinhsql, tenNhanVien, gioiTinh, "NVBH", trangThai);
+		nhanVien = new NhanVien(maNhanVien, email, ngaySinhsql, tenNhanVien, gioiTinh, chucVu, trangThai);
 		boolean kq = nhanVienService.themNhanVien(nhanVien);
 		return kq;
 	}
@@ -473,8 +479,9 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		if (comboBoxTrangThai.getSelectedItem().equals("Đang làm việc")) {
 			trangThai = true;
 		}
+		String chucVu = comboBoxChucVu.getSelectedItem().toString();
 		
-		nhanVien = new NhanVien(maNhanVien, email, ngaySinhsql, tenNhanVien, gioiTinh, "NVBH", trangThai);
+		nhanVien = new NhanVien(maNhanVien, email, ngaySinhsql, tenNhanVien, gioiTinh, chucVu, trangThai);
 		kq = nhanVienService.capNhatThongTinNhanVien(nhanVien);
 		
 			if (kq) {

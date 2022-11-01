@@ -22,7 +22,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import bus.ThongKeSanPhamSersvice;
+import bus.ThongKeSanPhamServiceImpl;
 import dao.ConectDatabase;
+import dto.ChiTietHoaDon;
+import dto.HoaDon;
 import handle.RoundJTextField;
 
 import java.awt.event.ActionListener;
@@ -33,16 +37,17 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 
-public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame {
+public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionListener{
 
 	public static JPanel contentPane;
 	private JTextField txtNam;
 	private JTable table;
 	private static DefaultTableModel tablemodel ;
+	private ThongKeSanPhamSersvice thongKeSanPhamSersvice = new ThongKeSanPhamServiceImpl();
 //	private ThongKeBaoCaoTQ tktq;
 	private JComboBox comboBox;
-	private JTextField textField;
-
+	private JLabel lblTongSanPham;
+	private JButton btnLoc;
 	/**
 	 * Launch the application.
 	 */
@@ -96,88 +101,25 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("Tháng:");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(257, 29, 88, 25);
+		lblNewLabel_1.setBounds(107, 29, 88, 25);
 		panel_1.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("Năm:");
 		lblNewLabel_2.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblNewLabel_2.setBounds(600, 29, 88, 25);
+		lblNewLabel_2.setBounds(394, 32, 88, 25);
 		panel_1.add(lblNewLabel_2);
 
 		txtNam = new JTextField();
-		txtNam.setBounds(700, 29, 307, 23);
+		txtNam.setBounds(519, 32, 307, 23);
 		panel_1.add(txtNam);
 		txtNam.setColumns(10);
 
-		JButton btnLoc = new JButton("Lọc");
+		btnLoc = new JButton("Lọc");
 		btnLoc.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				try {
-//					
-//					xoaAllDuLieuTable();
-//					TK_doanhThu_DAO ds = new TK_doanhThu_DAO();
-//				//	System.out.println(ds.baoCaoTQs(11, 2021));
-//					//System.out.println(ds.tinhTongTienBanDuocTheoThang(11, 2021));
-//					int thang = Integer.parseInt(comboBox.getSelectedItem().toString());
-//					String nam1=txtNam.getText();
-//					
-//					if(nam1.equalsIgnoreCase("")) {
-//						JOptionPane.showMessageDialog(btnNewButton, "Chưa nhập năm");
-//						return;
-//						
-//					}
-//					
-//					int nam = Integer.parseInt(nam1);
-//					
-//					DecimalFormat tien = new DecimalFormat("###,###,### VND");
-//					double tienBan = 0;
-//					double tienNhap = 0;
-//					double tienLai = 0;
-//					double tienBanSetText = 0;
-//					for (ThongKeBaoCaoTQ baoCaoTQ : ds.baoCaoTQs(thang, nam)) {
-//						tienBanSetText += baoCaoTQ.getDonGia() * baoCaoTQ.getSoLuongBan();
-//					}
-//					int cheknull = 0;
-//					
-//					TKSanPhamBanChayDAO a= new TKSanPhamBanChayDAO();
-//					double tt=a.tinhTongTienTatCaSP(thang, nam);
-//					txtTienBanDuoc.setText(tien.format(tt));
-//				//	txtTienNhap.setText(tien.format(ds.tinhTongTienThuocDaNhapTheoThang(thang, nam)));
-//					tienBan = tienBanSetText;
-//		//			tienNhap += ds.tinhTongTienThuocDaNhapTheoThang(thang, nam);
-//					tienLai = tienBan - tienNhap;
-//			//		txtLoiNhuan.setText(tien.format(tienLai));
-//					int i = 1;
-//					int check = 0;
-//					List<ThongKeBaoCaoTQ> tkq =ds.baoCaoTQs(thang, nam);
-//					System.out.println(tkq);
-//					double tienBanDuoc = 0;
-//					tablemodel=(DefaultTableModel) table.getModel();
-//					for (ThongKeBaoCaoTQ tk : tkq) {
-//						tienBanDuoc = tk.getDonGia() * tk.getSoLuongBan();
-//						
-//						tablemodel.addRow(new Object[] {
-//								i++, tk.getMaSach(), tk.getTenSach(),
-//								tien.format(tk.getDonGiaNhap()), tien.format(tk.getDonGia()),
-//								tk.getSoLuongBan(), tien.format(tienBanDuoc) });
-//						
-//						
-//					}
-//					check++;
-//					if  (check == 0) {
-//						JOptionPane.showMessageDialog(null, "khong co du lieu cua thang:" + thang + "/" + nam + "");
-//					}
-//				} catch (Exception e1) {
-//					// TODO Auto-generated catch block
-//					
-//					e1.printStackTrace();
-//				}
-//			}
-//		});
-		btnLoc.setForeground(new Color(255, 255, 255));
+		btnLoc.addActionListener(this);
+		btnLoc.setForeground(Color.BLACK);
 		btnLoc.setBackground(Color.CYAN);
-		btnLoc.setBounds(1057, 26, 114, 33);
+		btnLoc.setBounds(872, 23, 114, 33);
 		panel_1.add(btnLoc);
 
 		 comboBox = new JComboBox();
@@ -195,7 +137,7 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame {
 		comboBox.addItem("11");
 		comboBox.addItem("12");
 		comboBox.setMaximumRowCount(12);
-		comboBox.setBounds(394, 29, 133, 25);
+		comboBox.setBounds(205, 31, 133, 25);
 		panel_1.add(comboBox);
 		
 				JLabel lblNewLabel_3 = new JLabel("Tổng sản phẩm bán được:");
@@ -203,19 +145,17 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame {
 				panel_1.add(lblNewLabel_3);
 				lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 				
-				JLabel lblTongTien = new JLabel("100.000");
-				lblTongTien.setBounds(643, 85, 174, 20);
-				panel_1.add(lblTongTien);
-				lblTongTien.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+				lblTongSanPham = new JLabel("");
+				lblTongSanPham.setBounds(643, 85, 174, 20);
+				panel_1.add(lblTongSanPham);
+				lblTongSanPham.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 				
-				textField = new RoundJTextField(15);
-				textField.setBounds(434, 136, 156, 20);
-				panel_1.add(textField);
-				textField.setColumns(10);
-				
-				JButton btnTimKiem = new JButton("Tìm kiếm");
-				btnTimKiem.setBounds(600, 135, 89, 23);
-				panel_1.add(btnTimKiem);
+				JButton btnInBaoCao = new JButton("In báo cáo");
+				btnInBaoCao.setForeground(Color.BLACK);
+				btnInBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+				btnInBaoCao.setBackground(Color.CYAN);
+				btnInBaoCao.setBounds(1019, 23, 140, 33);
+				panel_1.add(btnInBaoCao);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 286, 1314, 314);
@@ -251,4 +191,40 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame {
 			tablemodel.removeRow(0);
 		}
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object o = e.getSource();
+		if (o.equals(btnLoc)) {
+			try {
+					xoaAllDuLieuTable();
+					tinhTongSPTheoThangNam();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Lỗi");
+			}
+		}
+		
 	}
+	public void tinhTongSPTheoThangNam() {
+		int thang = Integer.parseInt(comboBox.getSelectedItem().toString());
+		String namNhap = txtNam.getText().trim();
+		
+		if(namNhap.equalsIgnoreCase("")) {
+			JOptionPane.showMessageDialog(this, "Chưa nhập năm");
+			return;
+			
+		}
+		int nam = Integer.parseInt(namNhap);
+		int tongSP = thongKeSanPhamSersvice.tinhTongSanPhamBanDuocTheoThang(thang, nam);
+		lblTongSanPham.setText(String.valueOf(tongSP));
+		
+		List<ChiTietHoaDon> chiTietHoaDons = thongKeSanPhamSersvice.lay10SanPhamBanChayTheoThangNam(thang, nam);
+		tablemodel.setRowCount(0);
+          for (ChiTietHoaDon chiTietHoaDon : chiTietHoaDons) {
+        	  tablemodel.addRow(new Object[]{ tablemodel.getRowCount(),
+        			  chiTietHoaDon.getSanPham().getMaSanPham(), chiTietHoaDon.getSanPham().getTenSanPham(), chiTietHoaDon.getSoLuong()
+              });
+          }
+	}
+}

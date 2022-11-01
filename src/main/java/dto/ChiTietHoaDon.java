@@ -16,8 +16,41 @@ public class ChiTietHoaDon {
 
 	}
 
-	public double tinhTongTien(){
-		return 0;
+	public ChiTietHoaDon(int soLuong) {
+		super();
+		this.soLuong = soLuong;
 	}
+
+	public int getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
+	}
+
+	public HoaDon getHoaDon() {
+		return hoaDon;
+	}
+
+	public void setHoaDon(HoaDon hoaDon) {
+		this.hoaDon = hoaDon;
+	}
+
+	public SanPham getSanPham() {
+		return sanPham;
+	}
+
+	public void setSanPham(SanPham sanPham) {
+		this.sanPham = sanPham;
+	}
+
+	@Override
+	public String toString() {
+		return "ChiTietHoaDon [soLuong=" + soLuong + ", hoaDon=" + hoaDon.getMaHoaDon() + ", sanPham=" + sanPham.getMaSanPham() + "]";
+	}
+	
+	
+
 
 }

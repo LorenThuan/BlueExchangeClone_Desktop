@@ -13,21 +13,22 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-
-import org.hibernate.Session;
-
+import bus.KhachHangService;
+import bus.KhachHangServiceImpl;
+import bus.NhanVienService;
+import bus.NhanVienServiceImpl;
 import dao.ConectDatabase;
 import dao.ThongKeDoanhThuDao;
 import dto.HoaDon;
-import dto.HoaDon;
+import dto.KhachHang;
+import dto.NhanVien;
 
 public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 	Connection con;
 	PreparedStatement preStm;
 	ResultSet rs;
-
+	private KhachHangService khachHangService = new KhachHangServiceImpl();
+	private NhanVienService nhanVienService = new NhanVienServiceImpl();
 
 	@Override
 	public double tinhTongTienBanDuocTheoThang(int thang, int nam) {
@@ -56,77 +57,71 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 
 
 	@Override
-	public Map<HoaDon, Double> layTatCaHoaDonTheoThangNam(int thang, int nam) {
-//		Map<TaiKhoan, Double> map = new TreeMap<TaiKhoan, Double>();
-//		Double tinhTien = 0.0;
-//		Session currentSession = entityManager.unwrap(Session.class);
-//		List<Object[]> objects = currentSession.createNativeQuery("SELECT Tai_Khoan.id,ten_tai_khoan, ngay_tao, email, so_dien_thoai, ngay_sinh, gioi_tinh, sum(tong_tien) \r\n"
-//				+ "FROM            Hoa_Don INNER JOIN\r\n"
-//				+ "                         Tai_Khoan ON Hoa_Don.tai_khoan_id = Tai_Khoan.id\r\n"
-//				+ "			where [trang_thai] not like N'%Đang chờ xác nhận%' and trang_thai not like N'%Đang giao hàng%' and role not like N'ADMIN' \r\n"
-//				+ "						 group by  Tai_Khoan.id,ten_tai_khoan, ngay_tao, email, so_dien_thoai, ngay_sinh, gioi_tinh").getResultList();
-//		for(Object[] o : objects) {
-//			Integer idTK = (Integer) o[0];
-//			TaiKhoan taiKhoan = currentSession.get(TaiKhoan.class, idTK);
-//			BigDecimal tongTien = (BigDecimal) o[7];
-//			if(tongTien == null) {
-//				tinhTien = 0.0;
-//			}
-//			tinhTien = tongTien.doubleValue();
-//			map.put(taiKhoan, tinhTien);
-//		}
-//		return map;
-		
-		
-		Map<HoaDon, Double> map = null;
-		HoaDon hoaDon = null; 
-//		Session currentSession = entityManager.unwrap(Session.class);
+	public List<HoaDon> layTatCaHoaDonTheoThangNam(int thang, int nam) {
+		HoaDon hoaDon = null;
+		List<HoaDon> hoaDons = new ArrayList<HoaDon>();
 		try {
 //			List<Object[]> objects = currentSession.createNativeQuery()
 //			List<Ob>
-			List<Object[]> objectsList = new ArrayList<>();
-
+			
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "SELECT      Chi_Tiet_Hoa_Don.maHoaDon,Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - [giamGia])  as ThanhTien\r\n"
+			String sql = "SELECT      Chi_Tiet_Hoa_Don.maHoaDon, Hoa_Don.maNhanVien, Hoa_Don.maKhachHang,ngayDat,Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - [giamGia])  as ThanhTien\r\n"
 					+ "FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
 					+ "                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
 					+ "                         San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham\r\n"
 					+ "where YEAR([ngayDat]) = ? and MONTH([ngayDat]) = ?\r\n"
-					+ "group by Chi_Tiet_Hoa_Don.maHoaDon, Chi_Tiet_Hoa_Don.maSanPham, Chi_Tiet_Hoa_Don.[soLuong], [donGia], [giamGia]";
+					+ "group by Chi_Tiet_Hoa_Don.maHoaDon, Hoa_Don.maNhanVien, Hoa_Don.maKhachHang, ngayDat,Chi_Tiet_Hoa_Don.[soLuong], [donGia], [giamGia]";
 			preStm = con.prepareStatement(sql);
 			preStm.setInt(1, nam);
 			preStm.setInt(2, thang);
-			 int index = 1;
-			 if (null != objectsList && !objectsList.isEmpty()) {
-				    for (int i = 0; i < objectsList.size(); i ++) {
-				    	preStm.setObject(index++, objectsList.get(i));
-				    }
-				  }
 			rs = preStm.executeQuery();
-			ResultSetMetaData metaData = rs.getMetaData();
-			 int colsLen = metaData.getColumnCount();
-			 String fm = Integer.toString(colsLen);
-//			 Double tongTien = Double.parseDouble(fm);
-			  while (rs.next()) {
-			   map = new HashMap<HoaDon, Double>(colsLen);
-			    for (int i = 0; i < colsLen; i ++) {
-			      String maHd = metaData.getColumnName(i + 1);
-			      hoaDon = (HoaDon) rs.getObject(maHd);
-			      if (hoaDon == null) {
-			        System.out.println("error");
-			      }
-			      String tongTienFM = metaData.getColumnName(i + 2);
-			      Double tinhTongTien = Double.parseDouble(tongTienFM);
-			      BigDecimal tongTien = BigDecimal.valueOf(tinhTongTien);
-			      Double thanhTien = tongTien.doubleValue();
-			      map.put(hoaDon, thanhTien);
-			    }
-			  }
-			
+			while (rs.next()) {
+				String maHoaDon = rs.getString(1);
+				NhanVien nv = nhanVienService.layThongTinNhanVienTheoMaNhanVien(rs.getString(2));
+				KhachHang kh = khachHangService.layThongTinKhachHangTheoMaKhachHang(rs.getString(3));
+				Date ngayDat = rs.getDate(4);
+				BigDecimal dfm = rs.getBigDecimal(5);
+				Double tongTien = dfm.doubleValue();
+				hoaDon = new HoaDon();
+				hoaDon.setMaHoaDon(maHoaDon);
+				hoaDon.setNhanVien(nv);
+				hoaDon.setKhachHang(kh);
+				hoaDon.setNgayDat(ngayDat);
+				hoaDon.setTongTien(tongTien);
+				hoaDons.add(hoaDon);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return map;
+		return hoaDons;
+	}
+
+
+	@Override
+	public HoaDon layHoaDonTheoMa(String maHoaDon) {
+		HoaDon hoaDon = null;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "Select * from Hoa_Don where maHoaDon = ?";
+			preStm = con.prepareStatement(sql);
+			preStm.setString(1, maHoaDon);
+			rs = preStm.executeQuery();
+			if (rs.next()) {
+				Date ngaySinh = rs.getDate(2);
+				Boolean trangThai = rs.getBoolean(3);
+				String maNhanVien = rs.getString(4);
+				String maKhachHang = rs.getString(5);
+				NhanVien nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(maNhanVien);
+				KhachHang khachHang = khachHangService.layThongTinKhachHangTheoMaKhachHang(maKhachHang);
+				hoaDon = new HoaDon(maHoaDon, ngaySinh, trangThai);
+				hoaDon.setNhanVien(nhanVien);
+				hoaDon.setKhachHang(khachHang);
+	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hoaDon;
 	}
 }
 

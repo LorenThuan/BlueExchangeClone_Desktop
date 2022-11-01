@@ -186,7 +186,7 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 //		});
 		btnLoc.setForeground(Color.BLACK);
 		btnLoc.setBackground(Color.CYAN);
-		btnLoc.setBounds(901, 23, 114, 33);
+		btnLoc.setBounds(844, 23, 114, 33);
 		panel_1.add(btnLoc);
 
 		 comboBox = new JComboBox();
@@ -216,13 +216,6 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 				lblTongTien.setBounds(637, 85, 174, 20);
 				panel_1.add(lblTongTien);
 				lblTongTien.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-				
-				JButton btnInBaoCao = new JButton("In báo cáo");
-				btnInBaoCao.setForeground(Color.BLACK);
-				btnInBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				btnInBaoCao.setBackground(Color.CYAN);
-				btnInBaoCao.setBounds(1042, 23, 151, 33);
-				panel_1.add(btnInBaoCao);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 286, 1314, 314);
@@ -258,15 +251,6 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 			try {
 					xoaAllDuLieuTable();
 					tinhTongTienTheoThangNam();
-					int thang = Integer.parseInt(comboBox.getSelectedItem().toString());
-					String namNhap = txtNam.getText().trim();
-					
-					int nam = Integer.parseInt(namNhap);
-					
-					Map<HoaDon, Double> map = thongKeDoanhThuService.layTatCaHoaDonTheoThangNam(thang, nam);
-					map.entrySet().forEach(entry -> {
-					    System.out.println(entry.getKey() + " " + entry.getValue());
-					});
 			} catch (Exception e2) {
 				e2.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Lỗi");
@@ -287,5 +271,14 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		DecimalFormat formatTien = new DecimalFormat("###,###,### VND");
 		double tongTien = thongKeDoanhThuService.tinhTongTienBanDuocTheoThang(thang, nam);
 		lblTongTien.setText(formatTien.format(tongTien));
+		
+		List<HoaDon> hoaDons = thongKeDoanhThuService.layTatCaHoaDonTheoThangNam(thang, nam);
+		tablemodel.setRowCount(0);
+          for (HoaDon hoaDon : hoaDons) {
+        	  tablemodel.addRow(new Object[]{ tablemodel.getRowCount(),
+                  hoaDon.getMaHoaDon(), hoaDon.getNhanVien().getTenNhanVien(), hoaDon.getKhachHang().getTenKhachHang(),
+                  hoaDon.getNgayDat(), hoaDon.getTongTien()
+              });
+          }
 	}
 	}

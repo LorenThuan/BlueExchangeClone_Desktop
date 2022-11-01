@@ -39,7 +39,7 @@ import java.awt.event.ActionEvent;
 
 public class Form_Nha_Cung_Cap extends JFrame {
 
-	private JPanel contentPane;
+	public static JPanel contentPane;
 	private JTextField textMaNhaCungCap;
 	private JTextField textTenNhaCungCap;
 	private JTextField textDiaChi;

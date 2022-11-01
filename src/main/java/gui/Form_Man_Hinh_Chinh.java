@@ -45,12 +45,14 @@ import javax.swing.JTextField;
 
 
 public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuListener{
-	private static JPanel contentPane;
+	public static JPanel contentPane;
 	private Form_Khach_Hang form_Khach_Hang = new Form_Khach_Hang();
-	private Form_Nhan_Vien form_Nhan_Vien = new Form_Nhan_Vien();
+	public Form_Nhan_Vien form_Nhan_Vien = new Form_Nhan_Vien();
 	private Form_Quan_Ly_Tai_Khoan form_Quan_Ly_Tai_Khoan = new Form_Quan_Ly_Tai_Khoan();
 	private Form_Dang_Nhap form_Dang_Nhap = new Form_Dang_Nhap();
 	private Form_San_Pham form_San_Pham = new Form_San_Pham();
+	public Form_Thong_Ke_Doanh_Thu form_Thong_Ke_Doanh_Thu = new Form_Thong_Ke_Doanh_Thu();
+	public Form_Thong_ke_San_Pham_Ban_Chay form_Thong_ke_San_Pham_Ban_Chay = new Form_Thong_ke_San_Pham_Ban_Chay();
 	public static JTabbedPane tabbedPane;
 	public static JMenuItem mntmQuanLyTaiKhoan;
 	private JMenuItem mntmDangXuat;
@@ -241,6 +243,8 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnKhachHang.addMenuListener(this);
 		mnNhanVien.addMenuListener(this);
 		mnSanPham.addMenuListener(this);
+		mntmThongKeDoanhThu.addActionListener(this);
+		mntmThongKeSanPhamBanChay.addActionListener(this);
 
 	}
 
@@ -253,7 +257,16 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		} else if (o.equals(mntmDangXuat)) {
 			this.setVisible(false);
 			form_Dang_Nhap.setVisible(true);
-		
+		}
+		else if (o.equals(mntmThongKeDoanhThu)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_Thong_Ke_Doanh_Thu.contentPane);	
+			tabbedPane.setVisible(true);
+		}
+		else if (o.equals(mntmThongKeSanPhamBanChay)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_Thong_ke_San_Pham_Ban_Chay.contentPane);	
+			tabbedPane.setVisible(true);
 		}
 		
 	}

@@ -10,21 +10,19 @@ public class HoaDon {
 
 	private String maHoaDon;
 	private Date ngayDat;
-	private String trangThai;
+	private boolean trangThai;
 	public KhachHang khachHang;
 	public NhanVien nhanVien;
+	private double tongTien;
 	public HoaDon(){
 
 	}
 
 	
-
-	
-
 	
 
 
-	public HoaDon(String maHoaDon, Date ngayDat, String trangThai) {
+	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai) {
 		super();
 		this.maHoaDon = maHoaDon;
 		this.ngayDat = ngayDat;
@@ -32,7 +30,16 @@ public class HoaDon {
 	}
 
 
-	
+
+
+
+	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai, double tongTien) {
+		super();
+		this.maHoaDon = maHoaDon;
+		this.ngayDat = ngayDat;
+		this.trangThai = trangThai;
+		this.tongTien = tongTien;
+	}
 
 
 
@@ -43,20 +50,9 @@ public class HoaDon {
 	}
 
 
-
-
-
-
-
-
 	public void setMaHoaDon(String maHoaDon) {
 		this.maHoaDon = maHoaDon;
 	}
-
-
-
-
-
 
 
 
@@ -65,42 +61,21 @@ public class HoaDon {
 	}
 
 
-
-
-
-
-
-
 	public void setNgayDat(Date ngayDat) {
 		this.ngayDat = ngayDat;
 	}
 
 
 
-
-
-
-
-
-	public String getTrangThai() {
+	public boolean isTrangThai() {
 		return trangThai;
 	}
 
 
 
-
-
-
-
-
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(boolean trangThai) {
 		this.trangThai = trangThai;
 	}
-
-
-
-
-
 
 
 
@@ -111,29 +86,15 @@ public class HoaDon {
 
 
 
-
-
-
-
 	public void setKhachHang(KhachHang khachHang) {
 		this.khachHang = khachHang;
 	}
 
 
 
-
-
-
-
-
 	public NhanVien getNhanVien() {
 		return nhanVien;
 	}
-
-
-
-
-
 
 
 
@@ -147,22 +108,34 @@ public class HoaDon {
 
 
 
+	public double getTongTien() {
+		return tongTien;
+	}
+
+
+
+	public void setTongTien(double tongTien) {
+		this.tongTien = tongTien;
+	}
+
+
+	
+
+	public HoaDon(String maHoaDon) {
+		super();
+		this.maHoaDon = maHoaDon;
+	}
+
+
+
+
 
 	@Override
 	public String toString() {
 		return "HoaDon [maHoaDon=" + maHoaDon + ", ngayDat=" + ngayDat + ", trangThai=" + trangThai + ", khachHang="
-				+ khachHang.getMaKhachHang() + ", nhanVien=" + nhanVien.getMaNhanVien() + "]";
+				+ khachHang.getMaKhachHang() + ", nhanVien=" + nhanVien.getMaNhanVien() + ", tongTien=" + tongTien + "]";
 	}
 
 
-
-
-
-
-
-
-	public double tinhThanhTien(){
-		return 0;
-	}
 
 }
