@@ -51,15 +51,18 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	private Form_Quan_Ly_Tai_Khoan form_Quan_Ly_Tai_Khoan = new Form_Quan_Ly_Tai_Khoan();
 	private Form_Dang_Nhap form_Dang_Nhap = new Form_Dang_Nhap();
 	private Form_San_Pham form_San_Pham = new Form_San_Pham();
+	private Form_HoaDon form_HoaDon = new Form_HoaDon();
 	public static JTabbedPane tabbedPane;
 	public static JMenuItem mntmQuanLyTaiKhoan;
 	private JMenuItem mntmDangXuat;
+	public static JMenu mnBanHang;
 	public static JMenu mnKhachHang;
 	public static JMenu mnNhanVien;
 	public static JMenuItem mntmThongKeDoanhThu;
 	public static JMenuItem mntmThongKeSanPhamBanChay;
 	public static JMenuItem mntmThongKeKhachHang;
 	public static JMenu mnSanPham;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -131,7 +134,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		JMenuBar menuBarBanHang = new JMenuBar();
 		toolBar.add(menuBarBanHang);
 		
-		JMenu mnBanHang = new JMenu("Bán Hàng");
+		mnBanHang = new JMenu("Bán Hàng");
 		mnBanHang.setPreferredSize(new Dimension(160, mnBanHang.getPreferredSize().height));
 		Icon iconBanHang =  new ImageIcon("./HinhAnh/icon/iconBanHang.png");
 		mnBanHang.setFont(new Font("Arial", Font.BOLD, 16));
@@ -241,6 +244,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnKhachHang.addMenuListener(this);
 		mnNhanVien.addMenuListener(this);
 		mnSanPham.addMenuListener(this);
+		mnBanHang.addMenuListener(this);
 
 	}
 
@@ -274,6 +278,12 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 			tabbedPane.remove(tabbedPane.getSelectedComponent());
 			tabbedPane.add(form_San_Pham.contentPane);
 			tabbedPane.setSelectedComponent(form_San_Pham.contentPane);
+			tabbedPane.setVisible(true);
+		}
+		else if (o.equals(mnBanHang)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_HoaDon.contentPane);
+			tabbedPane.setSelectedComponent(form_HoaDon.contentPane);
 			tabbedPane.setVisible(true);
 		}
 		

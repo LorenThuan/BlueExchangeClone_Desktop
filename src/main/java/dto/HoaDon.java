@@ -1,5 +1,5 @@
 package dto;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author Loren Thuan
@@ -10,143 +10,68 @@ public class HoaDon {
 
 	private String maHoaDon;
 	private Date ngayDat;
-	private String trangThai;
+	private Boolean trangThai;
 	public KhachHang khachHang;
 	public NhanVien nhanVien;
-	public HoaDon(){
-
-	}
-
 	
-
-	
-
-	
-
-
-	public HoaDon(String maHoaDon, Date ngayDat, String trangThai) {
-		super();
-		this.maHoaDon = maHoaDon;
-		this.ngayDat = ngayDat;
-		this.trangThai = trangThai;
-	}
-
-
-	
-
-
-
-
-
 	public String getMaHoaDon() {
 		return maHoaDon;
 	}
-
-
-
-
-
-
-
 
 	public void setMaHoaDon(String maHoaDon) {
 		this.maHoaDon = maHoaDon;
 	}
 
-
-
-
-
-
-
-
 	public Date getNgayDat() {
 		return ngayDat;
 	}
-
-
-
-
-
-
-
 
 	public void setNgayDat(Date ngayDat) {
 		this.ngayDat = ngayDat;
 	}
 
-
-
-
-
-
-
-
-	public String getTrangThai() {
+	public Boolean getTrangThai() {
 		return trangThai;
 	}
 
-
-
-
-
-
-
-
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(Boolean trangThai) {
 		this.trangThai = trangThai;
 	}
-
-
-
-
-
-
-
 
 	public KhachHang getKhachHang() {
 		return khachHang;
 	}
 
-
-
-
-
-
-
-
 	public void setKhachHang(KhachHang khachHang) {
 		this.khachHang = khachHang;
 	}
-
-
-
-
-
-
-
 
 	public NhanVien getNhanVien() {
 		return nhanVien;
 	}
 
-
-
-
-
-
-
-
 	public void setNhanVien(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
 	}
 
+	public HoaDon(){
 
-
+	}
 	
+	
+	public HoaDon(String maHoaDon) {
+		super();
+		this.maHoaDon = maHoaDon;
+	}
 
-
-
+	public HoaDon(String maHoaDon, Date ngayDat, Boolean trangThai, KhachHang khachHang, NhanVien nhanVien) {
+		super();
+		this.maHoaDon = maHoaDon;
+		this.ngayDat = ngayDat;
+		this.trangThai = trangThai;
+		this.khachHang = khachHang;
+		this.nhanVien = nhanVien;
+	}
 
 	@Override
 	public String toString() {
@@ -154,15 +79,15 @@ public class HoaDon {
 				+ khachHang.getMaKhachHang() + ", nhanVien=" + nhanVien.getMaNhanVien() + "]";
 	}
 
+	/**
+	 * 
+	 * @param maHoaDon
+	 * @param ngayDat
+	 * @param trangThai
+	 * @param tongTien
+	 */
 
 
 
-
-
-
-
-	public double tinhThanhTien(){
-		return 0;
-	}
-
+	
 }

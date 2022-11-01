@@ -5,7 +5,6 @@ import java.util.List;
 import dao.NhanVienDao;
 import dao.impl.NhanVienImpl;
 import dto.NhanVien;
-import dto.TaiKhoan;
 
 public class NhanVienServiceImpl implements NhanVienService{
 	private NhanVienDao nhanVienDao = new NhanVienImpl();

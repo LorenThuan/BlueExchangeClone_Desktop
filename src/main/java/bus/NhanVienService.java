@@ -3,7 +3,6 @@ package bus;
 import java.util.List;
 
 import dto.NhanVien;
-import dto.TaiKhoan;
 
 public interface NhanVienService{
 	public List<NhanVien> getTatCaNhanVien();

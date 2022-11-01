@@ -93,7 +93,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		setIconImage(Toolkit.getDefaultToolkit().getImage("Hinh\\iconBook.png"));
 
 		JLabel lblImgNhaNam = new JLabel();
-		lblImgNhaNam.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\background\\BLUEEXCHANGE.jpg"));
+		lblImgNhaNam.setIcon(new ImageIcon("HinhAnh\\background\\BLUEEXCHANGE.jpg"));
 		lblImgNhaNam.setBounds(0, 0, 330, 333);
 		contentPane.add(lblImgNhaNam);
 
