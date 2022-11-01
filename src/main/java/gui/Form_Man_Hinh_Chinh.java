@@ -53,6 +53,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	private Form_San_Pham form_San_Pham = new Form_San_Pham();
 	public Form_Thong_Ke_Doanh_Thu form_Thong_Ke_Doanh_Thu = new Form_Thong_Ke_Doanh_Thu();
 	public Form_Thong_ke_San_Pham_Ban_Chay form_Thong_ke_San_Pham_Ban_Chay = new Form_Thong_ke_San_Pham_Ban_Chay();
+	private Form_HoaDon form_HoaDon = new Form_HoaDon();
 	public static JTabbedPane tabbedPane;
 	public static JMenuItem mntmQuanLyTaiKhoan;
 	private JMenuItem mntmDangXuat;
@@ -62,6 +63,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	public static JMenuItem mntmThongKeSanPhamBanChay;
 	public static JMenuItem mntmThongKeKhachHang;
 	public static JMenu mnSanPham;
+	public static JMenu mnBanHang;
 	/**
 	 * Launch the application.
 	 */
@@ -133,7 +135,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		JMenuBar menuBarBanHang = new JMenuBar();
 		toolBar.add(menuBarBanHang);
 		
-		JMenu mnBanHang = new JMenu("Bán Hàng");
+		mnBanHang = new JMenu("Bán Hàng");
 		mnBanHang.setPreferredSize(new Dimension(160, mnBanHang.getPreferredSize().height));
 		Icon iconBanHang =  new ImageIcon("./HinhAnh/icon/iconBanHang.png");
 		mnBanHang.setFont(new Font("Arial", Font.BOLD, 16));
@@ -245,6 +247,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnSanPham.addMenuListener(this);
 		mntmThongKeDoanhThu.addActionListener(this);
 		mntmThongKeSanPhamBanChay.addActionListener(this);
+		mnBanHang.addMenuListener(this);
 
 	}
 
@@ -287,6 +290,12 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 			tabbedPane.remove(tabbedPane.getSelectedComponent());
 			tabbedPane.add(form_San_Pham.contentPane);
 			tabbedPane.setSelectedComponent(form_San_Pham.contentPane);
+			tabbedPane.setVisible(true);
+		}
+		else if (o.equals(mnBanHang)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_HoaDon.contentPane);
+			tabbedPane.setSelectedComponent(form_HoaDon.contentPane);
 			tabbedPane.setVisible(true);
 		}
 		

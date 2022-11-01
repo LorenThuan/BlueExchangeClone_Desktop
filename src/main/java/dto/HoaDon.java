@@ -1,5 +1,6 @@
 package dto;
-import java.util.Date;
+
+import java.sql.Date;
 
 /**
  * @author Loren Thuan
@@ -18,8 +19,25 @@ public class HoaDon {
 
 	}
 
+
+	public HoaDon(String maHoaDon) {
+		super();
+		this.maHoaDon = maHoaDon;
+	}
 	
-	
+
+
+	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai, KhachHang khachHang, NhanVien nhanVien) {
+		super();
+		this.maHoaDon = maHoaDon;
+		this.ngayDat = ngayDat;
+		this.trangThai = trangThai;
+		this.khachHang = khachHang;
+		this.nhanVien = nhanVien;
+	}
+
+
+
 
 
 	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai) {
@@ -40,7 +58,6 @@ public class HoaDon {
 		this.trangThai = trangThai;
 		this.tongTien = tongTien;
 	}
-
 
 
 
@@ -121,10 +138,6 @@ public class HoaDon {
 
 	
 
-	public HoaDon(String maHoaDon) {
-		super();
-		this.maHoaDon = maHoaDon;
-	}
 
 
 

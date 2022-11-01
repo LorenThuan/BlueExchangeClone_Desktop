@@ -44,7 +44,6 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 	private JTable table;
 	private static DefaultTableModel tablemodel ;
 	private ThongKeSanPhamSersvice thongKeSanPhamSersvice = new ThongKeSanPhamServiceImpl();
-//	private ThongKeBaoCaoTQ tktq;
 	private JComboBox comboBox;
 	private JLabel lblTongSanPham;
 	private JButton btnLoc;
@@ -160,18 +159,7 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 286, 1314, 314);
 		contentPane.add(scrollPane);
-
 		table = new JTable();
-//		table.setModel(new DefaultTableModel(
-//			new Object[][] {
-//			},
-//			new String[] {
-//				"STT", "Ma san pham", "Ten san pham", "Don gia nhap", "Don gia ban", "So luong nhap", "So luong ban", "Tien nhap", "Tien ban"
-//			}
-//		));
-//		table.getColumnModel().getColumn(2).setPreferredWidth(79);
-//		table.getColumnModel().getColumn(5).setPreferredWidth(79);
-	//	table.setModel(tablemodel);
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng" }));
 		scrollPane.setViewportView(table);
 		

@@ -120,70 +120,6 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		btnLoc = new JButton("Lọc");
 		btnLoc.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLoc.addActionListener(this);
-//		btnNewButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				try {
-//					
-//					xoaAllDuLieuTable();
-//					TK_doanhThu_DAO ds = new TK_doanhThu_DAO();
-//				//	System.out.println(ds.baoCaoTQs(11, 2021));
-//					//System.out.println(ds.tinhTongTienBanDuocTheoThang(11, 2021));
-//					int thang = Integer.parseInt(comboBox.getSelectedItem().toString());
-//					String nam1=txtNam.getText();
-//					
-//					if(nam1.equalsIgnoreCase("")) {
-//						JOptionPane.showMessageDialog(btnNewButton, "Chưa nhập năm");
-//						return;
-//						
-//					}
-//					
-//					int nam = Integer.parseInt(nam1);
-//					
-//					DecimalFormat tien = new DecimalFormat("###,###,### VND");
-//					double tienBan = 0;
-//					double tienNhap = 0;
-//					double tienLai = 0;
-//					double tienBanSetText = 0;
-//					for (ThongKeBaoCaoTQ baoCaoTQ : ds.baoCaoTQs(thang, nam)) {
-//						tienBanSetText += baoCaoTQ.getDonGia() * baoCaoTQ.getSoLuongBan();
-//					}
-//					int cheknull = 0;
-//					
-//					TKSanPhamBanChayDAO a= new TKSanPhamBanChayDAO();
-//					double tt=a.tinhTongTienTatCaSP(thang, nam);
-//					txtTienBanDuoc.setText(tien.format(tt));
-//				//	txtTienNhap.setText(tien.format(ds.tinhTongTienThuocDaNhapTheoThang(thang, nam)));
-//					tienBan = tienBanSetText;
-//		//			tienNhap += ds.tinhTongTienThuocDaNhapTheoThang(thang, nam);
-//					tienLai = tienBan - tienNhap;
-//			//		txtLoiNhuan.setText(tien.format(tienLai));
-//					int i = 1;
-//					int check = 0;
-//					List<ThongKeBaoCaoTQ> tkq =ds.baoCaoTQs(thang, nam);
-//					System.out.println(tkq);
-//					double tienBanDuoc = 0;
-//					tablemodel=(DefaultTableModel) table.getModel();
-//					for (ThongKeBaoCaoTQ tk : tkq) {
-//						tienBanDuoc = tk.getDonGia() * tk.getSoLuongBan();
-//						
-//						tablemodel.addRow(new Object[] {
-//								i++, tk.getMaSach(), tk.getTenSach(),
-//								tien.format(tk.getDonGiaNhap()), tien.format(tk.getDonGia()),
-//								tk.getSoLuongBan(), tien.format(tienBanDuoc) });
-//						
-//						
-//					}
-//					check++;
-//					if  (check == 0) {
-//						JOptionPane.showMessageDialog(null, "khong co du lieu cua thang:" + thang + "/" + nam + "");
-//					}
-//				} catch (Exception e1) {
-//					// TODO Auto-generated catch block
-//					
-//					e1.printStackTrace();
-//				}
-//			}
-//		});
 		btnLoc.setForeground(Color.BLACK);
 		btnLoc.setBackground(Color.CYAN);
 		btnLoc.setBounds(844, 23, 114, 33);
@@ -224,16 +160,7 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		table = new JTable();
 		
 		
-//		table.setModel(new DefaultTableModel(
-//			new Object[][] {
-//			},
-//			new String[] {
-//				"STT", "Ma san pham", "Ten san pham", "Don gia nhap", "Don gia ban", "So luong nhap", "So luong ban", "Tien nhap", "Tien ban"
-//			}
-//		));
-//		table.getColumnModel().getColumn(2).setPreferredWidth(79);
-//		table.getColumnModel().getColumn(5).setPreferredWidth(79);
-	//	table.setModel(tablemodel);
+
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "STT", "Mã hóa đơn", "Tên nhân viên", "Tên khách hàng", "Ngày đặt hàng", "Tổng tiền" }));
 		scrollPane.setViewportView(table);
 	}
