@@ -382,6 +382,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			
 		} else if (o.equals(btnHoanTac)) {
 			comboBoxTrangThai.setEnabled(false);
+			comboBoxChucVu.setEnabled(false);
 			docDuLieu();
 		}
 		
@@ -488,6 +489,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 				tableNhanVien.setValueAt(textMaNhanVien.getText(), row, 0);
 				tableNhanVien.setValueAt(textTenNhanVien.getText(), row, 1);
 				tableNhanVien.setValueAt(textEmail.getText(), row, 3);
+				comboBoxChucVu.setEnabled(false);
 				Xoadata();
 				docDuLieu();
 				tableNhanVien.clearSelection();

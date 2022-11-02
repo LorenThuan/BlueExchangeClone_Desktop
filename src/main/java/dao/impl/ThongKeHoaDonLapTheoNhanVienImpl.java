@@ -7,15 +7,16 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import dao.ConectDatabase;
 import dao.ThongKeHoaDonLapTheoNhanVienDao;
 import gui.Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien;
 public class ThongKeHoaDonLapTheoNhanVienImpl implements ThongKeHoaDonLapTheoNhanVienDao{
 	@Override
-	public void thongKeNhanVienLapHoaDonTheoNgay(int ngay, int thang, int nam) {
-		DecimalFormat tien=new DecimalFormat("###,###,### VND");
-		
+	public void thongKeNhanVienLapHoaDonTheoNgay(int ngay, int thang, int nam, String maNhanVien) {
+		DecimalFormat tien = new DecimalFormat("###,###,### VND");
+		Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien.tablemodel =(DefaultTableModel) Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien.table.getModel();
 		try {
 		
 			Connection con = ConectDatabase.getInstance().getConnection();
@@ -36,7 +37,8 @@ public class ThongKeHoaDonLapTheoNhanVienImpl implements ThongKeHoaDonLapTheoNha
 		stmt.setInt(1, ngay);
 		stmt.setInt(2, thang);
 		stmt.setInt(3, nam);
-		ResultSet rs=stmt.executeQuery();
+		stmt.setString(4, maNhanVien);
+		ResultSet rs = stmt.executeQuery();
 		int i = 0;
 		String maHoaDonSoSanh= "";
 		Object [] ds = null;
@@ -48,7 +50,7 @@ public class ThongKeHoaDonLapTheoNhanVienImpl implements ThongKeHoaDonLapTheoNha
 			if(rs.getString("maHoaDon").equalsIgnoreCase(maHoaDonSoSanh)==false) {
 				++i;
 				String stt=i +"";
-				ds=new String [] {stt,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),tien.format(5),rs.getString(6)};
+				ds=new String [] {stt,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),tien.format(rs.getDouble(5)),rs.getString(6)};
 				maHoaDonSoSanh= rs.getString(1);
 			Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien.tablemodel.addRow(ds);
 			tongTienDaBan += rs.getDouble(5);

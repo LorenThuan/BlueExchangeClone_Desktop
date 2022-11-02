@@ -53,6 +53,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	private Form_San_Pham form_San_Pham = new Form_San_Pham();
 	public Form_Thong_Ke_Doanh_Thu form_Thong_Ke_Doanh_Thu = new Form_Thong_Ke_Doanh_Thu();
 	public Form_Thong_ke_San_Pham_Ban_Chay form_Thong_ke_San_Pham_Ban_Chay = new Form_Thong_ke_San_Pham_Ban_Chay();
+	private Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien = new Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien();
 	private Form_HoaDon form_HoaDon = new Form_HoaDon();
 	public static JTabbedPane tabbedPane;
 	public static JMenuItem mntmQuanLyTaiKhoan;
@@ -62,6 +63,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	public static JMenuItem mntmThongKeDoanhThu;
 	public static JMenuItem mntmThongKeSanPhamBanChay;
 	public static JMenuItem mntmThongKeKhachHang;
+	public static JMenuItem mntmThongKeHoaDonLapTheoNhanVien;
 	public static JMenu mnSanPham;
 	public static JMenu mnBanHang;
 	/**
@@ -179,7 +181,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mntmThongKeKhachHang.setEnabled(true);
 		mnThongKe.add(mntmThongKeKhachHang);
 		
-		JMenuItem mntmThongKeHoaDonLapTheoNhanVien = new JMenuItem("Thống kê hóa đơn lập theo nhân viên");
+		mntmThongKeHoaDonLapTheoNhanVien = new JMenuItem("Thống kê hóa đơn lập theo nhân viên");
 		mntmThongKeHoaDonLapTheoNhanVien.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\bill.png"));
 		mntmThongKeHoaDonLapTheoNhanVien.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeHoaDonLapTheoNhanVien);
@@ -248,6 +250,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mntmThongKeDoanhThu.addActionListener(this);
 		mntmThongKeSanPhamBanChay.addActionListener(this);
 		mnBanHang.addMenuListener(this);
+		mntmThongKeHoaDonLapTheoNhanVien.addActionListener(this);
 
 	}
 
@@ -269,6 +272,11 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		else if (o.equals(mntmThongKeSanPhamBanChay)) {
 			tabbedPane.remove(tabbedPane.getSelectedComponent());
 			tabbedPane.add(form_Thong_ke_San_Pham_Ban_Chay.contentPane);	
+			tabbedPane.setVisible(true);
+		}
+		else if (o.equals(mntmThongKeHoaDonLapTheoNhanVien)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien.contentPane);	
 			tabbedPane.setVisible(true);
 		}
 		

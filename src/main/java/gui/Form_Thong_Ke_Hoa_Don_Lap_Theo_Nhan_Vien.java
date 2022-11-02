@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import bus.ThongKeHoaDonLapTheoNhanVienService;
+import bus.ThongKeHoaDonLapTheoNhanVienServiceImpl;
 import dao.ConectDatabase;
 
 import javax.swing.JFormattedTextField;
@@ -38,7 +40,7 @@ import javax.swing.JSpinner;
 public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 
 	public static JPanel contentPane;
-	private JTable table;
+	public static JTable table;
 	private JComboBox  cboNgay;
 	private JComboBox cboThang;
 	public static DefaultComboBoxModel cboModeMaSP = new DefaultComboBoxModel();
@@ -47,7 +49,7 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 	public static JLabel lblTongHoaDon;
 	public static DefaultTableModel tablemodel = new DefaultTableModel();
 	private JTextField txtnam;
-
+	private ThongKeHoaDonLapTheoNhanVienService thongKeHoaDonLapTheoNhanVienService = new ThongKeHoaDonLapTheoNhanVienServiceImpl();
 
 	/**
 	 * Launch the application.
@@ -115,9 +117,9 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 				System.out.println(ngay1);
 				System.out.println(thang1);
 				System.out.println(nam1);
-				
-
-						thongKeNhanVienLapHoaDonTheoNgay(ngay1,thang1,nam1);
+				String maNhanVien = Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim();
+				xoaAllDuLieuTable();
+				thongKeHoaDonLapTheoNhanVienService.thongKeNhanVienLapHoaDonTheoNgay(ngay1, thang1, nam1, maNhanVien);
 
 				
 			}
@@ -369,4 +371,6 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 		
 		
 	}
+	
+
 }
