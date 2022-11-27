@@ -37,11 +37,7 @@ public class HoaDonServiceImpl implements HoaDonService{
 		return hoaDonDao.getCT_HoadonTheoHoaDon(mahoadon);
 	}
 
-	@Override
-	public List<HoaDon> getAllDSHoadon() {
-		// TODO Auto-generated method stub
-		return hoaDonDao.getAllDSHoadon();
-	}
+
 
 	@Override
 	public boolean themHoaDon(HoaDon hoadon) {
@@ -113,6 +109,11 @@ public class HoaDonServiceImpl implements HoaDonService{
 	public ChiTietHoaDon get_TungCT_HoaDon(String mahoadon, String maSP) {
 		// TODO Auto-generated method stub
 		return hoaDonDao.get_TungCT_HoaDon(mahoadon, maSP);
+	}
+
+	@Override
+	public List<HoaDon> getAllDSHoadon(String maNhanVien) {
+		return hoaDonDao.getAllDSHoadon(maNhanVien);
 	} 
 	
 }

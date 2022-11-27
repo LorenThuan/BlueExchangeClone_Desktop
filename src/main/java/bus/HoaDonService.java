@@ -12,7 +12,7 @@ public interface HoaDonService {
 	public List<SanPham> getTatCaSanPham();
 	public SanPham laySanPhamTheoMa(String ma);
 	public List<ChiTietHoaDon> getCT_HoadonTheoHoaDon(String mahoadon);
-	public List<HoaDon> getAllDSHoadon();
+	public List<HoaDon> getAllDSHoadon(String maNhanVien);
 	public boolean themHoaDon(HoaDon hoadon);
 	public boolean themCT_HoaDon(HoaDon hd, SanPham sp, int soLuong);
 	public KhachHang timKiemKhachHangtheoSDT(String noiDungTim);

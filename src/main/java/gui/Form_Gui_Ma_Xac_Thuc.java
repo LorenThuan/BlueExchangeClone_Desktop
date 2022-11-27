@@ -176,8 +176,8 @@ public class Form_Gui_Ma_Xac_Thuc extends JFrame implements ActionListener {
 		Random rand = new Random();
 		randomCode = rand.nextInt(999999);
 		String host = "smtp.gmail.com";
-		String user = "thuan22022001@gmail.com";
-		String pass = "vpgdbapvmflxydqw";
+		String user = "sieunmsv22@gmail.com";
+		String pass = "imandtmcjmdapcfb";
 		String to = textEmail.getText().trim();
 		String subject = "Gửi mã xác thực";
 		String message = "Your reset code is " + randomCode;

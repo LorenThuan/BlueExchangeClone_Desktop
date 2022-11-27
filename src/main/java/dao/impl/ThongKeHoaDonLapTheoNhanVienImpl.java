@@ -23,7 +23,7 @@ public class ThongKeHoaDonLapTheoNhanVienImpl implements ThongKeHoaDonLapTheoNha
 			PreparedStatement stmt = null;
 			String sql= "SELECT        Chi_Tiet_Hoa_Don.maHoaDon, Nhan_Vien.maNhanVien, \r\n"
 					+ "Nhan_Vien.[tenNhanVien], Hoa_Don.[ngayDat], \r\n"
-					+ "sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - [giamGia]))  as TongTien, \r\n"
+					+ "sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) * 1.1  as TongTien, \r\n"
 					+ "sum(Chi_Tiet_Hoa_Don.soLuong), count(Chi_Tiet_Hoa_Don.maHoaDon)\r\n"
 					+ "FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
 					+ "                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"

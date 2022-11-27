@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,4 +10,5 @@ public interface ThongKeDoanhThuDao {
 	public double tinhTongTienBanDuocTheoThang(int thang, int nam);
 	public List<HoaDon> layTatCaHoaDonTheoThangNam(int thang, int nam);
 	public HoaDon layHoaDonTheoMa(String maHoaDon);
+	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien);
 }

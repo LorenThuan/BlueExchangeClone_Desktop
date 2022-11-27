@@ -17,16 +17,28 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.bouncycastle.util.encoders.UTF8;
+
 import com.toedter.calendar.JDateChooser;
 
 import bus.HoaDonService;
 import bus.HoaDonServiceImpl;
+import bus.ThongKeDoanhThuService;
+import bus.ThongKeDoanhThuServiceImpl;
 import dao.ConectDatabase;
 import dto.ChiTietHoaDon;
 import dto.HoaDon;
 import dto.KhachHang;
 import dto.NhanVien;
 import dto.SanPham;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignStyle;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.view.JasperViewer;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JScrollPane;
@@ -42,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
@@ -80,12 +93,14 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 	private JTextField textThanhTien;
 	private JTextField textTienThua;
 	private JTextField textVAT;
+	private JButton btnXuatBaoCao;
 	private java.util.Date ngayHomNay = new java.util.Date();
 	private Date ngayLap = new Date(ngayHomNay.getTime());
 	private JScrollPane scrollSanPam;
 	private HoaDonService hoaDonService = new HoaDonServiceImpl();
 	private static List<HoaDon> allHoaDon = new ArrayList<>();
-
+	private ThongKeDoanhThuService thongKeDoanhThuService = new ThongKeDoanhThuServiceImpl();
+	private double tongTienBaoCao;
 	/**
 	 * Launch the application.
 	 */
@@ -314,7 +329,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnDonHang.add(textMaHD);
 
 		txtNhanVien = new JTextField();
-		txtNhanVien.setText(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
+		txtNhanVien.setText(Form_Quan_Ly_Tai_Khoan.textTenNhanVien.getText().trim());
 		txtNhanVien.setForeground(Color.RED);
 		txtNhanVien.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtNhanVien.setEditable(false);
@@ -503,7 +518,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtSDT.setBounds(58, 54, 173, 26);
 		pnCongCu.add(txtSDT);
 		
-		JButton btnXuatBaoCao = new JButton("Xuất báo cáo");
+		btnXuatBaoCao = new JButton("Xuất báo cáo");
 		btnXuatBaoCao.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnXuatBaoCao.setEnabled(true);
 		btnXuatBaoCao.setBounds(135, 103, 145, 29);
@@ -511,7 +526,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		addEvent();
 
-		allHoaDon = hoaDonService.getAllDSHoadon();
+		allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 		loadTableHoaDon(allHoaDon);
 	}
 
@@ -527,6 +542,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		btnTimKiemSP.addActionListener(this);
 		btnXoaCT_Don.addActionListener(this);
 		btnXoaHD.addActionListener(this);
+		btnXuatBaoCao.addActionListener(this);
 		tableHoaDon.addMouseListener(this);
 		xuLyNhanPhim();
 	}
@@ -537,6 +553,37 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		lt = hoaDonService.getSanPhamTim(noidung);
 		return lt;
 	}
+	
+	  //Tạo hàm xuất hóa đơn
+    @SuppressWarnings("deprecation")
+	public void XuatHoaDon(Date ngayHomNay, double tongTien, String soHoaDonTuDong){
+        try {
+            
+            Hashtable map = new Hashtable();
+            
+            map.put("maNhanVien", Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
+            map.put("ngayHomNay", ngayHomNay);
+            map.put("tongTien", tongTien);
+            map.put("soHoaDonTuDong", soHoaDonTuDong);
+            
+            JasperReport report = JasperCompileManager.compileReport("src/main/java/gui/rptXuatHoaDon.jrxml");
+                  
+            JasperPrint p = JasperFillManager.fillReport(report,  map, ConectDatabase.getConnection() );
+//            JRDesignStyle jrDesignStyle = new JRDesignStyle();
+            /*Set the Encoding to UTF-8 for pdf and embed font to arial*/
+//            jrDesignStyle.setDefault(true);
+            String fontPath = "XuatHoaDon.pdf";
+//            jrDesignStyle.setPdfFontName(fontPath);
+//            jrDesignStyle.setPdfEncoding("Identity-H");
+//            jrDesignStyle.setPdfEmbedded(true);
+//            p.addStyle(jrDesignStyle);
+            JasperViewer.viewReport(p, false);
+            JasperExportManager.exportReportToPdfFile(p, fontPath);
+//            JRPdfExporter exporter = new JRPdfExporter();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
 //	private List<SanPham> dsSanPham1() {
 //		List<SanPham> lt = new ArrayList<>();
@@ -767,7 +814,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				HoaDon hd = taoHoaDon(maHD, false);
 				hoaDonService.themHoaDon(hd);
 				themCT_HoaDon(hd);
-				allHoaDon = hoaDonService.getAllDSHoadon();
+				allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 				loadTableHoaDon(allHoaDon);
 			}
 			xoaRong();
@@ -787,7 +834,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 					} else {
 						hoaDonService.capNhatTrangThai(maHD);
 					}
-					allHoaDon = hoaDonService.getAllDSHoadon();
+					allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 					loadTableHoaDon(allHoaDon);
 					List<SanPham> ls = new ArrayList<>();
 					ls = hoaDonService.getTatCaSanPham();
@@ -839,6 +886,13 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			} else {
 				JOptionPane.showConfirmDialog(btnXoaHD, "Xoá thành công!");
 			}
+		} else if (o.equals(btnXuatBaoCao)) {
+			Date homnay = new Date(ngayHomNay.getTime());
+			tongTienBaoCao = thongKeDoanhThuService.tinhTongTienBanDuocTheoNgay(homnay, Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
+			String soHoaDonTuDong = taoSoHoaDonTuDong();
+			XuatHoaDon(homnay, tongTienBaoCao, soHoaDonTuDong);
+//			System.out.println(homnay);
+//			System.out.println(Double.toString(tongTienBaoCao));
 		}
 	}
 
@@ -854,7 +908,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 	public HoaDon taoHoaDon(String maHD, Boolean flag) {
 		HoaDon hd = new HoaDon();
-		NhanVien nv = new NhanVien("NV001");
+		NhanVien nv = new NhanVien(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 		Date homnay = new Date(ngayHomNay.getTime());
 		hd.setMaHoaDon(maHD);
 		hd.setKhachHang(hoaDonService.timKiemKhachHangtheoSDT(txtSDT_KhachHang.getText()));
@@ -983,5 +1037,12 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private String taoSoHoaDonTuDong () {        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime ngayNhap = LocalDateTime.now();
+        String res = formatter.format(ngayNhap);
+        return res;
 	}
 }

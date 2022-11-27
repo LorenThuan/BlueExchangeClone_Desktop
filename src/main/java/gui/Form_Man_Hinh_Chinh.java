@@ -97,7 +97,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 //		getContentPane().setForeground(Color.GREEN);
 //		getContentPane().setBackground(Color.WHITE);
 //		getContentPane().setLayout(null);
-		setTitle("THE BLUES");
+		setTitle("THE SKY");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setBounds(100, 100, 450, 300);
 //		setSize(869, 427);
@@ -126,7 +126,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		JMenuBar menuBarTrangChu = new JMenuBar();
 		toolBar.add(menuBarTrangChu);
 		
-		JMenu mnTrangChu = new JMenu("<html><p style='text-align:center; width: 160;height: 26'>THE BLUES</p></html>");
+		JMenu mnTrangChu = new JMenu("<html><p style='text-align:center; width: 160;height: 26'>THE SKY</p></html>");
 //		mnTrangChu.setPreferredSize(new Dimension(160, mnTrangChu.getPreferredSize().height));
 		mnTrangChu.setForeground(new Color(0, 0, 255));
 		mnTrangChu.setFont(new Font("Arial", Font.BOLD, 16));

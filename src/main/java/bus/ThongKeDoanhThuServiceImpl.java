@@ -1,5 +1,6 @@
 package bus;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,11 @@ public class ThongKeDoanhThuServiceImpl implements ThongKeDoanhThuService{
 	public List<HoaDon> layTatCaHoaDonTheoThangNam(int thang, int nam) {
 		// TODO Auto-generated method stub
 		return thongKeDoanhThuDao.layTatCaHoaDonTheoThangNam(thang, nam);
+	}
+
+	@Override
+	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien) {
+		return thongKeDoanhThuDao.tinhTongTienBanDuocTheoNgay(ngayHienTai, maNhanVien);
 	}
 	
 

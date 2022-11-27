@@ -35,7 +35,7 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 		double tongTien = 0;
 		try {
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "SELECT      sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - [giamGia]))  as TongTien\r\n"
+			String sql = "SELECT      sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) * 1.1 as TongTien\r\n"
 					+ "FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
 					+ "                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
 					+ "                         San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham\r\n"
@@ -65,12 +65,12 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 //			List<Ob>
 			
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "SELECT      Chi_Tiet_Hoa_Don.maHoaDon, Hoa_Don.maNhanVien, Hoa_Don.maKhachHang,ngayDat,Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - [giamGia])  as ThanhTien\r\n"
+			String sql = "SELECT      Chi_Tiet_Hoa_Don.maHoaDon, Hoa_Don.maNhanVien, Hoa_Don.maKhachHang,ngayDat,sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) * 1.1  as ThanhTien\r\n"
 					+ "FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
 					+ "                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
 					+ "                         San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham\r\n"
 					+ "where YEAR([ngayDat]) = ? and MONTH([ngayDat]) = ?\r\n"
-					+ "group by Chi_Tiet_Hoa_Don.maHoaDon, Hoa_Don.maNhanVien, Hoa_Don.maKhachHang, ngayDat,Chi_Tiet_Hoa_Don.[soLuong], [donGia], [giamGia]";
+					+ "group by Chi_Tiet_Hoa_Don.maHoaDon, Hoa_Don.maNhanVien, Hoa_Don.maKhachHang, ngayDat";
 			preStm = con.prepareStatement(sql);
 			preStm.setInt(1, nam);
 			preStm.setInt(2, thang);
@@ -122,6 +122,34 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 			e.printStackTrace();
 		}
 		return hoaDon;
+	}
+
+
+	@Override
+	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien) {
+		double tongTien = 0;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "SELECT sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) * 1.1 as TongTien\r\n"
+					+ "FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
+					+ "                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
+					+ "                         San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham INNER JOIN\r\n"
+					+ "                         Khach_Hang ON Hoa_Don.maKhachHang = Khach_Hang.maKhachHang INNER JOIN\r\n"
+					+ "                         Nhan_Vien ON Hoa_Don.maNhanVien = Nhan_Vien.maNhanVien\r\n"
+					+ "WHERE Nhan_Vien.maNhanVien = ? and ngayDat = ?";
+			preStm = con.prepareStatement(sql);
+			preStm.setString(1, maNhanVien);
+			preStm.setDate(2, ngayHienTai);
+			rs = preStm.executeQuery();
+			while (rs.next()) {
+				tongTien = rs.getDouble(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return tongTien;
 	}
 }
 

@@ -273,12 +273,12 @@ public class HoaDonImpl implements HoaDonDao {
 		return null;
 	}
 
-	public List<HoaDon> getAllDSHoadon() {
+	public List<HoaDon> getAllDSHoadon(String maNhanVien) {
 		List<HoaDon> dSHoaDon = new ArrayList<HoaDon>();
 		
 		try {
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "select * from Hoa_Don";
+			String sql = "select * from Hoa_Don where maNhanVien = '"+ maNhanVien +"'";
 			preStm = con.prepareStatement(sql);
 			rs = preStm.executeQuery();
 			while (rs.next()) {

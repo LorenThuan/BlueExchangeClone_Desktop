@@ -43,7 +43,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 
 	public static JPanel contentPane;
 	public static JTextField textMaNhanVien;
-	private JTextField textTenNhanVien;
+	public static JTextField textTenNhanVien;
 	private JPasswordField passwordNhanVien;
 	private JTextField textEmail;
 	private JComboBox<String> comboBox;
