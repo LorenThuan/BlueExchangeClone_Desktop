@@ -16,6 +16,7 @@ public class SanPham {
 	private String hinhAnh;
 	private int soLuong;
 	private double giamGia;
+	private double giaNhap;
 	private String mauSac;
 	private String gioiTinh;
 	private String kichThuoc;
@@ -170,6 +171,14 @@ public class SanPham {
 
 	public void setNhaCungCap(NhaCungCap nhaCungCap) {
 		this.nhaCungCap = nhaCungCap;
+	}
+
+	public double getGiaNhap() {
+		return giaNhap;
+	}
+
+	public void setGiaNhap(double giaNhap) {
+		this.giaNhap = giaNhap;
 	}
 
 

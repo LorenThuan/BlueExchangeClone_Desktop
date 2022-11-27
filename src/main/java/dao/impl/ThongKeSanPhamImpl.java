@@ -72,7 +72,7 @@ public class ThongKeSanPhamImpl implements ThongKeSanPhamDao{
 				String maSanPham = rs.getString(2);
 				int soLuong = rs.getInt(3);
 				HoaDon hd = thongKeDoanhThuService.layHoaDonTheoMa(maHoaDon);
-				SanPham sanPham = sanPhamService.laySanPhamTheoMa(maSanPham);
+				SanPham sanPham = sanPhamService.timSanPhamTheoMa(maSanPham);
 				chiTietHoaDon = new ChiTietHoaDon(soLuong);
 				chiTietHoaDon.setSanPham(sanPham);
 				chiTietHoaDon.setHoaDon(hd);

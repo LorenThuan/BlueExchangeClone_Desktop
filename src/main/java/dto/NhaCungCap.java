@@ -24,6 +24,12 @@ public class NhaCungCap {
 
 	
 
+	public NhaCungCap() {
+		super();
+	}
+
+
+
 	public NhaCungCap(String maNhaCungCap, String tenNhaCungCap, Date ngayHopTac, String diaChi, String soDienThoai,
 			String email) {
 		super();
