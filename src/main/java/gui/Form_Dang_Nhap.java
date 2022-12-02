@@ -44,6 +44,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.KeyAdapter;
 
 
 public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListener, MouseListener {
@@ -93,7 +94,7 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		setIconImage(Toolkit.getDefaultToolkit().getImage("Hinh\\iconBook.png"));
 
 		JLabel lblImgNhaNam = new JLabel();
-		lblImgNhaNam.setIcon(new ImageIcon("./HinhAnh/background/BackGroupLogin.jpeg"));
+		lblImgNhaNam.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\background\\CuaHangQuanAo.jpg"));
 		lblImgNhaNam.setBounds(0, 0, 330, 333);
 		contentPane.add(lblImgNhaNam);
 
@@ -131,6 +132,23 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 //		});
 
 		pwdMatkhau = new JPasswordField();
+		pwdMatkhau.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(txtTaiKhoan.getText().equalsIgnoreCase("")) {
+						JOptionPane.showMessageDialog(btnDangNhap, "Tài khoản không được  để trống");
+					return;
+					}
+					else if( pwdMatkhau.getText().equalsIgnoreCase("")) {
+						JOptionPane.showMessageDialog(btnDangNhap, "Mật khẩu không được  để trống");
+						return;
+					}
+						
+					logIn();
+				}
+			}
+		});
 //		pwdMatkhau.setText("Nhập mật khẩu");
 		pwdMatkhau.setEchoChar('•');
 		pwdMatkhau.setBounds(371, 167, 230, 30);
@@ -235,48 +253,50 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 	}
 
 	public boolean kiemTraDangNhap(String tenDangNhap, String matKhau) {
-		 if (taiKhoan.getNhanVien().getMaNhanVien().equalsIgnoreCase(tenDangNhap)
-				&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
-				&& nhanVien.getChucVu().equalsIgnoreCase("NVBH")) {
-			TrangThaiDangNhapNhanVien = true;
-			return true;
-		} else if (taiKhoan.getNhanVien().getMaNhanVien().equalsIgnoreCase(tenDangNhap)
-				&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
-				&& nhanVien.getChucVu().equalsIgnoreCase("NVQL")) {
-			TrangThaiDangNhapQuanLy = true;
-			return true;
-		}
-
+	
+			 if (taiKhoan.getNhanVien().getMaNhanVien().equalsIgnoreCase(tenDangNhap)
+						&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
+						&& nhanVien.getChucVu().equalsIgnoreCase("NVBH")) {
+					TrangThaiDangNhapNhanVien = true;
+					return true;
+				} else if (taiKhoan.getNhanVien().getMaNhanVien().equalsIgnoreCase(tenDangNhap)
+						&& taiKhoan.getMatKhau().equalsIgnoreCase(matKhau)
+						&& nhanVien.getChucVu().equalsIgnoreCase("NVQL")) {
+					TrangThaiDangNhapQuanLy = true;
+					return true;
+				}
 		return false;
 	}
 	
 	public void logIn() {
 	
+		try {
+			String tenDN = txtTaiKhoan.getText().trim();
+			String matKhau = pwdMatkhau.getText().trim();
+			phanQuyenDangNhap(tenDN, matKhau);
 			
-				String tenDN = txtTaiKhoan.getText().trim();
-				String matKhau = pwdMatkhau.getText().trim();
-				phanQuyenDangNhap(tenDN, matKhau);
-				
-				if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapNhanVien == true) {
-					usernameToGetNhanVien = txtTaiKhoan.getText();
-					System.out.println("1 " + usernameToGetNhanVien);
-					Form_Man_Hinh_Chinh formManHinhChinh = new Form_Man_Hinh_Chinh();
-					formManHinhChinh.mnNhanVien.setEnabled(false);
-					formManHinhChinh.mntmThongKeDoanhThu.setEnabled(false);
-					formManHinhChinh.mntmThongKeKhachHang.setEnabled(false);
-					formManHinhChinh.mntmThongKeSanPhamBanChay.setEnabled(false);
-					formManHinhChinh.setVisible(true);
-					this.setVisible(false);
-				} else if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapQuanLy == true) {
-					usernameToGetNhanVien = txtTaiKhoan.getText();
-					System.out.println("2 " + usernameToGetNhanVien);
-					Form_Man_Hinh_Chinh formManHinhChinh = new Form_Man_Hinh_Chinh();
-					formManHinhChinh.setVisible(true);
-					this.setVisible(false);
-				}
-					
+			if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapNhanVien == true) {
+				usernameToGetNhanVien = txtTaiKhoan.getText();
+//				System.out.println("1 " + usernameToGetNhanVien);
+				Form_Man_Hinh_Chinh formManHinhChinh = new Form_Man_Hinh_Chinh();
+				formManHinhChinh.mnNhanVien.setEnabled(false);
+				formManHinhChinh.mntmThongKeDoanhThu.setEnabled(false);
+//				formManHinhChinh.mntmThongKeKhachHang.setEnabled(false);
+				formManHinhChinh.mntmThongKeSanPhamBanChay.setEnabled(false);
+				formManHinhChinh.setVisible(true);
+				this.setVisible(false);
+			} else if (kiemTraDangNhap(tenDN, matKhau) && TrangThaiDangNhapQuanLy == true) {
+				usernameToGetNhanVien = txtTaiKhoan.getText();
+//				System.out.println("2 " + usernameToGetNhanVien);
+				Form_Man_Hinh_Chinh formManHinhChinh = new Form_Man_Hinh_Chinh();
+				formManHinhChinh.setVisible(true);
+				this.setVisible(false);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu");
+//			e.printStackTrace();
+		}
 			
-	
 		
 }
 

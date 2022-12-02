@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +83,42 @@ public class ThongKeSanPhamImpl implements ThongKeSanPhamDao{
 			e.printStackTrace();
 		}
 		return chiTietHoaDons;
+	}
+
+	@Override
+	public ArrayList<SanPham> get10SanPhamBanChay() {
+		ArrayList<SanPham> danhSachSanPham = new ArrayList<SanPham>();	
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			
+			String sql="SELECT top 10 * FROM dbo.San_Pham\r\n"
+					+ "ORDER BY donGia * (1 - giamGia) DESC, tenSanPham ASC";
+			preStm = con.prepareStatement(sql);
+			rs = preStm.executeQuery();
+			while (rs.next()) {				
+				String maSanPham = rs.getString(1);
+				String tenSanPham = rs.getString(2);
+				Double donGia = rs.getDouble(4);
+				String hinhAnh = rs.getString(5);
+				int soLuong = rs.getInt(6);
+				Double giamGia = rs.getDouble(7);
+				String kichThuoc = rs.getString(8);
+				String mauSac = rs.getString(10);
+				SanPham sanPham = new SanPham();
+				sanPham.setMaSanPham(maSanPham);
+				sanPham.setTenSanPham(tenSanPham);
+				sanPham.setDonGia(donGia);
+				sanPham.setHinhAnh(hinhAnh);
+				sanPham.setSoLuong(soLuong);
+				sanPham.setKichThuoc(kichThuoc);
+				sanPham.setMauSac(mauSac);
+				sanPham.setGiamGia(giamGia);
+				danhSachSanPham.add(sanPham);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return danhSachSanPham;
 	}
 
 }

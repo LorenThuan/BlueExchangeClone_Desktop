@@ -54,6 +54,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	public Form_Thong_Ke_Doanh_Thu form_Thong_Ke_Doanh_Thu = new Form_Thong_Ke_Doanh_Thu();
 	public Form_Thong_ke_San_Pham_Ban_Chay form_Thong_ke_San_Pham_Ban_Chay = new Form_Thong_ke_San_Pham_Ban_Chay();
 	private Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien = new Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien();
+	private Form_Trang_Chu form_Trang_Chu = new Form_Trang_Chu();
 	private Form_HoaDon form_HoaDon = new Form_HoaDon();
 	public static JTabbedPane tabbedPane;
 	public static JMenuItem mntmQuanLyTaiKhoan;
@@ -66,6 +67,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	public static JMenuItem mntmThongKeHoaDonLapTheoNhanVien;
 	public static JMenu mnSanPham;
 	public static JMenu mnBanHang;
+	public static JMenu mnTrangChu;
 	/**
 	 * Launch the application.
 	 */
@@ -126,7 +128,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		JMenuBar menuBarTrangChu = new JMenuBar();
 		toolBar.add(menuBarTrangChu);
 		
-		JMenu mnTrangChu = new JMenu("<html><p style='text-align:center; width: 160;height: 26'>THE SKY</p></html>");
+		mnTrangChu = new JMenu("<html><p style='text-align:center; width: 160;height: 26'>THE SKY</p></html>");
 //		mnTrangChu.setPreferredSize(new Dimension(160, mnTrangChu.getPreferredSize().height));
 		mnTrangChu.setForeground(new Color(0, 0, 255));
 		mnTrangChu.setFont(new Font("Arial", Font.BOLD, 16));
@@ -141,7 +143,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnBanHang.setPreferredSize(new Dimension(160, mnBanHang.getPreferredSize().height));
 		Icon iconBanHang =  new ImageIcon("./HinhAnh/icon/iconBanHang.png");
 		mnBanHang.setFont(new Font("Arial", Font.BOLD, 16));
-		mnBanHang.setIcon(iconBanHang);
+		mnBanHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\iconBanHang-removebg-preview.png"));
 		menuBarBanHang.add(mnBanHang);
 		
 		JMenuBar menuBarSanPham = new JMenuBar();
@@ -172,14 +174,14 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mntmThongKeSanPhamBanChay.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeSanPhamBanChay);
 		
-		mntmThongKeKhachHang = new JMenuItem("Thống kê khách hàng");
-		mntmThongKeKhachHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\diagram.png"));
-		mntmThongKeKhachHang.setBackground(new Color(240, 240, 240));
-		mntmThongKeKhachHang.setForeground(new Color(0, 0, 0));
-		mntmThongKeKhachHang.setSelected(false);
-		mntmThongKeKhachHang.setFont(new Font("Arial", Font.BOLD, 14));
-		mntmThongKeKhachHang.setEnabled(true);
-		mnThongKe.add(mntmThongKeKhachHang);
+//		mntmThongKeKhachHang = new JMenuItem("Thống kê khách hàng");
+//		mntmThongKeKhachHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\diagram.png"));
+//		mntmThongKeKhachHang.setBackground(new Color(240, 240, 240));
+//		mntmThongKeKhachHang.setForeground(new Color(0, 0, 0));
+//		mntmThongKeKhachHang.setSelected(false);
+//		mntmThongKeKhachHang.setFont(new Font("Arial", Font.BOLD, 14));
+//		mntmThongKeKhachHang.setEnabled(true);
+//		mnThongKe.add(mntmThongKeKhachHang);
 		
 		mntmThongKeHoaDonLapTheoNhanVien = new JMenuItem("Thống kê hóa đơn lập theo nhân viên");
 		mntmThongKeHoaDonLapTheoNhanVien.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\bill.png"));
@@ -213,7 +215,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		JMenu mnTaiKhoan = new JMenu("Tài Khoản");
 		mnTaiKhoan.setPreferredSize(new Dimension(160, mnTaiKhoan.getPreferredSize().height));
-		mnTaiKhoan.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\account.png"));
+		mnTaiKhoan.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\account-removebg-preview.png"));
 		mnTaiKhoan.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarTaiKhoan.add(mnTaiKhoan);
 		
@@ -241,6 +243,10 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		tabbedPane.setBounds(0, 50, 1364, 691);
 		contentPane.add(tabbedPane);
 		tabbedPane.setVisible(false);
+//		tabbedPane.remove(tabbedPane.getSelectedComponent());
+//		tabbedPane.add(form_Trang_Chu.contentPane);
+//		tabbedPane.setSelectedComponent(form_Trang_Chu.contentPane);
+//		tabbedPane.setVisible(true);
 		
 		mntmQuanLyTaiKhoan.addActionListener(this);
 		mntmDangXuat.addActionListener(this);
@@ -251,6 +257,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mntmThongKeSanPhamBanChay.addActionListener(this);
 		mnBanHang.addMenuListener(this);
 		mntmThongKeHoaDonLapTheoNhanVien.addActionListener(this);
+		mnTrangChu.addMenuListener(this);
 
 	}
 
@@ -304,6 +311,11 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 			tabbedPane.remove(tabbedPane.getSelectedComponent());
 			tabbedPane.add(form_HoaDon.contentPane);
 			tabbedPane.setSelectedComponent(form_HoaDon.contentPane);
+			tabbedPane.setVisible(true);
+		} else if (o.equals(mnTrangChu)) {
+			tabbedPane.remove(tabbedPane.getSelectedComponent());
+			tabbedPane.add(form_Trang_Chu.contentPane);
+			tabbedPane.setSelectedComponent(form_Trang_Chu.contentPane);
 			tabbedPane.setVisible(true);
 		}
 		

@@ -5,8 +5,12 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -282,6 +286,10 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		btnHoanTac.addActionListener(this);
 		tableNhanVien.addMouseListener(this);
 		
+//		this.addKeyListener(this);
+//		setFocusable(true);
+		 KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+	        manager.addKeyEventDispatcher(new MyDispatcher());
 		docDuLieu();
 	}
 
@@ -315,7 +323,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			comboBoxTrangThai.setEnabled(true);
 			comboBoxTrangThai.getModel().setSelectedItem(nv.isTrangThai() == true ? "Đang làm việc" : "Thôi việc");
 			
-			comboBoxChucVu.setEnabled(true);
+			comboBoxChucVu.setEnabled(false);
 			comboBoxChucVu.getModel().setSelectedItem(nv.getChucVu());
 			
 			textMaNhanVien.setEditable(false);
@@ -350,6 +358,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -408,6 +417,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		textTimKiem.setText("");
 		dateChonNgaySinh.setDate(null);
 		textMaNhanVien.setEditable(true);
+		
 	}
 	
 	public static boolean themMoiNhanVien() {
@@ -415,6 +425,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		String maNhanVien = textMaNhanVien.getText().trim();
 		String tenNhanVien = textTenNhanVien.getText().trim();
 		String email = textEmail.getText().trim();
+		
 		boolean gioiTinh = false;
 		if (rdbtnNam.isSelected()) {
 			gioiTinh = true;
@@ -461,6 +472,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		String maNhanVien = textMaNhanVien.getText().trim();
 		String tenNhanVien = textTenNhanVien.getText().trim();
 		String email = textEmail.getText().trim();
+		
 		boolean gioiTinh = false;
 		if (rdbtnNam.isSelected()) {
 			gioiTinh = true;
@@ -521,4 +533,20 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		dataModelNhanVien = (DefaultTableModel) tableNhanVien.getModel();
 		dataModelNhanVien.getDataVector().removeAllElements();
 	}
+
+	
+	 private class MyDispatcher implements KeyEventDispatcher {
+	        @Override
+	        public boolean dispatchKeyEvent(KeyEvent e) {
+	            if (e.getKeyCode() == KeyEvent.VK_INSERT) {
+	            	comboBoxTrangThai.setEnabled(false);
+	    			Boolean kq = themMoiNhanVien();
+	    			docDuLieu();
+	    			new Form_Cap_Mat_Khau().setVisible(true);
+	                System.out.println("tester");
+	            } 
+	            return false;
+	        }
+	    }
+
 }

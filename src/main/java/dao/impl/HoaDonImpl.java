@@ -311,7 +311,7 @@ public class HoaDonImpl implements HoaDonDao {
 		boolean n = false;
 		try {
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "insert into Hoa_Don values(?,?,?,?,?)";
+			String sql = "insert into Hoa_Don values(?,?,?,?,?,?)";
 
 			preStm = con.prepareStatement(sql);
 
@@ -320,6 +320,7 @@ public class HoaDonImpl implements HoaDonDao {
 			preStm.setBoolean(3, hoadon.isTrangThai());
 			preStm.setString(4, hoadon.getNhanVien().getMaNhanVien());
 			preStm.setString(5, hoadon.getKhachHang().getMaKhachHang());
+			preStm.setDouble(6, hoadon.getGiamGia());
 			n = preStm.executeUpdate() > 0;
 
 		} catch (Exception e) {

@@ -15,6 +15,7 @@ public class HoaDon {
 	public KhachHang khachHang;
 	public NhanVien nhanVien;
 	private double tongTien;
+	private double giamGia;
 	public HoaDon(){
 
 	}
@@ -27,17 +28,23 @@ public class HoaDon {
 	
 
 
-	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai, KhachHang khachHang, NhanVien nhanVien) {
+	
+
+
+
+
+
+	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai, KhachHang khachHang, NhanVien nhanVien,
+			double tongTien, double giamGia) {
 		super();
 		this.maHoaDon = maHoaDon;
 		this.ngayDat = ngayDat;
 		this.trangThai = trangThai;
 		this.khachHang = khachHang;
 		this.nhanVien = nhanVien;
+		this.tongTien = tongTien;
+		this.giamGia = giamGia;
 	}
-
-
-
 
 
 	public HoaDon(String maHoaDon, Date ngayDat, boolean trangThai) {
@@ -137,17 +144,30 @@ public class HoaDon {
 
 
 	
+	
 
 
 
 
+
+	public double getGiamGia() {
+		return giamGia;
+	}
+
+
+	public void setGiamGia(double giamGia) {
+		this.giamGia = giamGia;
+	}
 
 
 	@Override
 	public String toString() {
 		return "HoaDon [maHoaDon=" + maHoaDon + ", ngayDat=" + ngayDat + ", trangThai=" + trangThai + ", khachHang="
-				+ khachHang.getMaKhachHang() + ", nhanVien=" + nhanVien.getMaNhanVien() + ", tongTien=" + tongTien + "]";
+				+ khachHang.getMaKhachHang() + ", nhanVien=" + nhanVien.getMaNhanVien() + ", tongTien=" + tongTien + ", giamGia=" + giamGia + "]";
 	}
+
+
+	
 
 
 

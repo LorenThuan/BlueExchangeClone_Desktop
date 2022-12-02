@@ -111,12 +111,13 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 				Boolean trangThai = rs.getBoolean(3);
 				String maNhanVien = rs.getString(4);
 				String maKhachHang = rs.getString(5);
+				Double giamGia = rs.getDouble(6);
 				NhanVien nhanVien = nhanVienService.layThongTinNhanVienTheoMaNhanVien(maNhanVien);
 				KhachHang khachHang = khachHangService.layThongTinKhachHangTheoMaKhachHang(maKhachHang);
 				hoaDon = new HoaDon(maHoaDon, ngaySinh, trangThai);
 				hoaDon.setNhanVien(nhanVien);
 				hoaDon.setKhachHang(khachHang);
-	
+				hoaDon.setGiamGia(giamGia);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
