@@ -173,7 +173,7 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 	<columnHeader>
 		<band height="37" splitType="Stretch">
 			<staticText>
-				<reportElement x="-20" y="10" width="100" height="20" uuid="ff0ea907-1582-4ab9-be52-278a3c9a92d2"/>
+				<reportElement x="-11" y="10" width="91" height="20" uuid="ff0ea907-1582-4ab9-be52-278a3c9a92d2"/>
 				<textElement textAlignment="Center">
 					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -208,7 +208,7 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 				<text><![CDATA[Đơn giá]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="10" width="95" height="20" uuid="bd84a511-e30f-4b34-bdd5-e21663a7abfe"/>
+				<reportElement x="480" y="10" width="80" height="20" uuid="bd84a511-e30f-4b34-bdd5-e21663a7abfe"/>
 				<textElement textAlignment="Center">
 					<font fontName="DejaVu Sans" size="10" isBold="true" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -248,9 +248,6 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 			<line>
 				<reportElement x="575" y="9" width="1" height="21" uuid="7a7443d8-a1a4-4ffd-8b51-4265c7296877"/>
 			</line>
-			<line>
-				<reportElement x="-20" y="12" width="1" height="18" uuid="159212c9-4be1-4ede-9f10-d1e5874628a1"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -284,14 +281,14 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 				<textFieldExpression><![CDATA[$F{donGia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="10" width="95" height="17" uuid="eac8e684-cd76-4a04-87d7-42a5436d53fa"/>
+				<reportElement x="480" y="10" width="80" height="17" uuid="eac8e684-cd76-4a04-87d7-42a5436d53fa"/>
 				<textElement textAlignment="Center">
 					<font fontName="DejaVu Sans" isBold="false" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ThanhTien}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="-20" y="10" width="100" height="20" uuid="da606ac2-f91a-4fc3-a410-4a5b8a3ae541"/>
+				<reportElement x="-9" y="10" width="89" height="20" uuid="da606ac2-f91a-4fc3-a410-4a5b8a3ae541"/>
 				<textElement textAlignment="Center">
 					<font fontName="DejaVu Sans" isBold="false" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -322,7 +319,7 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 				<reportElement x="575" y="-28" width="1" height="55" uuid="c7d85480-e507-4bf8-9314-2e9f6ed11383"/>
 			</line>
 			<line>
-				<reportElement x="-20" y="-27" width="1" height="52" uuid="746c499c-87f1-428e-bcc5-81619596a409"/>
+				<reportElement x="-10" y="-26" width="1" height="52" uuid="746c499c-87f1-428e-bcc5-81619596a409"/>
 			</line>
 			<textField>
 				<reportElement x="309" y="10" width="70" height="16" uuid="98c2fc50-135e-4a00-b8ff-091e14f497b6"/>
@@ -331,6 +328,9 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 				</textElement>
 				<textFieldExpression><![CDATA[$F{soLuong}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="-10" y="-25" width="1" height="18" uuid="159212c9-4be1-4ede-9f10-d1e5874628a1"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>
