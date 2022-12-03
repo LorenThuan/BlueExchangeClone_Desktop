@@ -20,9 +20,12 @@ public class NhaCungCap {
 
 	public void finalize() throws Throwable {
 
-	}
+	}	
 
-	
+	public NhaCungCap() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public NhaCungCap(String maNhaCungCap, String tenNhaCungCap, Date ngayHopTac, String diaChi, String soDienThoai,
 			String email) {

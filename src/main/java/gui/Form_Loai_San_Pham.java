@@ -5,9 +5,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,13 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
 
 import bus.LoaiSanPhamService;
 import bus.LoaiSanPhamServiceImpl;
 import dao.ConectDatabase;
 import dto.LoaiSanPham;
-import dto.SanPham;
 
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -31,12 +27,11 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Form_Loai_San_Pham extends JFrame {
 
@@ -49,6 +44,8 @@ public class Form_Loai_San_Pham extends JFrame {
 	private DefaultTableModel modelLoaiSanPham;
 
 	private LoaiSanPhamService loaiSanPhamService = new LoaiSanPhamServiceImpl();
+	private JLabel lblTBMaLoai;
+	private JLabel lblTBTenLoai;
 	/**
 	 * Launch the application.
 	 */
@@ -112,6 +109,14 @@ public class Form_Loai_San_Pham extends JFrame {
 				if (textMaLoaiSanPham.getText().equals("Tự động khi để trống")) {
 					textMaLoaiSanPham.setText("Tự động khi để trống");
 					textMaLoaiSanPham.setForeground(new Color(153, 153, 153));
+				} else if (!textMaLoaiSanPham.getText().matches("LSP[\\d]{1,14}")) {
+					lblTBMaLoai.setText("* Không hợp lệ! LSP***********!");
+					if (textMaLoaiSanPham.getText().equals("Tự động khi để trống")) {
+						lblTBMaLoai.setText("");
+					} 
+				}
+				else {					
+					lblTBMaLoai.setText("");
 				}
 			}
 			@Override
@@ -119,7 +124,15 @@ public class Form_Loai_San_Pham extends JFrame {
 				if (textMaLoaiSanPham.getText().equals("")) {
 					textMaLoaiSanPham.setText("Tự động khi để trống");
 					textMaLoaiSanPham.setForeground(new Color(153, 153, 153));
-				}	
+				} else if (!textMaLoaiSanPham.getText().matches("LSP[\\d]{1,14}")) {
+					lblTBMaLoai.setText("* Không hợp lệ! LSP***********!");
+					if (textMaLoaiSanPham.getText().equals("Tự động khi để trống")) {
+						lblTBMaLoai.setText("");
+					} 
+				}
+				else {					
+					lblTBMaLoai.setText("");
+				}
 			}
 		});
 		textMaLoaiSanPham.setColumns(10);
@@ -129,9 +142,45 @@ public class Form_Loai_San_Pham extends JFrame {
 		panelNhaCungCap.add(lblTenLoaiSanPham);
 		
 		textTenLoaiSanPham = new JTextField();
+		textTenLoaiSanPham.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textTenLoaiSanPham.getText().length() == 0) {
+					lblTBTenLoai.setText("* Không để trống!");
+				} else if (textTenLoaiSanPham.getText().length() > 50) {
+					lblTBTenLoai.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenLoai.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textTenLoaiSanPham.getText().length() == 0) {
+					lblTBTenLoai.setText("* Không để trống!");
+				} else if (textTenLoaiSanPham.getText().length() > 50) {
+					lblTBTenLoai.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenLoai.setText("");
+				}
+			}
+		});
 		textTenLoaiSanPham.setBounds(151, 77, 149, 19);
 		panelNhaCungCap.add(textTenLoaiSanPham);
 		textTenLoaiSanPham.setColumns(10);
+		
+		lblTBMaLoai = new JLabel("");
+		lblTBMaLoai.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMaLoai.setForeground(Color.RED);
+		lblTBMaLoai.setBounds(151, 54, 149, 19);
+		panelNhaCungCap.add(lblTBMaLoai);
+		
+		lblTBTenLoai = new JLabel("");
+		lblTBTenLoai.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBTenLoai.setForeground(Color.RED);
+		lblTBTenLoai.setBounds(151, 95, 142, 19);
+		panelNhaCungCap.add(lblTBTenLoai);
 		
 		JPanel panelChucNang = new JPanel();
 		panelChucNang.setBounds(31, 390, 355, 138);
@@ -379,20 +428,23 @@ public class Form_Loai_San_Pham extends JFrame {
 	private boolean kiemTraDuLieu () {
 		String maLoaiSanPham = textMaLoaiSanPham.getText().trim();
 		String tenLoaiSanPham = textTenLoaiSanPham.getText().trim();
+		
+		lblTBMaLoai.setText("");
+		lblTBTenLoai.setText("");
+		
 		if (!maLoaiSanPham.equals("Tự động khi để trống")) {
 			if (!(maLoaiSanPham.length() > 0 && maLoaiSanPham.length() < 50
 					&& maLoaiSanPham.matches("LSP[\\d]{1,14}"))) {
-				JOptionPane.showMessageDialog(this, "Loại sản phẩm! 'LSP[\\d]{1,14}'");
+				lblTBMaLoai.setText("* Không hợp lệ! LSP**************");
 				return false;
 			}
 		}
 		
 		if (!(tenLoaiSanPham.length() > 0 && tenLoaiSanPham.length() < 50
 				&& tenLoaiSanPham.matches("[\\W\\w\\s]+"))) {
-			JOptionPane.showMessageDialog(this, "Tên loại! Không chứ ký tự đặc biệt");
+			lblTBTenLoai.setText("* Không hợp lệ!");
 			return false;
 		}
 		return true;
 	}
-
 }

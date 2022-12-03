@@ -47,9 +47,9 @@ public class SanPhamServiceImpl implements SanPhamService{
 	}
 
 	@Override
-	public SanPham laySanPhamTheoMa(String ma) {
+	public SanPham timSanPhamTheoMa(String ma) {
 		// TODO Auto-generated method stub
-		return sanPhamDao.laySanPhamTheoMa(ma);
+		return sanPhamDao.timSanPhamTheoMa(ma);
 	}
 
 }

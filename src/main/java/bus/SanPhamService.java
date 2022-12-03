@@ -12,5 +12,5 @@ public interface SanPhamService {
 	public boolean capNhatSanPham (SanPham sanPham);
 	public ArrayList<SanPham> timKiemSanPham(String tuKhoa);
 	public ArrayList<SanPham> timKiemSanPhamTheoLoai(String tuKhoa);
-	public SanPham laySanPhamTheoMa (String ma);
+	public SanPham timSanPhamTheoMa (String ma);
 }

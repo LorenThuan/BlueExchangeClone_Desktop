@@ -1,19 +1,16 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,17 +28,15 @@ import com.toedter.calendar.JDateChooser;
 import bus.NhanVienService;
 import bus.NhanVienServiceImpl;
 import dao.ConectDatabase;
-import dto.KhachHang;
-import dto.NhanVien;
 import dto.NhanVien;
 import handle.RoundJTextField;
 
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Color;
 
 public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListener{
 
@@ -65,6 +60,10 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 	private JButton btnHoanTac;
 	private static JComboBox<String> comboBoxTrangThai;
 	private static JDateChooser dateChonNgaySinh;
+	private JLabel lblTBMaNhanVien;
+	private JLabel lblTBTenNhanVien;
+	private JLabel lblTBEmail;
+	private JLabel lblTBNgaySinh;
 
 	/**
 	 * Launch the application.
@@ -113,7 +112,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lblMaNhanVien);
 		
 		JLabel lblTenNhanVien = new JLabel("Tên Nhân Viên:");
-		lblTenNhanVien.setBounds(24, 91, 110, 14);
+		lblTenNhanVien.setBounds(24, 83, 110, 14);
 		panelThongTinNhanVien.add(lblTenNhanVien);
 		
 		
@@ -124,7 +123,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		
 		textTenNhanVien = new JTextField();
 		textTenNhanVien.setColumns(10);
-		textTenNhanVien.setBounds(177, 88, 197, 20);
+		textTenNhanVien.setBounds(177, 81, 197, 20);
 		panelThongTinNhanVien.add(textTenNhanVien);
 		
 		JLabel lblGioiTinh = new JLabel("Giới Tính:");
@@ -155,12 +154,12 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(dateChonNgaySinh);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(466, 91, 83, 14);
+		lblEmail.setBounds(466, 83, 83, 14);
 		panelThongTinNhanVien.add(lblEmail);
 		
 		textEmail = new JTextField();
 		textEmail.setColumns(10);
-		textEmail.setBounds(555, 88, 197, 20);
+		textEmail.setBounds(555, 81, 197, 20);
 		panelThongTinNhanVien.add(textEmail);
 		
 		JLabel lbTrangThai = new JLabel("Trạng Thái:");
@@ -173,6 +172,30 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		comboBoxTrangThai.addItem("Thôi việc");
 		comboBoxTrangThai.setBounds(979, 83, 123, 30);
 		panelThongTinNhanVien.add(comboBoxTrangThai);
+		
+		lblTBMaNhanVien = new JLabel("");
+		lblTBMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMaNhanVien.setForeground(Color.RED);
+		lblTBMaNhanVien.setBounds(177, 51, 197, 20);
+		panelThongTinNhanVien.add(lblTBMaNhanVien);
+		
+		lblTBTenNhanVien = new JLabel("");
+		lblTBTenNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBTenNhanVien.setForeground(Color.RED);
+		lblTBTenNhanVien.setBounds(177, 100, 197, 20);
+		panelThongTinNhanVien.add(lblTBTenNhanVien);
+		
+		lblTBEmail = new JLabel("");
+		lblTBEmail.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBEmail.setForeground(Color.RED);
+		lblTBEmail.setBounds(555, 101, 197, 20);
+		panelThongTinNhanVien.add(lblTBEmail);
+		
+		lblTBNgaySinh = new JLabel("");
+		lblTBNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBNgaySinh.setForeground(Color.RED);
+		lblTBNgaySinh.setBounds(979, 51, 123, 20);
+		panelThongTinNhanVien.add(lblTBNgaySinh);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(126, 230, 1098, 45);
@@ -344,7 +367,8 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			comboBoxTrangThai.setEnabled(false);
 			Boolean kq = themMoiNhanVien();
 			docDuLieu();
-			new Form_Cap_Mat_Khau().setVisible(true);
+			new Form_Cap_Mat_Khau().setVisible(true);					
+			
 		} else if (o.equals(btnXoa)) {
 			comboBoxTrangThai.setEnabled(false);
 			 Boolean kq = xoaNhanVien();
@@ -500,5 +524,41 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 	public static void Xoadata() {
 		dataModelNhanVien = (DefaultTableModel) tableNhanVien.getModel();
 		dataModelNhanVien.getDataVector().removeAllElements();
+	}
+	
+	public boolean kiemTraDuLieu() {
+		String maNhanVien = textMaNhanVien.getText().trim();
+		String tenNhanVien = textTenNhanVien.getText().trim();
+		String email = textEmail.getText().trim();
+		
+		lblTBMaNhanVien.setText("");
+		lblTBTenNhanVien.setText("");
+		lblTBNgaySinh.setText("");
+		lblTBEmail.setText("");
+		
+		if (!(maNhanVien.length() > 0 && maNhanVien.length() < 20
+				&& maNhanVien.matches("NV[\\d]{3}"))) {
+			lblTBMaNhanVien.setText("* Không hợp lệ! NV***");
+			return false;
+		}
+		
+		if (!(tenNhanVien.length() > 0 && tenNhanVien.length() < 20
+				&& maNhanVien.matches("[\\W\\w\\s]+"))) {
+			lblTBTenNhanVien.setText("* Không hợp lệ!");
+			return false;
+		}
+		
+		if (!(email.length() > 0 && email.length() < 50
+				&& email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))) {
+			lblTBEmail.setText("* Không hợp lệ!");
+			return false;
+		}
+		
+		if (dateChonNgaySinh.getDate().getYear() + 16 > Date.valueOf(LocalDate.now()).getYear()) {
+			lblTBNgaySinh.setText("* Phải từ 16 tuổi!");
+			return false;
+		}
+		
+		return true;		
 	}
 }

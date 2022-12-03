@@ -24,15 +24,16 @@ import handle.RoundJTextField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Form_Khach_Hang extends JFrame implements ActionListener, MouseListener{
 
@@ -54,6 +55,9 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 	private JButton btnSua;
 	private JButton btnTimKiem;
 	private JButton btnHoanTac;
+	private JLabel lblTBTenKhachHang;
+	private JLabel lblTBSoDienThoai;
+	private JLabel lblTBMaKhachHang;
 	/**
 	 * Launch the application.
 	 */
@@ -101,18 +105,62 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		panelThongTinKhachHang.add(lblMaKhachHang);
 		
 		JLabel lblTenKhachHang = new JLabel("Tên Khách Hàng:");
-		lblTenKhachHang.setBounds(24, 91, 126, 14);
+		lblTenKhachHang.setBounds(24, 79, 126, 14);
 		panelThongTinKhachHang.add(lblTenKhachHang);
 		
 		
 		textMaKhachHang = new JTextField();
+		textMaKhachHang.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (!textMaKhachHang.getText().matches("KH[\\d]{1,14}")) {
+					lblTBMaKhachHang.setText("* Không hợp lệ! KH***********!");
+				}
+				else {					
+					lblTBMaKhachHang.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (!textMaKhachHang.getText().matches("KH[\\d]{1,14}")) {
+					lblTBMaKhachHang.setText("* Không hợp lệ! KH***********!");
+				}
+				else {					
+					lblTBMaKhachHang.setText("");
+				}
+			}
+		});
 		textMaKhachHang.setBounds(177, 32, 197, 20);
 		panelThongTinKhachHang.add(textMaKhachHang);
 		textMaKhachHang.setColumns(10);
 		
 		textTenKhachHang = new JTextField();
+		textTenKhachHang.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textTenKhachHang.getText().length() == 0) {
+					lblTBTenKhachHang.setText("* Không để trống!");
+				} else if (textTenKhachHang.getText().length() > 50) {
+					lblTBTenKhachHang.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenKhachHang.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textTenKhachHang.getText().length() == 0) {
+					lblTBTenKhachHang.setText("* Không để trống!");
+				} else if (textTenKhachHang.getText().length() > 50) {
+					lblTBTenKhachHang.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenKhachHang.setText("");
+				}
+			}
+		});
 		textTenKhachHang.setColumns(10);
-		textTenKhachHang.setBounds(177, 88, 197, 20);
+		textTenKhachHang.setBounds(177, 77, 197, 20);
 		panelThongTinKhachHang.add(textTenKhachHang);
 		
 		JLabel lblGioiTinh = new JLabel("Giới Tính:");
@@ -133,13 +181,57 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		btnGroupGioiTinh.add(rdbtnNu);
 		
 		JLabel lblSoDienThoai = new JLabel("Số Điện Thoại:");
-		lblSoDienThoai.setBounds(466, 91, 83, 14);
+		lblSoDienThoai.setBounds(466, 79, 83, 14);
 		panelThongTinKhachHang.add(lblSoDienThoai);
 		
 		textSoDienThoai = new JTextField();
+		textSoDienThoai.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textSoDienThoai.getText().length() == 0) {
+					lblTBSoDienThoai.setText("* Không để trống!");
+				} else if (!textSoDienThoai.getText().matches("(84|0[3|5|7|8|9])([0-9]{8})")) {
+					lblTBSoDienThoai.setText("* Không hợp lệ!");
+				}
+				else {					
+					lblTBSoDienThoai.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textSoDienThoai.getText().length() == 0) {
+					lblTBSoDienThoai.setText("* Không để trống!");
+				} else if (!textSoDienThoai.getText().matches("(84|0[3|5|7|8|9])([0-9]{8})")) {
+					lblTBSoDienThoai.setText("* Không hợp lệ!");
+				}
+				else {					
+					lblTBSoDienThoai.setText("");
+				}
+			}
+		});
 		textSoDienThoai.setColumns(10);
-		textSoDienThoai.setBounds(555, 88, 197, 20);
+		textSoDienThoai.setBounds(555, 77, 197, 20);
 		panelThongTinKhachHang.add(textSoDienThoai);
+		
+		lblTBMaKhachHang = new JLabel("");
+		lblTBMaKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMaKhachHang.setForeground(Color.RED);
+		lblTBMaKhachHang.setBounds(177, 54, 197, 20);
+		panelThongTinKhachHang.add(lblTBMaKhachHang);
+		
+		lblTBTenKhachHang = new JLabel("");
+		lblTBTenKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBTenKhachHang.setForeground(Color.RED);
+		lblTBTenKhachHang.setBounds(177, 100, 197, 20);
+		panelThongTinKhachHang.add(lblTBTenKhachHang);
+		
+		lblTBSoDienThoai = new JLabel("");
+		lblTBSoDienThoai.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBSoDienThoai.setForeground(Color.RED);
+		lblTBSoDienThoai.setBounds(555, 100, 197, 20);
+		panelThongTinKhachHang.add(lblTBSoDienThoai);
+		
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(157, 235, 1037, 45);
@@ -344,9 +436,11 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		if (o.equals(btnXoaRong)) {
 			xoaRong();
 		} else if (o.equals(btnThem)) {
-			Boolean kq = themMoiKhachHang();
-			docDuLieu();
-			xoaRong();
+			if (kiemTraDuLieu()) {
+				Boolean kq = themMoiKhachHang();
+				docDuLieu();
+				xoaRong();
+			}			
 		} else if (o.equals(btnXoa)) {
 			 Boolean kq = xoaKhachHang();
 			 docDuLieu();
@@ -361,8 +455,10 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 				timKiemKhachHang(noidungTim);
 			}	
 		} else if (o.equals(btnSua)) {
-			Boolean kq = capNhatKhachHang();
-			xoaRong();
+			if (kiemTraDuLieu()) {
+				Boolean kq = capNhatKhachHang();
+				xoaRong();
+			}			
 			
 		} else if (o.equals(btnHoanTac)) {
 			docDuLieu();
@@ -420,5 +516,41 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private boolean kiemTraDuLieu () {
+		String maKhachHang = textMaKhachHang.getText().trim();
+		String tenKhachHang = textTenKhachHang.getText().trim();
+		String soDienThoai = textSoDienThoai.getText().trim();
+		
+		lblTBMaKhachHang.setText("");
+		lblTBTenKhachHang.setText("");
+		lblTBSoDienThoai.setText("");
+		
+		if (maKhachHang.length() == 0) {
+			lblTBMaKhachHang.setText("* Không để trống!");
+			return false;
+		} else if (!(maKhachHang.matches("KH[\\d]{1,14}") && maKhachHang.length() < 50)) {
+			lblTBMaKhachHang.setText("* Không hợp lệ!");
+			return false;
+		}
+		
+		if (tenKhachHang.length() == 0) {
+			lblTBTenKhachHang.setText("* Không để trống!");
+			return false;
+		} else if (!(tenKhachHang.matches("[\\W\\w\\s]+") && tenKhachHang.length() < 50)) {
+			lblTBTenKhachHang.setText("* Không hợp lệ!");
+			return false;
+		}
+		
+		if (soDienThoai.length() == 0) {
+			lblTBSoDienThoai.setText("* Không để trống!");
+			return false;
+		} else if (!soDienThoai.matches("(84|0[3|5|7|8|9])([0-9]{8})")) {
+			lblTBSoDienThoai.setText("* Không hợp lệ!");
+			return false;
+		}
+		
+		return true;
 	}
 }

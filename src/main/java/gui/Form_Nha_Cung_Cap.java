@@ -20,7 +20,6 @@ import com.toedter.calendar.JDateChooser;
 import bus.NhaCungCapSerVice;
 import bus.NhaCungCapServiceIml;
 import dao.ConectDatabase;
-import dto.LoaiSanPham;
 import dto.NhaCungCap;
 
 import java.awt.event.ActionListener;
@@ -30,12 +29,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Form_Nha_Cung_Cap extends JFrame {
 
@@ -52,6 +51,12 @@ public class Form_Nha_Cung_Cap extends JFrame {
 	private DefaultTableModel modelNhaCungCap;
 	
 	private NhaCungCapSerVice nhaCungCapSerVice = new NhaCungCapServiceIml();
+	private JLabel lblTBMaNhaCungCap;
+	private JLabel lblTBTenNhaCungCap;
+	private JLabel lblTBNgayHopTac;
+	private JLabel lblTBDiaChi;
+	private JLabel lblTBSoDienThoai;
+	private JLabel lblTBEmail;
 
 	/**
 	 * Launch the application.
@@ -118,6 +123,14 @@ public class Form_Nha_Cung_Cap extends JFrame {
 				if (textMaNhaCungCap.getText().equals("Tự động khi để trống")) {
 					textMaNhaCungCap.setText("Tự động khi để trống");
 					textMaNhaCungCap.setForeground(new Color(153, 153, 153));
+				} else if (!textMaNhaCungCap.getText().matches("NCC[\\d]{1,14}")) {
+					lblTBMaNhaCungCap.setText("* Không hợp lệ! NCC***********!");
+					if (textMaNhaCungCap.getText().equals("Tự động khi để trống")) {
+						lblTBMaNhaCungCap.setText("");
+					} 
+				}
+				else {					
+					lblTBMaNhaCungCap.setText("");
 				}
 			}
 			@Override
@@ -125,7 +138,15 @@ public class Form_Nha_Cung_Cap extends JFrame {
 				if (textMaNhaCungCap.getText().equals("")) {
 					textMaNhaCungCap.setText("Tự động khi để trống");
 					textMaNhaCungCap.setForeground(new Color(153, 153, 153));
-				}	
+				} else if (!textMaNhaCungCap.getText().matches("NCC[\\d]{1,14}")) {
+					lblTBMaNhaCungCap.setText("* Không hợp lệ! NCC***********!");
+					if (textMaNhaCungCap.getText().equals("Tự động khi để trống")) {
+						lblTBMaNhaCungCap.setText("");
+					} 
+				}
+				else {					
+					lblTBMaNhaCungCap.setText("");
+				}
 			}
 		});
 		textMaNhaCungCap.setColumns(10);
@@ -133,11 +154,35 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		
 		
 		JLabel lblTenNhaCungCap = new JLabel("Tên nhà cung cấp:");
-		lblTenNhaCungCap.setBounds(10, 60, 142, 13);
+		lblTenNhaCungCap.setBounds(10, 63, 142, 13);
 		panelNhaCungCap.add(lblTenNhaCungCap);
 		
 		textTenNhaCungCap = new JTextField();
-		textTenNhaCungCap.setBounds(125, 57, 149, 19);
+		textTenNhaCungCap.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textTenNhaCungCap.getText().length() == 0) {
+					lblTBTenNhaCungCap.setText("* Không để trống!");
+				} else if (textTenNhaCungCap.getText().length() > 50) {
+					lblTBTenNhaCungCap.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenNhaCungCap.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textTenNhaCungCap.getText().length() == 0) {
+					lblTBTenNhaCungCap.setText("* Không để trống!");
+				} else if (textTenNhaCungCap.getText().length() > 50) {
+					lblTBTenNhaCungCap.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenNhaCungCap.setText("");
+				}
+			}
+		});
+		textTenNhaCungCap.setBounds(125, 60, 149, 19);
 		panelNhaCungCap.add(textTenNhaCungCap);
 		textTenNhaCungCap.setColumns(10);
 		
@@ -155,6 +200,30 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblDiaChi);
 		
 		textDiaChi = new JTextField();
+		textDiaChi.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textDiaChi.getText().length() == 0) {
+					lblTBDiaChi.setText("* Không để trống!");
+				} else if (textDiaChi.getText().length() > 50) {
+					lblTBDiaChi.setText("* Quá dài!");
+				}
+				else {					
+					lblTBDiaChi.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textDiaChi.getText().length() == 0) {
+					lblTBDiaChi.setText("* Không để trống!");
+				} else if (textDiaChi.getText().length() > 50) {
+					lblTBDiaChi.setText("* Quá dài!");
+				}
+				else {					
+					lblTBDiaChi.setText("");
+				}
+			}
+		});
 		textDiaChi.setBounds(125, 137, 149, 19);
 		panelNhaCungCap.add(textDiaChi);
 		textDiaChi.setColumns(10);
@@ -164,6 +233,30 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblSoDienThoai);
 		
 		textSoDienThoai = new JTextField();
+		textSoDienThoai.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textSoDienThoai.getText().length() == 0) {
+					lblTBSoDienThoai.setText("* Không để trống!");
+				} else if (!textSoDienThoai.getText().matches("(84|0[3|5|7|8|9])([0-9]{8})")) {
+					lblTBSoDienThoai.setText("* Không hợp lệ!");
+				}
+				else {					
+					lblTBSoDienThoai.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textSoDienThoai.getText().length() == 0) {
+					lblTBSoDienThoai.setText("* Không để trống!");
+				} else if (!textSoDienThoai.getText().matches("(84|0[3|5|7|8|9])([0-9]{8})")) {
+					lblTBSoDienThoai.setText("* Không hợp lệ!");
+				}
+				else {					
+					lblTBSoDienThoai.setText("");
+				}
+			}
+		});
 		textSoDienThoai.setBounds(125, 179, 149, 19);
 		panelNhaCungCap.add(textSoDienThoai);
 		textSoDienThoai.setColumns(10);
@@ -173,9 +266,75 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblEmail);
 		
 		textEmail = new JTextField();
+		textEmail.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textEmail.getText().length() == 0) {
+					lblTBEmail.setText("* Không để trống!");
+				} else if (textEmail.getText().length() > 50) {
+					lblTBEmail.setText("* Quá dài!");
+				} else if (!textEmail.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+					lblTBEmail.setText("* Không hợp lệ!");
+				}
+				else {					
+					lblTBEmail.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textEmail.getText().length() == 0) {
+					lblTBEmail.setText("* Không để trống!");
+				} else if (textEmail.getText().length() > 50) {
+					lblTBEmail.setText("* Quá dài!");
+				} else if (!textEmail.getText().matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+					lblTBEmail.setText("* Không hợp lệ!");
+				}
+				else {					
+					lblTBEmail.setText("");
+				}
+			}
+		});
 		textEmail.setBounds(125, 222, 149, 19);
 		panelNhaCungCap.add(textEmail);
 		textEmail.setColumns(10);
+		
+		lblTBMaNhaCungCap = new JLabel("");
+		lblTBMaNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMaNhaCungCap.setForeground(Color.RED);
+		lblTBMaNhaCungCap.setBounds(125, 41, 149, 19);
+		panelNhaCungCap.add(lblTBMaNhaCungCap);
+		
+		lblTBTenNhaCungCap = new JLabel("");
+		lblTBTenNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBTenNhaCungCap.setForeground(Color.RED);
+		lblTBTenNhaCungCap.setBounds(125, 80, 149, 19);
+		panelNhaCungCap.add(lblTBTenNhaCungCap);
+		
+		lblTBNgayHopTac = new JLabel("");
+		lblTBNgayHopTac.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBNgayHopTac.setForeground(Color.RED);
+		lblTBNgayHopTac.setBounds(125, 115, 149, 19);
+		panelNhaCungCap.add(lblTBNgayHopTac);
+		
+		lblTBDiaChi = new JLabel("");
+		lblTBDiaChi.setForeground(Color.RED);
+		lblTBDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBDiaChi.setBounds(125, 155, 149, 19);
+		panelNhaCungCap.add(lblTBDiaChi);
+		
+		lblTBSoDienThoai = new JLabel("");
+		lblTBSoDienThoai.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBSoDienThoai.setForeground(Color.RED);
+		lblTBSoDienThoai.setBounds(125, 199, 149, 19);
+		panelNhaCungCap.add(lblTBSoDienThoai);
+		
+		lblTBEmail = new JLabel("");
+		lblTBEmail.setForeground(Color.RED);
+		lblTBEmail.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBEmail.setBounds(125, 243, 149, 19);
+		panelNhaCungCap.add(lblTBEmail);
+		
+		
 		
 		JPanel panelChucNang = new JPanel();
 		panelChucNang.setBounds(29, 379, 303, 92);
@@ -457,35 +616,45 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		String ngayHopTac = dateNgayHopTac.getDate().toString();
 		String soDienThoai = textSoDienThoai.getText().trim();
 		String email = textEmail.getText().trim();
+		
+		lblTBMaNhaCungCap.setText("");
+		lblTBTenNhaCungCap.setText("");
+		lblTBDiaChi.setText("");
+		lblTBNgayHopTac.setText("");
+		lblTBSoDienThoai.setText("");
+		lblTBEmail.setText("");
+		
 		if (!maNhaCungCap.equals("Tự động khi để trống")) {
-			if (!(maNhaCungCap.length() > 0 && maNhaCungCap.length() < 50
+			if (!(maNhaCungCap.length() > 0 && maNhaCungCap.length() < 20
 					&& maNhaCungCap.matches("NCC[\\d]{1,14}"))) {
-				JOptionPane.showMessageDialog(this, "Mã nhà cung cấp! 'NCC[\\d]{1,14}'");
+				lblTBMaNhaCungCap.setText("* Không hợp lệ! NCC**************");
 				return false;
 			}
 		}
 		if (!(tenNhaCungCap.length() > 0 && tenNhaCungCap.length() < 50
 				&& tenNhaCungCap.matches("[\\W\\w]+"))) {
-			JOptionPane.showMessageDialog(this, "Tên nhà cung cấp! Không chứ ký tự đặc biệt");
+			lblTBTenNhaCungCap.setText("* Không hợp lệ!");
 			return false;
 		}
-		if (!(ngayHopTac.length() > 0)) {
-			JOptionPane.showMessageDialog(this, "Ngày hợp tác! Cần chọn ngày");
+		if (!(ngayHopTac.length() > 0 
+				&& (dateNgayHopTac.getDate().before(Date.valueOf(LocalDate.now()))
+				|| dateNgayHopTac.getDate().equals(Date.valueOf(LocalDate.now()) )))){
+			lblTBNgayHopTac.setText("* Trước ngày hiện tại!");
 			return false;
 		}
 		if (!(diaChi.length() > 0 && diaChi.length() < 50
 				&& diaChi.matches("[\\W\\w\\s/]+"))) {
-			JOptionPane.showMessageDialog(this, "Địa chỉ! Không chứ ký tự đặc biệt");
+			lblTBDiaChi.setText("* Không hợp lệ!");
 			return false;
 		}
 		if (!(soDienThoai.length() > 0 && soDienThoai.length() < 20
 				&& soDienThoai.matches("(84|0[3|5|7|8|9])([0-9]{8})"))) {
-			JOptionPane.showMessageDialog(this, "Số điện thoại! Không đúng");
+			lblTBSoDienThoai.setText("* Không hợp lệ!");
 			return false;
 		}
 		if (!(email.length() > 0 && email.length() < 50
 				&& email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))) {
-			JOptionPane.showMessageDialog(this, "Email! Không đúng cấu trúc");
+			lblTBEmail.setText("* Không hợp lệ!");
 			return false;
 		}
 		return true;
