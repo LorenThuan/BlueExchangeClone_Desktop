@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Objects;
+
 /**
  * @author Loren Thuan
  * @version 1.0
@@ -55,6 +57,23 @@ public class LoaiSanPham {
 
 	public void setTenLoai(String tenLoai) {
 		this.tenLoai = tenLoai;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(maLoaiSanPham);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LoaiSanPham other = (LoaiSanPham) obj;
+		return Objects.equals(maLoaiSanPham, other.maLoaiSanPham);
 	}
 
 	
