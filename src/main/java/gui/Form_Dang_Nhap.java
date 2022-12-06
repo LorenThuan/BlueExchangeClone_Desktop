@@ -156,13 +156,15 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		pwdMatkhau.setColumns(10);
 
 		btnDangNhap = new JButton("Đăng nhập");
+		btnDangNhap.setBackground(new Color(240, 240, 240));
 		btnDangNhap.setFont(new Font("Arial", Font.BOLD, 13));
-		btnDangNhap.setIcon(new ImageIcon("Hinh\\iconLogin.png"));
+		btnDangNhap.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\enter.png"));
 		btnDangNhap.setBounds(371, 256, 123, 30);
 		contentPane.add(btnDangNhap);
 
 		btnThoat = new JButton("Thoát");
-		btnThoat.setIcon(new ImageIcon("Hinh\\iconReset.png"));
+		btnThoat.setBackground(new Color(240, 240, 240));
+		btnThoat.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\close.png"));
 		btnThoat.setFont(new Font("Arial", Font.BOLD, 13));
 		btnThoat.setBounds(504, 256, 97, 30);
 		contentPane.add(btnThoat);
@@ -213,6 +215,16 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 				});
 				lblMatKhau.setBounds(408, 215, 193, 23);
 				contentPane.add(lblMatKhau);
+				
+				JLabel lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\unauthorized-person.png"));
+				lblNewLabel_1.setBounds(336, 105, 32, 30);
+				contentPane.add(lblNewLabel_1);
+				
+				JLabel lblNewLabel_1_1 = new JLabel("");
+				lblNewLabel_1_1.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\padlock.png"));
+				lblNewLabel_1_1.setBounds(336, 167, 32, 32);
+				contentPane.add(lblNewLabel_1_1);
 		btnThoat.addActionListener(this);
 		btnDangNhap.addActionListener(this);
 		lblQuenMatKhau.addMouseListener(this);

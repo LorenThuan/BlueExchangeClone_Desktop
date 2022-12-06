@@ -89,7 +89,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 
 		JPanel pnThemTK = new JPanel();
 		pnThemTK.setBounds(10, 75, 566, 278);
-		pnThemTK.setBackground(new Color(91,165,156));
+		pnThemTK.setBackground(Color.CYAN);
 		contentPane.add(pnThemTK);
 		pnThemTK.setLayout(null);
 

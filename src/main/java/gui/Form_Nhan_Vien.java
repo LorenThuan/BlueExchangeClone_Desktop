@@ -46,6 +46,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Color;
 
 public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListener{
 
@@ -101,6 +102,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.CYAN);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(1380, 780);
 		setLocationRelativeTo(null);
@@ -191,32 +193,39 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lbChucVu);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(126, 230, 1098, 45);
+		panel.setBounds(126, 223, 1122, 52);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		btnThem = new JButton("Thêm");
-		btnThem.setBounds(29, 11, 89, 23);
+		btnThem.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\addition.png"));
+		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnThem.setBounds(44, 11, 89, 23);
 		panel.add(btnThem);
 		
 		btnXoa = new JButton("Xóa");
-		btnXoa.setBounds(153, 11, 89, 23);
+		btnXoa.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\delete.png"));
+		btnXoa.setBounds(176, 11, 89, 23);
 		panel.add(btnXoa);
 		
 		btnSua = new JButton("Sửa");
-		btnSua.setBounds(284, 11, 89, 23);
+		btnSua.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\update.png"));
+		btnSua.setBounds(311, 11, 89, 23);
 		panel.add(btnSua);
 		
 		btnXoaRong = new JButton("Xóa Rỗng");
-		btnXoaRong.setBounds(418, 11, 89, 23);
+		btnXoaRong.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\loop1.png"));
+		btnXoaRong.setBounds(438, 11, 108, 23);
 		panel.add(btnXoaRong);
 		
 		btnHoanTac = new JButton("Hoàn Tác");
-		btnHoanTac.setBounds(545, 11, 89, 23);
+		btnHoanTac.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\arrows.png"));
+		btnHoanTac.setBounds(585, 11, 115, 23);
 		panel.add(btnHoanTac);
 		
 		btnTimKiem = new JButton("Tìm kiếm");
-		btnTimKiem.setBounds(999, 11, 89, 23);
+		btnTimKiem.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\image\\search1.png"));
+		btnTimKiem.setBounds(999, 11, 113, 23);
 		panel.add(btnTimKiem);
 		
 		textTimKiem = new RoundJTextField(15);
