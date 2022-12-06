@@ -162,7 +162,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		contentPane.setLayout(null);
 
 		JPanel pnTimKiem = new JPanel();
-		pnTimKiem.setBackground(new Color(240, 240, 240));
+		pnTimKiem.setBackground(new Color(255, 255, 255));
 		pnTimKiem.setBorder(new TitledBorder(
 				new TitledBorder(
 						new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00ECm ki\u1EBFm",
@@ -915,7 +915,11 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			loadDuLieuSanPham(allSanPham);
 		} else if (o.equals(btnTimKiemSP)) {
 			List<SanPham> ls = new ArrayList<>();
-			ls = dsSanPham();
+			for(SanPham sp : allSanPham) {
+				if(sp.getMaSanPham().contains(txtMaSanPham.getText()) || sp.getTenSanPham().contains(txtMaSanPham.getText())) {
+					ls.add(sp);
+				}
+			}
 			loadDuLieuSanPham(ls);
 		} else if (o.equals(btnThemVaoCT_Don)) {
 			if (!txtSoLuong.isEditable()) {
@@ -1101,6 +1105,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 					List<SanPham> ls = new ArrayList<>();
 					ls = hoaDonService.getTatCaSanPham();
 					loadDuLieuSanPham(ls);
+					txtMaSPban.setText("");
 					xoaRong();
 					xuLyNutThanhToan();
 				} else {
@@ -1158,6 +1163,13 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				ct_HoaDontheoHD = hoaDonService.getCT_HoadonTheoHoaDon(hoadonChon.getMaHoaDon());
 				loadDuLieuCT_HoaDon(hoadonChon);
 				loadDuLieuSanPham(allSanPham);
+			}
+			if(tableDonHang.getRowCount() == 0) {
+				tinhToan();
+				txtSanPham.setText("");
+				txtSoLuong.setText("");
+				txtSoLuong.setEditable(false);
+				xuLyNutThanhToan();
 			}
 			txtMaSPban.setText("");
 			btnSuaSoLuong.setEnabled(false);
@@ -1266,6 +1278,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				double giam = hoadonChon.getGiamGia();
 				System.out.println(giam);
 				txtPhanTramGiam.setText(Double.toString(hoadonChon.getGiamGia()));
+				txtMaSPban.setText("");
 				loadDuLieuCT_HoaDon(hoadonChon);
 				tinhToan();
 				xuLyNutThanhToan();
