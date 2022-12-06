@@ -217,8 +217,7 @@ public class Form_San_Pham extends JFrame {
 		
 		lblHinhAnh = new JLabel();
 		lblHinhAnh.setBounds(24, 21, 207, 185);
-		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
-				+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
+		lblHinhAnh.setIcon(ResizeImage("./HinhAnh/icon/iconSanPham.png"));
 		System.out.println(lblHinhAnh.getText());
 		panelThongTinSanPham.add(lblHinhAnh);
 		
@@ -643,8 +642,7 @@ public class Form_San_Pham extends JFrame {
 	}
 		
 	private void xoaRong () {
-		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
-							+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
+		lblHinhAnh.setIcon(ResizeImage("./HinhAnh/icon/iconSanPham.png"));
 					textMaSanPham.setText("Tự động khi để trống");
 					textMaSanPham.setForeground(new Color(153, 153, 153));
 					textTenSanPham.setText("");

@@ -15,12 +15,14 @@ public interface HoaDonDao {
 	public List<HoaDon> getAllDSHoadon(String maNhanVien);
 	public boolean themHoaDon(HoaDon hoadon);
 	public boolean themCT_HoaDon(HoaDon hd, SanPham sp, int soLuong);
-	public KhachHang timKiemKhachHangtheoSDT(String noiDungTim);
+	public List<KhachHang> timKiemKhachHangtheoNoiDung(String noiDungTim);
+	public KhachHang timKiemKhachHangtheoTen(String tenKHang);
+	public KhachHang timKiemKhachHangtheoSDT(String sdt);
 	public HoaDon getHoaDon(String mahoadon);
 	public boolean xoaHD(String maHoaDon);
 	public boolean capNhatSLSanPham(String maSP, int soluong);
 	public List<ChiTietHoaDon> getAllDSCT_Hoadon();
-	public boolean capNhatTrangThai(String maHoaDon);
+	public boolean capNhatTrangThai(HoaDon hd);
 	public boolean capNhatSLCT_HoaDon(String maHD, String maSP, int soluong);
 	public boolean xoaCT_HD(String mahoadon, String maSP);
 	public KhachHang timKiemKhachHangtheoMa(String maKH);
