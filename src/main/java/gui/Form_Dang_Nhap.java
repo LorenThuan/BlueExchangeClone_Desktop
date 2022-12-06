@@ -91,10 +91,10 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Hinh\\iconBook.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./Hinh//iconBook.png"));
 
 		JLabel lblImgNhaNam = new JLabel();
-		lblImgNhaNam.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\background\\CuaHangQuanAo.jpg"));
+		lblImgNhaNam.setIcon(new ImageIcon("./HinhAnh//background//CuaHangQuanAo.jpg"));
 		lblImgNhaNam.setBounds(0, 0, 330, 333);
 		contentPane.add(lblImgNhaNam);
 

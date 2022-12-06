@@ -52,9 +52,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 	}
 
 	@Override
-	public KhachHang timKiemKhachHangtheoSDT(String noiDungTim) {
+	public List<KhachHang> timKiemKhachHangtheoNoiDung(String noiDungTim) {
 		// TODO Auto-generated method stub
-		return hoaDonDao.timKiemKhachHangtheoSDT(noiDungTim);
+		return hoaDonDao.timKiemKhachHangtheoNoiDung(noiDungTim);
 	}
 
 	@Override
@@ -82,9 +82,9 @@ public class HoaDonServiceImpl implements HoaDonService{
 	}
 
 	@Override
-	public boolean capNhatTrangThai(String maHoaDon) {
+	public boolean capNhatTrangThai(HoaDon hd) {
 		// TODO Auto-generated method stub
-		return hoaDonDao.capNhatTrangThai(maHoaDon);
+		return hoaDonDao.capNhatTrangThai(hd);
 	}
 
 	@Override
@@ -114,6 +114,18 @@ public class HoaDonServiceImpl implements HoaDonService{
 	@Override
 	public List<HoaDon> getAllDSHoadon(String maNhanVien) {
 		return hoaDonDao.getAllDSHoadon(maNhanVien);
+	}
+
+	@Override
+	public KhachHang timKiemKhachHangtheoSDT(String sdt) {
+		// TODO Auto-generated method stub
+		return hoaDonDao.timKiemKhachHangtheoSDT(sdt);
+	}
+
+	@Override
+	public KhachHang timKiemKhachHangtheoTen(String tenKHang) {
+		// TODO Auto-generated method stub
+		return hoaDonDao.timKiemKhachHangtheoTen(tenKHang);
 	} 
 	
 }

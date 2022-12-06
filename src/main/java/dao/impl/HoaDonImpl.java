@@ -255,6 +255,7 @@ public class HoaDonImpl implements HoaDonDao {
 				Boolean trangThai = rs.getBoolean(3);
 				String maNV = rs.getString(4);
 				String maKH = rs.getString(5);
+				Double giamGia = rs.getDouble(6);
 
 				NhanVien nv = new NhanVien(maNV);
 				KhachHang kh = new KhachHang(maKH);
@@ -264,6 +265,7 @@ public class HoaDonImpl implements HoaDonDao {
 				hd.setTrangThai(trangThai);
 				hd.setNhanVien(nv);
 				hd.setKhachHang(kh);
+				hd.setGiamGia(giamGia);
 			}
 			return hd;
 
@@ -283,11 +285,12 @@ public class HoaDonImpl implements HoaDonDao {
 			rs = preStm.executeQuery();
 			while (rs.next()) {
 				HoaDon hd = new HoaDon();
-				String maHD = rs.getString(1);
-				Date ngayDat = rs.getDate(2);
-				Boolean trangThai = rs.getBoolean(3);
-				String maNV = rs.getString(4);
-				String maKH = rs.getString(5);
+				String maHD = rs.getString("maHoaDon");
+				Date ngayDat = rs.getDate("ngayDat");
+				Boolean trangThai = rs.getBoolean("trangThai");
+				String maNV = rs.getString("maNhanVien");
+				String maKH = rs.getString("maKhachHang");
+				Double giamGia = rs.getDouble("giamGia");
 
 				NhanVien nv = new NhanVien(maNV);
 				KhachHang kh = new KhachHang(maKH);
@@ -297,6 +300,7 @@ public class HoaDonImpl implements HoaDonDao {
 				hd.setTrangThai(trangThai);
 				hd.setNhanVien(nv);
 				hd.setKhachHang(kh);
+				hd.setGiamGia(giamGia);
 
 				dSHoaDon.add(hd);
 			}
@@ -305,6 +309,29 @@ public class HoaDonImpl implements HoaDonDao {
 			e.printStackTrace();
 		}
 		return dSHoaDon;
+	}
+	
+	public KhachHang timKiemKhachHangtheoMa(String maKH) {
+		KhachHang khachHang = null;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "select * from Khach_Hang where maKhachHang = ?";
+			preStm = con.prepareStatement(sql);
+
+			preStm.setString(1, maKH);
+			rs = preStm.executeQuery();
+			khachHang = new KhachHang();
+
+			while (rs.next()) {
+				String tenKH = rs.getString("tenKhachHang");
+				String soDienThoai = rs.getString("soDienThoai");
+				Boolean gioiTinh = rs.getBoolean("gioiTinh");
+				khachHang = new KhachHang(maKH, tenKH, soDienThoai, gioiTinh);
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		return khachHang;
 	}
 
 	public boolean themHoaDon(HoaDon hoadon) {
@@ -349,17 +376,65 @@ public class HoaDonImpl implements HoaDonDao {
 		return n;
 	}
 
-	public KhachHang timKiemKhachHangtheoSDT(String noiDungTim) {
-		KhachHang khachHang = null;
+	public List<KhachHang> timKiemKhachHangtheoNoiDung(String noiDungTim) {
+		List<KhachHang> dskhachHang = new ArrayList<KhachHang>();
 		try {
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "select * from Khach_Hang where soDienThoai like ?";
+			String sql = "select * from Khach_Hang where soDienThoai like ? or tenKhachHang like ?";
 			preStm = con.prepareStatement(sql);
 
 			preStm.setString(1, "%" + noiDungTim + "%");
+			preStm.setString(2, "%" + noiDungTim + "%");
+			rs = preStm.executeQuery();
+
+			while (rs.next()) {
+				KhachHang khachHang = new KhachHang();
+				String maKH = rs.getString("maKhachHang");
+				String tenKH = rs.getString("tenKhachHang");
+				String soDienThoai = rs.getString("soDienThoai");
+				Boolean gioiTinh = rs.getBoolean("gioiTinh");
+				khachHang = new KhachHang(maKH, tenKH, soDienThoai, gioiTinh);
+				dskhachHang.add(khachHang);
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		return dskhachHang;
+	}
+	
+	public KhachHang timKiemKhachHangtheoSDT(String sdt) {
+		KhachHang khachHang = null;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "select * from Khach_Hang where soDienThoai = ?";
+			preStm = con.prepareStatement(sql);
+
+			preStm.setString(1, sdt);
 			rs = preStm.executeQuery();
 			khachHang = new KhachHang();
+			while (rs.next()) {
+				String maKH = rs.getString("maKhachHang");
+				String tenKH = rs.getString("tenKhachHang");
+				String soDienThoai = rs.getString("soDienThoai");
+				Boolean gioiTinh = rs.getBoolean("gioiTinh");
+				khachHang = new KhachHang(maKH, tenKH, soDienThoai, gioiTinh);
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		return khachHang;
+	}
+	
+	public KhachHang timKiemKhachHangtheoTen(String tenKHang) {
+		KhachHang khachHang = null;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "select * from Khach_Hang where tenKhachHang = ?";
+			preStm = con.prepareStatement(sql);
 
+			preStm.setString(1, tenKHang);
+			rs = preStm.executeQuery();
+			khachHang = new KhachHang();
 			while (rs.next()) {
 				String maKH = rs.getString("maKhachHang");
 				String tenKH = rs.getString("tenKhachHang");
@@ -373,28 +448,6 @@ public class HoaDonImpl implements HoaDonDao {
 		return khachHang;
 	}
 
-	public KhachHang timKiemKhachHangtheoMa(String maKH) {
-		KhachHang khachHang = null;
-		try {
-			con = ConectDatabase.getInstance().getConnection();
-			String sql = "select * from Khach_Hang where maKhachHang = ?";
-			preStm = con.prepareStatement(sql);
-
-			preStm.setString(1, maKH);
-			rs = preStm.executeQuery();
-			khachHang = new KhachHang();
-
-			while (rs.next()) {
-				String tenKH = rs.getString("tenKhachHang");
-				String soDienThoai = rs.getString("soDienThoai");
-				Boolean gioiTinh = rs.getBoolean("gioiTinh");
-				khachHang = new KhachHang(maKH, tenKH, soDienThoai, gioiTinh);
-			}
-		} catch (Exception e2) {
-			e2.printStackTrace();
-		}
-		return khachHang;
-	}
 
 	public boolean xoaHD(String maHoaDon) {
 		boolean check = false;
@@ -462,14 +515,15 @@ public class HoaDonImpl implements HoaDonDao {
 		return n;
 	}
 
-	public boolean capNhatTrangThai(String maHoaDon) {
+	public boolean capNhatTrangThai(HoaDon hd) {
 		boolean n = false;
 		try {
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "Update Hoa_Don set trangThai = 1 where maHoaDon = ?";
+			String sql = "Update Hoa_Don set trangThai = 1, giamGia = ? where maHoaDon = ?";
 
 			preStm = con.prepareStatement(sql);
-			preStm.setString(1, maHoaDon);
+			preStm.setDouble(1, hd.getGiamGia());
+			preStm.setString(2, hd.getMaHoaDon());
 			n = preStm.executeUpdate() > 0;
 
 		} catch (Exception e2) {

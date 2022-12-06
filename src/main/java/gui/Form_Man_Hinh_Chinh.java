@@ -143,7 +143,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnBanHang.setPreferredSize(new Dimension(160, mnBanHang.getPreferredSize().height));
 		Icon iconBanHang =  new ImageIcon("./HinhAnh/icon/iconBanHang.png");
 		mnBanHang.setFont(new Font("Arial", Font.BOLD, 16));
-		mnBanHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\iconBanHang-removebg-preview.png"));
+		mnBanHang.setIcon(new ImageIcon("./HinhAnh/icon/iconBanHang-removebg-preview.png"));
 		menuBarBanHang.add(mnBanHang);
 		
 		JMenuBar menuBarSanPham = new JMenuBar();
@@ -151,7 +151,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		mnSanPham = new JMenu("Sản Phẩm");
 		mnSanPham.setPreferredSize(new Dimension(160, mnSanPham.getPreferredSize().height));
-		mnSanPham.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\iconSanPham.png"));
+		mnSanPham.setIcon(new ImageIcon("./HinhAnh/icon/iconSanPham.png"));
 		mnSanPham.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarSanPham.add(mnSanPham);
 		
@@ -160,22 +160,22 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		JMenu mnThongKe = new JMenu("Thống Kê");
 		mnThongKe.setPreferredSize(new Dimension(160, mnThongKe.getPreferredSize().height));
-		mnThongKe.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\iconThongKe.png"));
+		mnThongKe.setIcon(new ImageIcon("./HinhAnh/icon/iconThongKe.png"));
 		mnThongKe.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarThongKe.add(mnThongKe);
 		
 		mntmThongKeDoanhThu = new JMenuItem("Thống kê doanh thu");
-		mntmThongKeDoanhThu.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\growth.png"));
+		mntmThongKeDoanhThu.setIcon(new ImageIcon("./HinhAnh/icon/growth.png"));
 		mntmThongKeDoanhThu.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeDoanhThu);
 		
 		mntmThongKeSanPhamBanChay = new JMenuItem("Thống kê sản phẩm bán chạy");
-		mntmThongKeSanPhamBanChay.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\sell.png"));
+		mntmThongKeSanPhamBanChay.setIcon(new ImageIcon("./HinhAnh/icon/sell.png"));
 		mntmThongKeSanPhamBanChay.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeSanPhamBanChay);
 		
 //		mntmThongKeKhachHang = new JMenuItem("Thống kê khách hàng");
-//		mntmThongKeKhachHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\diagram.png"));
+//		mntmThongKeKhachHang.setIcon(new ImageIcon("./HinhAnh/icon/diagram.png"));
 //		mntmThongKeKhachHang.setBackground(new Color(240, 240, 240));
 //		mntmThongKeKhachHang.setForeground(new Color(0, 0, 0));
 //		mntmThongKeKhachHang.setSelected(false);
@@ -184,7 +184,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 //		mnThongKe.add(mntmThongKeKhachHang);
 		
 		mntmThongKeHoaDonLapTheoNhanVien = new JMenuItem("Thống kê hóa đơn lập theo nhân viên");
-		mntmThongKeHoaDonLapTheoNhanVien.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\bill.png"));
+		mntmThongKeHoaDonLapTheoNhanVien.setIcon(new ImageIcon("./HinhAnh/icon/bill.png"));
 		mntmThongKeHoaDonLapTheoNhanVien.setFont(new Font("Arial", Font.BOLD, 14));
 		mnThongKe.add(mntmThongKeHoaDonLapTheoNhanVien);
 		
@@ -193,7 +193,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		mnNhanVien = new JMenu("Nhân Viên");
 		mnNhanVien.setPreferredSize(new Dimension(160, mnNhanVien.getPreferredSize().height));
-		mnNhanVien.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\iconNhanVien.png"));
+		mnNhanVien.setIcon(new ImageIcon("./HinhAnh/icon/iconNhanVien.png"));
 		mnNhanVien.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarNhanVien.add(mnNhanVien);
 		
@@ -204,7 +204,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		mnKhachHang = new JMenu("Khách hàng");
 		mnKhachHang.setPreferredSize(new Dimension(160, mnKhachHang.getPreferredSize().height));
-		mnKhachHang.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\customer.png"));
+		mnKhachHang.setIcon(new ImageIcon("./HinhAnh/icon/customer.png"));
 		mnKhachHang.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarKhachHang.add(mnKhachHang);
 		
@@ -215,17 +215,17 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		JMenu mnTaiKhoan = new JMenu("Tài Khoản");
 		mnTaiKhoan.setPreferredSize(new Dimension(160, mnTaiKhoan.getPreferredSize().height));
-		mnTaiKhoan.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\account-removebg-preview.png"));
+		mnTaiKhoan.setIcon(new ImageIcon("./HinhAnh/icon/account-removebg-preview.png"));
 		mnTaiKhoan.setFont(new Font("Arial", Font.BOLD, 16));
 		menuBarTaiKhoan.add(mnTaiKhoan);
 		
 		mntmQuanLyTaiKhoan = new JMenuItem("Quản lý tài khoản");
-		mntmQuanLyTaiKhoan.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\account-manager.png"));
+		mntmQuanLyTaiKhoan.setIcon(new ImageIcon("./HinhAnh/icon/account-manager.png"));
 		mntmQuanLyTaiKhoan.setFont(new Font("Arial", Font.BOLD, 14));
 		mnTaiKhoan.add(mntmQuanLyTaiKhoan);
 		
 		mntmDangXuat = new JMenuItem("Đăng xuất");
-		mntmDangXuat.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\logout.png"));
+		mntmDangXuat.setIcon(new ImageIcon("./HinhAnh/icon/logout.png"));
 		mntmDangXuat.setFont(new Font("Arial", Font.BOLD, 14));
 		mnTaiKhoan.add(mntmDangXuat);
 		
@@ -234,7 +234,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		JMenu mnHuongDanSuDung = new JMenu("Hướng dẫn sử dụng");
 		mnHuongDanSuDung.setPreferredSize(new Dimension(240, mnHuongDanSuDung.getPreferredSize().height));
-		mnHuongDanSuDung.setIcon(new ImageIcon("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\icon\\information.png"));
+		mnHuongDanSuDung.setIcon(new ImageIcon("./HinhAnh/icon/information.png"));
 		mnHuongDanSuDung.setFont(new Font("Arial", Font.BOLD, 16));
 		menuHuongDanSuDung.add(mnHuongDanSuDung);
 		
