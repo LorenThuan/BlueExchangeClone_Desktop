@@ -131,19 +131,20 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 		double tongTien = 0;
 		try {
 			con = ConectDatabase.getInstance().getConnection();
-			String sql = "SELECT sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) * 1.1 as TongTien\r\n"
-					+ "FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
-					+ "                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
-					+ "                         San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham INNER JOIN\r\n"
-					+ "                         Khach_Hang ON Hoa_Don.maKhachHang = Khach_Hang.maKhachHang INNER JOIN\r\n"
-					+ "                         Nhan_Vien ON Hoa_Don.maNhanVien = Nhan_Vien.maNhanVien\r\n"
-					+ "WHERE Nhan_Vien.maNhanVien = ? and ngayDat = ?";
+			String sql = "SELECT sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) + sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*0.1 - (sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*(Hoa_Don.giamGia))/100  as TongTien\r\n"
+					+ "										FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
+					+ "										                        Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
+					+ "									                        San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham INNER JOIN\r\n"
+					+ "								                       Khach_Hang ON Hoa_Don.maKhachHang = Khach_Hang.maKhachHang INNER JOIN\r\n"
+					+ "									                       Nhan_Vien ON Hoa_Don.maNhanVien = Nhan_Vien.maNhanVien\r\n"
+					+ "										WHERE Nhan_Vien.maNhanVien = ? and ngayDat = ?\r\n"
+					+ "									GROUP by  San_Pham.[giamGia], Hoa_Don.giamGia";
 			preStm = con.prepareStatement(sql);
 			preStm.setString(1, maNhanVien);
 			preStm.setDate(2, ngayHienTai);
 			rs = preStm.executeQuery();
 			while (rs.next()) {
-				tongTien = rs.getDouble(1);
+				tongTien += rs.getDouble(1);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

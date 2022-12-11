@@ -7,7 +7,12 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 
 public class RoundJTextField extends JTextField {
-    private Shape shape;
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8525078971090185380L;
+	private Shape shape;
     public RoundJTextField(int size) {
         super(size);
         setOpaque(false); // As suggested by @AVD in comment.

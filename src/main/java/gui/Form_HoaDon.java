@@ -1086,6 +1086,11 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			}
 		} else if (o.equals(btnThanhToan)) {
 			HoaDon hd = hoaDonService.getHoaDon(txtMaHD.getText().trim());
+			if (txtSDT_KhachHang.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "Nhập thông tin khách hàng");
+				txtTenOrSDT.setFocusable(true);
+			} 
+			else {
 			if (!txtTienThua.getText().equals("")) {
 				int input = JOptionPane.showConfirmDialog(btnThanhToan, "Đồng ý thanh toán?");
 				if (input == 0) {
@@ -1097,6 +1102,9 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 						themCT_HoaDon(hd);
 						JOptionPane.showConfirmDialog(btnThanhToan, "Thanh toán thành công!");
 					} else {
+						if (txtPhanTramGiam.getText().equals("")) {
+							txtPhanTramGiam.setText("0");
+						}
 						hoadonChon.setGiamGia(Double.parseDouble(txtPhanTramGiam.getText()));
 						hoaDonService.capNhatTrangThai(hoadonChon);
 					}
@@ -1114,7 +1122,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			} else {
 				JOptionPane.showConfirmDialog(btnThanhToan, "Chưa nhập đủ tiền!");
 			}
-			
+		}
 		} else if (o.equals(btnSuaSoLuong)) {
 			int index = tableDonHang.getSelectedRow();
 			int soluongcu = Integer.parseInt(tableDonHang.getValueAt(index, 6).toString());
@@ -1212,6 +1220,9 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		hd.setNgayDat(homnay);
 		hd.setTrangThai(flag);
 		if (flag) {
+			if (txtPhanTramGiam.getText().equals("")) {
+				txtPhanTramGiam.setText("0");
+			}
 			hd.setGiamGia(Double.parseDouble(txtPhanTramGiam.getText()));
 		}
 		return hd;
