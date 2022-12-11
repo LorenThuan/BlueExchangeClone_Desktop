@@ -1,5 +1,8 @@
 package bus;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.SanPhamDao;
@@ -50,6 +53,12 @@ public class SanPhamServiceImpl implements SanPhamService{
 	public SanPham timSanPhamTheoMa(String ma) {
 		// TODO Auto-generated method stub
 		return sanPhamDao.timSanPhamTheoMa(ma);
+	}
+
+	@Override
+	public boolean themSanPhamTuExcel(File file) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		return sanPhamDao.themSanPhamTuExcel(file);
 	}
 
 }

@@ -1,5 +1,8 @@
 package dao;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dto.SanPham;
@@ -12,4 +15,5 @@ public interface SanPhamDao {
 	public ArrayList<SanPham> timKiemSanPham(String tuKhoa);
 	public ArrayList<SanPham> timKiemSanPhamTheoLoai(String tuKhoa);
 	public SanPham timSanPhamTheoMa (String ma);
+	public boolean themSanPhamTuExcel(File file) throws IOException, SQLException;
 }

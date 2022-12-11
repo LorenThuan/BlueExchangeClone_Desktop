@@ -41,6 +41,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -475,6 +477,15 @@ public class Form_San_Pham extends JFrame {
 			}
 		});
 		
+		try {
+			sanPhamservice.themSanPhamTuExcel(new File("C:\\Users\\LorenThuan\\Desktop\\Nhom13_PTUD\\sanPham1.xlsx"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 			
 	}
 	
@@ -714,6 +725,7 @@ public class Form_San_Pham extends JFrame {
         return tu[0];
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private boolean kiemTraDuLieu () {
 		String maSanPham = textMaSanPham.getText().trim();
 		String tenSanPham = textTenSanPham.getText().trim();

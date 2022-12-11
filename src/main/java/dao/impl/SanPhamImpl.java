@@ -1,10 +1,19 @@
 package dao.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import dao.ConectDatabase;
 import dao.SanPhamDao;
@@ -305,6 +314,59 @@ public class SanPhamImpl implements SanPhamDao{
 			e.printStackTrace();
 		}
 		return sanPham;
+	}
+
+	@Override
+	public boolean themSanPhamTuExcel(File file) throws IOException, SQLException {
+		// TODO Auto-generated method stub
+		boolean n = false;
+		try {
+			con = ConectDatabase.getInstance().getConnection();	
+			Statement stmt = con.createStatement();
+			FileInputStream fis = new FileInputStream(file);
+			XSSFWorkbook workbook = new XSSFWorkbook(fis);
+			XSSFSheet sheet = workbook.getSheet("Sheet1");
+			
+			int rows = sheet.getLastRowNum();
+			
+			for(int r = 1 ;r <= rows; r++)
+			{
+				XSSFRow row = sheet.getRow(r);	
+				
+				String maSanPham = row.getCell(0).getStringCellValue();
+				String tenSanPham = row.getCell(1).getStringCellValue();
+				String moTa = row.getCell(2).getStringCellValue();
+				Double donGia = row.getCell(3).getNumericCellValue();
+				String hinhAnh = row.getCell(4).getStringCellValue();
+				int soLuong = (int) row.getCell(5).getNumericCellValue();
+				Double giamGia = row.getCell(6).getNumericCellValue();
+				String kichThuoc = row.getCell(7).getStringCellValue();
+				String chatLieu = row.getCell(8).getStringCellValue();
+				String mauSac = row.getCell(9).getStringCellValue();
+				String gioiTinh = row.getCell(10).getStringCellValue();
+				String trangThai = row.getCell(11).getStringCellValue();			
+				String maLoaiSanPham = row.getCell(12).getStringCellValue();	
+				String maNhaCungCap = row.getCell(13).getStringCellValue();	
+				Double giaNhap = row.getCell(14).getNumericCellValue();
+				
+				String sql = "INSERT INTO dbo.San_Pham VALUES('"+maSanPham+"', '"+ "N" + tenSanPham+"', '"+ "N" + moTa +"', '"+donGia+"', '"+hinhAnh+"', '"+soLuong+"', '"+giamGia+"', '"+kichThuoc+"', '"+chatLieu+"', '"+mauSac+"', '"+gioiTinh+"', '"+trangThai+"', '"+maLoaiSanPham+"', '"+maNhaCungCap+"', '"+giaNhap+"')";
+				
+//				preStm = con.prepareStatement(sql);
+//				rs = preStm.executeQuery();
+//				preStm = con.prepareStatement(sql);	
+//				n = preStm.executeUpdate() > 0;
+				stmt.execute(sql);
+			}
+			workbook.close();
+			fis.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+			con.close();
+		}
+		
+			return n;			
 	}
 
 }
