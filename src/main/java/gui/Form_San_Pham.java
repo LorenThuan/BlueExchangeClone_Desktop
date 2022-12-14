@@ -50,6 +50,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class Form_San_Pham extends JFrame {
 
@@ -76,6 +77,18 @@ public class Form_San_Pham extends JFrame {
 	private JTextField textGiaNhap;
 	private JList<SanPham> listSanPham;
 	private DefaultListModel<SanPham> listModelSanPham;
+	private JLabel lblTBMaSanPham;
+	private JLabel lblTBTenSanPham;
+	private JLabel lblTBMoTa;
+	private JLabel lblTBChatLieu;
+	private JLabel lblTBMauSac;
+	private JLabel lblTBSoLuong;
+	private JLabel lblTBGiamGia;
+	private JLabel lblTBGioiTinh;
+	private JLabel lblTBGiaNhap;
+	private JLabel lblTBHinhAnh;
+	private JLabel lblTBGiaBan;
+	private JButton btnNhapExcel;
 
 	/**
 	 * Launch the application.
@@ -120,7 +133,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.setLayout(null);
 		
 		JLabel lblMaSanPham = new JLabel("Mã Sản phẩm:");
-		lblMaSanPham.setBounds(264, 21, 99, 13);
+		lblMaSanPham.setBounds(274, 21, 99, 13);
 		panelThongTinSanPham.add(lblMaSanPham);
 		
 		textMaSanPham = new JTextField();
@@ -139,8 +152,17 @@ public class Form_San_Pham extends JFrame {
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (textMaSanPham.getText().equals("Tự động khi để trống")) {
-					textMaSanPham.setText("Tự động khi để trống");
+					//textMaSanPham.setText("Tự động khi để trống");
 					textMaSanPham.setForeground(new Color(153, 153, 153));
+					lblTBMaSanPham.setText("");
+				} else if (!textMaSanPham.getText().matches("SP[\\d]{1,14}")) {
+					lblTBMaSanPham.setText("* Không hợp lệ! SP***********!");
+					if (textMaSanPham.getText().equals("Tự động khi để trống")) {
+						lblTBMaSanPham.setText("");
+					} 
+				}
+				else {					
+					lblTBMaSanPham.setText("");
 				}
 			}
 			@Override
@@ -149,6 +171,15 @@ public class Form_San_Pham extends JFrame {
 					textMaSanPham.setText("Tự động khi để trống");
 					textMaSanPham.setForeground(new Color(153, 153, 153));
 				}	
+				if (!textMaSanPham.getText().matches("SP[\\d]{1,14}")) {
+					lblTBMaSanPham.setText("* Không hợp lệ! SP***********!");
+					if (textMaSanPham.getText().equals("Tự động khi để trống")) {
+						lblTBMaSanPham.setText("");
+					} 
+				}
+				else {					
+					lblTBMaSanPham.setText("");
+				}
 			}
 		});
 		textMaSanPham.setBounds(382, 18, 155, 19);
@@ -157,34 +188,106 @@ public class Form_San_Pham extends JFrame {
 		
 		JLabel lblTenSanPham = new JLabel("Tên Sản phẩm:");
 		lblTenSanPham.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTenSanPham.setBounds(264, 50, 99, 13);
+		lblTenSanPham.setBounds(274, 65, 99, 13);
 		panelThongTinSanPham.add(lblTenSanPham);
 		
 		textTenSanPham = new JTextField();
-		textTenSanPham.setBounds(382, 47, 155, 19);
+		textTenSanPham.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textTenSanPham.getText().length() == 0) {
+					lblTBTenSanPham.setText("* Không để trống!");
+				} else if (textTenSanPham.getText().length() > 50) {
+					lblTBTenSanPham.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenSanPham.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textTenSanPham.getText().length() == 0) {
+					lblTBTenSanPham.setText("* Không để trống!");
+				} else if (textTenSanPham.getText().length() > 50) {
+					lblTBTenSanPham.setText("* Quá dài!");
+				}
+				else {					
+					lblTBTenSanPham.setText("");
+				}
+			}
+		});
+		textTenSanPham.setBounds(382, 62, 155, 19);
 		panelThongTinSanPham.add(textTenSanPham);
-		textTenSanPham.setColumns(10);
+		textTenSanPham.setColumns(10);		
 		
 		lblMoTa = new JLabel("Mô tả:");
-		lblMoTa.setBounds(264, 98, 77, 13);
+		lblMoTa.setBounds(274, 108, 77, 13);
 		panelThongTinSanPham.add(lblMoTa);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(382, 81, 155, 55);
+		scrollPane.setBounds(382, 101, 155, 35);
 		panelThongTinSanPham.add(scrollPane);
 		
 		textMoTa = new JTextArea();
+		textMoTa.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textMoTa.getText().length() == 0) {
+					lblTBMoTa.setText("* Không để trống!");
+				} else if (textMoTa.getText().length() > 50) {
+					lblTBMoTa.setText("* Quá dài!");
+				}
+				else {					
+					lblTBMoTa.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textMoTa.getText().length() == 0) {
+					lblTBMoTa.setText("* Không để trống!");
+				} else if (textMoTa.getText().length() > 50) {
+					lblTBMoTa.setText("* Quá dài!");
+				}
+				else {					
+					lblTBMoTa.setText("");
+				}
+			}
+		});
 		scrollPane.setViewportView(textMoTa);
 		
 		JLabel lblChatLieu = new JLabel("Chất liệu:");
-		lblChatLieu.setBounds(264, 168, 91, 13);
+		lblChatLieu.setBounds(274, 167, 91, 13);
 		panelThongTinSanPham.add(lblChatLieu);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(382, 146, 155, 49);
+		scrollPane_1.setBounds(382, 160, 155, 35);
 		panelThongTinSanPham.add(scrollPane_1);
 		
 		textChatLieu = new JTextArea();
+		textChatLieu.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textChatLieu.getText().length() == 0) {
+					lblTBChatLieu.setText("* Không để trống!");
+				} else if (textChatLieu.getText().length() > 50) {
+					lblTBChatLieu.setText("* Quá dài!");
+				}
+				else {					
+					lblTBChatLieu.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textChatLieu.getText().length() == 0) {
+					lblTBChatLieu.setText("* Không để trống!");
+				} else if (textChatLieu.getText().length() > 50) {
+					lblTBChatLieu.setText("* Quá dài!");
+				}
+				else {					
+					lblTBChatLieu.setText("");
+				}
+			}
+		});
 		scrollPane_1.setViewportView(textChatLieu);
 		
 		JLabel lblGioiTinh = new JLabel("Giới tính:");
@@ -196,7 +299,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(chckbxNam);
 		
 		chckbxNu = new JCheckBox("Nữ");
-		chckbxNu.setBounds(181, 257, 77, 21);
+		chckbxNu.setBounds(189, 257, 69, 21);
 		panelThongTinSanPham.add(chckbxNu);
 		
 		JLabel lblKichThuoc = new JLabel("Kích thước:");
@@ -205,21 +308,46 @@ public class Form_San_Pham extends JFrame {
 		
 		comboKichThuoc = new JComboBox();
 		comboKichThuoc.setModel(new DefaultComboBoxModel(new String[] {"XS", "S", "M", "L", "XL", "XXL", "XXXL", "FreeSize"}));
-		comboKichThuoc.setBounds(132, 300, 99, 21);
+		comboKichThuoc.setBounds(110, 300, 148, 21);
 		panelThongTinSanPham.add(comboKichThuoc);
 		
 		JLabel lblMauSac = new JLabel("Màu sắc:");
-		lblMauSac.setBounds(264, 220, 77, 13);
+		lblMauSac.setBounds(274, 220, 77, 13);
 		panelThongTinSanPham.add(lblMauSac);
 		
 		textMauSac = new JTextField();
+		textMauSac.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textMauSac.getText().length() == 0) {
+					lblTBMauSac.setText("* Không để trống!");
+				} else if (textMauSac.getText().length() > 50) {
+					lblTBMauSac.setText("* Quá dài!");
+				}
+				else {					
+					lblTBMauSac.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textMauSac.getText().length() == 0) {
+					lblTBMauSac.setText("* Không để trống!");
+				} else if (textMauSac.getText().length() > 50) {
+					lblTBMauSac.setText("* Quá dài!");
+				}
+				else {					
+					lblTBMauSac.setText("");
+				}
+			}
+		});
 		textMauSac.setBounds(382, 217, 155, 19);
 		panelThongTinSanPham.add(textMauSac);
 		textMauSac.setColumns(10);
 		
 		lblHinhAnh = new JLabel();
-		lblHinhAnh.setBounds(24, 21, 207, 185);
-		lblHinhAnh.setIcon(ResizeImage("./HinhAnh/icon/iconSanPham.png"));
+		lblHinhAnh.setBounds(38, 21, 207, 185);
+		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
+				+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
 		System.out.println(lblHinhAnh.getText());
 		panelThongTinSanPham.add(lblHinhAnh);
 		
@@ -241,23 +369,79 @@ public class Form_San_Pham extends JFrame {
 				}
 			}
 		});
-		btnHinhAnh.setBounds(53, 216, 155, 21);
+		btnHinhAnh.setBounds(58, 216, 155, 21);
 		panelThongTinSanPham.add(btnHinhAnh);
 		
 		JLabel lblSoLuong = new JLabel("Số lượng:");
-		lblSoLuong.setBounds(264, 261, 77, 13);
+		lblSoLuong.setBounds(274, 261, 77, 13);
 		panelThongTinSanPham.add(lblSoLuong);
 		
 		textSoLuong = new JTextField();
+		textSoLuong.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textSoLuong.getText().length() == 0) {
+					lblTBSoLuong.setText("* Không để trống!");
+				} else if (textSoLuong.getText().length() > 10) {
+					lblTBSoLuong.setText("* Quá dài!");
+				} else if (!textSoLuong.getText().matches("[\\d]+")) {
+					lblTBSoLuong.setText("* Chỉ nhập số!");
+				}
+				else {					
+					lblTBSoLuong.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textSoLuong.getText().length() == 0) {
+					lblTBSoLuong.setText("* Không để trống!");
+				} else if (textSoLuong.getText().length() > 10) {
+					lblTBSoLuong.setText("* Quá dài!");
+				} else if (!textSoLuong.getText().matches("[\\d]+")) {
+					lblTBSoLuong.setText("* Chỉ nhập số!");
+				}
+				else {					
+					lblTBSoLuong.setText("");
+				}
+			}
+		});
 		textSoLuong.setBounds(382, 258, 155, 19);
 		panelThongTinSanPham.add(textSoLuong);
 		textSoLuong.setColumns(10);
 		
 		JLabel lblGiamGia = new JLabel("Giảm giá:");
-		lblGiamGia.setBounds(264, 304, 91, 13);
+		lblGiamGia.setBounds(274, 304, 91, 13);
 		panelThongTinSanPham.add(lblGiamGia);
 		
 		textGiamGia = new JTextField();
+		textGiamGia.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textGiamGia.getText().length() == 0) {
+					lblTBGiamGia.setText("* Không để trống!");
+				} else if (textGiamGia.getText().length() > 10) {
+					lblTBGiamGia.setText("* Quá dài!");
+				} else if (!textGiamGia.getText().matches("[\\d.]+")) {
+					lblTBGiamGia.setText("* Chỉ nhập số!");
+				}
+				else {					
+					lblTBGiamGia.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textGiamGia.getText().length() == 0) {
+					lblTBGiamGia.setText("* Không để trống!");
+				} else if (textGiamGia.getText().length() > 10) {
+					lblTBGiamGia.setText("* Quá dài!");
+				} else if (!textGiamGia.getText().matches("[\\d.]+")) {
+					lblTBGiamGia.setText("* Chỉ nhập số!");
+				}
+				else {					
+					lblTBGiamGia.setText("");
+				}
+			}
+		});
 		textGiamGia.setBounds(382, 301, 155, 19);
 		panelThongTinSanPham.add(textGiamGia);
 		textGiamGia.setColumns(10);
@@ -267,15 +451,63 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblGiaNhap);
 		
 		textGiaNhap = new JTextField();
-		textGiaNhap.setBounds(132, 341, 99, 19);
+		textGiaNhap.setBounds(110, 341, 148, 19);
 		panelThongTinSanPham.add(textGiaNhap);
 		textGiaNhap.setColumns(10);
 		
+		textGiaNhap.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textGiaNhap.getText().length() == 0) {
+					lblTBGiaNhap.setText("* Không để trống!");
+				} else if (textGiaNhap.getText().length() > 10) {
+					lblTBGiaNhap.setText("* Quá dài!");
+				} else if (!textGiaNhap.getText().matches("[\\d.]+")) {
+					lblTBGiaNhap.setText("* Chỉ nhập số!");
+				}
+				else {					
+					lblTBGiaNhap.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textGiaNhap.getText().length() == 0) {
+					lblTBGiaNhap.setText("* Không để trống!");
+				} else if (textGiaNhap.getText().length() > 10) {
+					lblTBGiaNhap.setText("* Quá dài!");
+				} else if (!textGiaNhap.getText().matches("[\\d.]+")) {
+					lblTBGiaNhap.setText("* Chỉ nhập số!");
+				}
+				else {					
+					lblTBGiaNhap.setText("");
+				}
+			}
+		});
+		
+		textGiaNhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (textGiaNhap.getText().length() > 0 && textGiaNhap.getText().matches("[\\d.]+")) {
+					Double giaBan = Double.valueOf(textGiaNhap.getText()) * 5;
+					textDonGiaBan.setText(String.valueOf(giaBan));
+					lblTBGiaNhap.setText("");
+				}	
+				else {
+					textDonGiaBan.setText("");
+					lblTBGiaNhap.setText("* Chỉ nhập số!");
+				}
+			}
+		});
+		
 		JLabel lblDonGiaBan = new JLabel("Đơn giá bán:");
-		lblDonGiaBan.setBounds(264, 344, 91, 13);
+		lblDonGiaBan.setBounds(274, 344, 91, 13);
 		panelThongTinSanPham.add(lblDonGiaBan);
 		
 		textDonGiaBan = new JTextField();
+		textDonGiaBan.setEditable(false);
+		textDonGiaBan.setForeground(Color.BLACK);
 		textDonGiaBan.setBounds(382, 341, 155, 19);
 		panelThongTinSanPham.add(textDonGiaBan);
 		textDonGiaBan.setColumns(10);
@@ -333,6 +565,72 @@ public class Form_San_Pham extends JFrame {
 		JButton btnThemNhaCungCap = new JButton("+");
 		btnThemNhaCungCap.setBounds(434, 484, 85, 21);
 		panelThongTinSanPham.add(btnThemNhaCungCap);
+		
+		lblTBMaSanPham = new JLabel("");
+		lblTBMaSanPham.setForeground(Color.RED);
+		lblTBMaSanPham.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMaSanPham.setBounds(382, 39, 155, 19);
+		panelThongTinSanPham.add(lblTBMaSanPham);
+		
+		lblTBTenSanPham = new JLabel("");
+		lblTBTenSanPham.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBTenSanPham.setForeground(Color.RED);
+		lblTBTenSanPham.setBounds(382, 80, 155, 19);
+		panelThongTinSanPham.add(lblTBTenSanPham);
+		
+		lblTBMoTa = new JLabel("");
+		lblTBMoTa.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMoTa.setForeground(Color.RED);
+		lblTBMoTa.setBounds(382, 137, 155, 19);
+		panelThongTinSanPham.add(lblTBMoTa);
+		
+		lblTBChatLieu = new JLabel("");
+		lblTBChatLieu.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBChatLieu.setForeground(Color.RED);
+		lblTBChatLieu.setBounds(382, 194, 155, 19);
+		panelThongTinSanPham.add(lblTBChatLieu);
+		
+		lblTBMauSac = new JLabel("");
+		lblTBMauSac.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBMauSac.setForeground(Color.RED);
+		lblTBMauSac.setBounds(382, 235, 155, 19);
+		panelThongTinSanPham.add(lblTBMauSac);
+		
+		lblTBSoLuong = new JLabel("");
+		lblTBSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBSoLuong.setForeground(Color.RED);
+		lblTBSoLuong.setBounds(382, 278, 155, 19);
+		panelThongTinSanPham.add(lblTBSoLuong);
+		
+		lblTBGiamGia = new JLabel("");
+		lblTBGiamGia.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBGiamGia.setForeground(Color.RED);
+		lblTBGiamGia.setBounds(382, 318, 155, 19);
+		panelThongTinSanPham.add(lblTBGiamGia);
+		
+		lblTBGioiTinh = new JLabel("");
+		lblTBGioiTinh.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBGioiTinh.setForeground(Color.RED);
+		lblTBGioiTinh.setBounds(110, 277, 148, 19);
+		panelThongTinSanPham.add(lblTBGioiTinh);
+		
+		lblTBGiaNhap = new JLabel("");
+		lblTBGiaNhap.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBGiaNhap.setForeground(Color.RED);
+		lblTBGiaNhap.setBounds(110, 359, 148, 19);
+		panelThongTinSanPham.add(lblTBGiaNhap);
+		
+		lblTBHinhAnh = new JLabel("");
+		lblTBHinhAnh.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBHinhAnh.setForeground(Color.RED);
+		lblTBHinhAnh.setBounds(58, 235, 155, 19);
+		panelThongTinSanPham.add(lblTBHinhAnh);
+		
+		lblTBGiaBan = new JLabel("");
+		lblTBGiaBan.setForeground(Color.RED);
+		lblTBGiaBan.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblTBGiaBan.setBounds(382, 359, 155, 19);
+		panelThongTinSanPham.add(lblTBGiaBan);
 		
 		btnThemNhaCungCap.addActionListener(new ActionListener() {
 			
@@ -393,7 +691,7 @@ public class Form_San_Pham extends JFrame {
 		});
 		
 		JButton btnXoaRong = new JButton("Xóa rỗng");
-		btnXoaRong.setBounds(287, 50, 100, 30);
+		btnXoaRong.setBounds(351, 50, 100, 30);
 		panelChucNang.add(btnXoaRong);
 		
 		btnXoaRong.addActionListener(new ActionListener() {
@@ -413,19 +711,40 @@ public class Form_San_Pham extends JFrame {
 				isSelected();
 			}
 		});
-		btnHoanTac.setBounds(410, 50, 100, 30);
+		btnHoanTac.setBounds(461, 50, 100, 30);
 		panelChucNang.add(btnHoanTac);
 		
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setBounds(234, 10, 100, 30);
 		panelChucNang.add(btnThem);
 		
-		btnThem.addActionListener(new ActionListener() {
-			
-			@Override
+		btnNhapExcel = new JButton("Nhập Excel");
+		btnNhapExcel.setBounds(234, 50, 100, 30);
+		panelChucNang.add(btnNhapExcel);
+		
+		btnNhapExcel.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				themSanPham();
+                JFileChooser file = new JFileChooser();
+                file.setCurrentDirectory(new File(System.getProperty("user.home")));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Excel", "xls", "xlsx");
+                file.addChoosableFileFilter(filter);
+                int result = file.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = file.getSelectedFile();
+					String path = selectedFile.getAbsolutePath();
+					try {
+						if (sanPhamservice.themSanPhamTuExcel(new File(path))) {
+							createListSanPham();
+							JOptionPane.showMessageDialog(null, "Nhập thành công!!!");
+						} else {
+							JOptionPane.showMessageDialog(null, "Nhập thất bại!!!");
+						}
+					} catch (IOException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		
@@ -477,15 +796,6 @@ public class Form_San_Pham extends JFrame {
 			}
 		});
 		
-//		try {
-//			sanPhamservice.themSanPhamTuExcel(new File("C:\\Users\\LorenThuan\\Desktop\\Nhom13_PTUD\\sanPham1.xlsx"));
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 			
 	}
 	
@@ -653,8 +963,10 @@ public class Form_San_Pham extends JFrame {
 	}
 		
 	private void xoaRong () {
-		lblHinhAnh.setIcon(ResizeImage("./HinhAnh/icon/iconSanPham.png"));
+		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
+							+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
 					textMaSanPham.setText("Tự động khi để trống");
+					textMaSanPham.setEditable(true);
 					textMaSanPham.setForeground(new Color(153, 153, 153));
 					textTenSanPham.setText("");
 					textMoTa.setText("");
@@ -678,6 +990,7 @@ public class Form_San_Pham extends JFrame {
 			String maSanPham = listSanPham.getSelectedValue().getMaSanPham();
 		 	SanPham sanPham = sanPhamservice.timSanPhamTheoMa(maSanPham);
 		 	textMaSanPham.setText(sanPham.getMaSanPham());
+		 	textMaSanPham.setEditable(false);
 		 	textTenSanPham.setText(sanPham.getTenSanPham());
 		 	
 		 	if (sanPham.getLoaiSanPham() != null) {
@@ -725,7 +1038,6 @@ public class Form_San_Pham extends JFrame {
         return tu[0];
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	private boolean kiemTraDuLieu () {
 		String maSanPham = textMaSanPham.getText().trim();
 		String tenSanPham = textTenSanPham.getText().trim();
@@ -734,62 +1046,97 @@ public class Form_San_Pham extends JFrame {
 		String mauSac = textMauSac.getText().trim();
 		String soLuong = textSoLuong.getText().trim();
 		String giamGia = textGiamGia.getText().trim();
-		String donGia = textDonGiaBan.getText().trim();
 		String giaNhap = textGiaNhap.getText().trim();
+		String giaBan = textDonGiaBan.getText().trim();
+		
+		lblTBMaSanPham.setText("");
+		lblTBTenSanPham.setText("");
+		lblTBMoTa.setText("");
+		lblTBChatLieu.setText("");
+		lblTBMauSac.setText("");
+		lblTBSoLuong.setText("");
+		lblTBGiamGia.setText("");
+		lblTBHinhAnh.setText("");
+		lblTBGioiTinh.setText("");
+		lblTBGiaNhap.setText("");
+		lblTBGiaBan.setText("");
 		
 		if (!maSanPham.equals("Tự động khi để trống")) {
-			if (!(maSanPham.length() > 0 && maSanPham.length() < 50
-					&& maSanPham.matches("SP[\\d]{1,14}"))) {
-				JOptionPane.showMessageDialog(this, "Mã sản phẩm! 'SP[\\d]{1,14}'");
+			if (maSanPham.length() == 0) {
+				lblTBMaSanPham.setText("* Không để trống!");
+				return false;
+			} else if (!(maSanPham.matches("SP[\\d]{1,14}") && maSanPham.length() < 20)) {
+				lblTBMaSanPham.setText("* Không hợp lệ! SP***********");
 				return false;
 			}
 		}
-		if (!(tenSanPham.length() > 0 && tenSanPham.length() < 50
-				&& tenSanPham.matches("[\\W\\w\\s]+"))) {
-			JOptionPane.showMessageDialog(this, "Tên sản phẩm! Không chứ ký tự đặc biệt");
+		
+		if (tenSanPham.length() == 0) {
+			lblTBTenSanPham.setText("* Không để trống!");
+			return false;
+		} else if (!(tenSanPham.matches("[\\W\\w\\s]+") && tenSanPham.length() < 50)) {
+			lblTBTenSanPham.setText("* Không hợp lệ!");
 			return false;
 		}
-		if (!(moTa.length() > 0 && moTa.length() < 50
-				&& moTa.matches("[\\W\\w\\s]+"))) {
-			JOptionPane.showMessageDialog(this, "Mô tả! Không chứ ký tự đặc biệt");
+	
+		if (moTa.length() == 0) {
+			lblTBMoTa.setText("* Không để trống!");
+			return false;
+		} else if (!(moTa.matches("[\\W\\w\\s]+") && moTa.length() < 50)) {
+			lblTBMoTa.setText("* Không hợp lệ!");
 			return false;
 		}
-		if (!(chatLieu.length() > 0 && chatLieu.length() < 50
-				&& chatLieu.matches("[\\W\\w\\s]+"))) {
-			JOptionPane.showMessageDialog(this, "Chất liệu! Không chứ ký tự đặc biệt");
+			
+		if (chatLieu.length() == 0) {
+			lblTBChatLieu.setText("* Không để trống!");
+			return false;
+		} else if (!(chatLieu.matches("[\\W\\w\\s]+") && chatLieu.length() < 50)) {
+			lblTBChatLieu.setText("* Không hợp lệ!");
 			return false;
 		}
-		if (!(mauSac.length() > 0 && mauSac.length() < 50
-				&& mauSac.matches("[\\W\\w\\s]+"))) {
-			JOptionPane.showMessageDialog(this, "Màu sắc! Không chứ ký tự đặc biệt");
+		
+		if (mauSac.length() == 0) {
+			lblTBMauSac.setText("* Không để trống!");
+			return false;
+		} else if (!(mauSac.matches("[\\W\\w\\s]+") && mauSac.length() < 50)) {
+			lblTBMauSac.setText("* Không hợp lệ!");
 			return false;
 		}
-		if (!(soLuong.length() > 0 && soLuong.length() < 50
-				&& soLuong.matches("[\\d]+"))) {
-			JOptionPane.showMessageDialog(this, "Số lượng! Chỉ nhập số");
+		
+		if (soLuong.length() == 0) {
+			lblTBSoLuong.setText("* Không để trống!");
+			return false;
+		} else if (!(soLuong.matches("[\\d]+") && soLuong.length() < 10)) {
+			lblTBSoLuong.setText("* Chỉ nhập số!");
 			return false;
 		}
-		if (!(giamGia.length() > 0 && giamGia.length() < 50
-				&& giamGia.matches("[\\d.]+"))) {
-			JOptionPane.showMessageDialog(this, "Giảm giá! Chỉ nhập số");
+		
+		if (giamGia.length() == 0) {
+			lblTBGiamGia.setText("* Không để trống!");
+			return false;
+		} else if (!(giamGia.matches("[\\d.]+") && giamGia.length() < 10)) {
+			lblTBGiamGia.setText("* Chỉ nhập số!");
 			return false;
 		}
-		if (!(donGia.length() > 0 && donGia.length() < 50
-				&& donGia.matches("[\\d.]+"))) {
-			JOptionPane.showMessageDialog(this, "Đơn giá bán! Chỉ nhập số");
-			return false;
-		}
-		if (!(giaNhap.length() > 0 && giaNhap.length() < 50
-				&& giaNhap.matches("[\\d.]+"))) {
-			JOptionPane.showMessageDialog(this, "Giá nhập! Chỉ nhập số");
-			return false;
-		}
-		if (lblHinhAnh.equals("") || lblHinhAnh == null) {
-			JOptionPane.showMessageDialog(this, "Chọn hình!");
+		if (lblHinhAnh.getText().equals("") || lblHinhAnh == null) {
+			lblTBHinhAnh.setText("* Chọn hình!");
 			return false;
 		}
 		if (chckbxNam.isSelected() == false && chckbxNu.isSelected() == false) {
-			JOptionPane.showMessageDialog(this, "Chọn giới tính!");
+			lblTBGioiTinh.setText("* Chọn giới tính!");
+			return false;
+		}
+		
+		if (giaNhap.length() == 0) {
+			lblTBGiaNhap.setText("* Không để trống!");
+			return false;
+		} else if (!(giaNhap.matches("[\\d.]+") && giaNhap.length() < 20)) {
+			lblTBGiaNhap.setText("* Chỉ nhập số!");
+			return false;
+		}
+		
+		if (giaBan.length() == 0) {
+			lblTBGiaBan.setText("Enter Giá nhập!");
 			return false;
 		}
 		return true;

@@ -319,7 +319,6 @@ public class SanPhamImpl implements SanPhamDao{
 	@Override
 	public boolean themSanPhamTuExcel(File file) throws IOException, SQLException {
 		// TODO Auto-generated method stub
-		boolean n = false;
 		try {
 			con = ConectDatabase.getInstance().getConnection();	
 			Statement stmt = con.createStatement();
@@ -349,24 +348,24 @@ public class SanPhamImpl implements SanPhamDao{
 				String maNhaCungCap = row.getCell(13).getStringCellValue();	
 				Double giaNhap = row.getCell(14).getNumericCellValue();
 				
-				String sql = "INSERT INTO dbo.San_Pham VALUES('"+maSanPham+"', '"+ "N" + tenSanPham+"', '"+ "N" + moTa +"', '"+donGia+"', '"+hinhAnh+"', '"+soLuong+"', '"+giamGia+"', '"+kichThuoc+"', '"+chatLieu+"', '"+mauSac+"', '"+gioiTinh+"', '"+trangThai+"', '"+maLoaiSanPham+"', '"+maNhaCungCap+"', '"+giaNhap+"')";
+				String sql = "INSERT INTO dbo.San_Pham VALUES('"+maSanPham+"', N'"+tenSanPham+"', N'"+moTa +"', '"+donGia+"', N'"+hinhAnh+"', '"+soLuong+"', '"+giamGia+"', N'"+kichThuoc+"', N'"+chatLieu+"', N'"+mauSac+"', N'"+gioiTinh+"', N'"+trangThai+"', N'"+maLoaiSanPham+"', N'"+maNhaCungCap+"', '"+giaNhap+"')";
 				
-//				preStm = con.prepareStatement(sql);
-//				rs = preStm.executeQuery();
-//				preStm = con.prepareStatement(sql);	
-//				n = preStm.executeUpdate() > 0;
-				stmt.execute(sql);
+				SanPham sanPham = new SanPham();
+				sanPham.setMaSanPham(maSanPham);
+						
+				if (!this.getTatCaSanPham().contains(sanPham)) {
+					stmt.execute(sql);
+				} else {
+					return false;
+				}
 			}
 			workbook.close();
 			fis.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-
-			con.close();
 		}
-		
-			return n;			
+		return true;			
 	}
 
 }
