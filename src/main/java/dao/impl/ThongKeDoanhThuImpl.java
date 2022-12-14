@@ -54,6 +54,31 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 		}
 		return tongTien;
 	}
+	
+	public double tinhTongTienLaiTheoThang(int thang, int nam) {
+		double tongTien = 0;
+		try {
+			con = ConectDatabase.getInstance().getConnection();
+			String sql = "SELECT      sum(Chi_Tiet_Hoa_Don.[soLuong] * ([donGia]-[giaNhap]) * (1 - San_Pham.[giamGia])) + sum(Chi_Tiet_Hoa_Don.[soLuong] * ([donGia]-[giaNhap]) * (1 - San_Pham.[giamGia]))*0.1 - (sum(Chi_Tiet_Hoa_Don.[soLuong] * ([donGia]-[giaNhap]) * (1 - San_Pham.[giamGia]))*(Hoa_Don.giamGia))/100  as TongTien\r\n"
+					+ "					FROM            Chi_Tiet_Hoa_Don INNER JOIN\r\n"
+					+ "					                         Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN\r\n"
+					+ "					                        San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham\r\n"
+					+ "					where YEAR([ngayDat]) = ?  and MONTH([ngayDat]) = ?\r\n"
+					+ "					group by Chi_Tiet_Hoa_Don.[soLuong], [donGia], [giaNhap], San_Pham.[giamGia], Hoa_Don.giamGia";
+			preStm = con.prepareStatement(sql);
+			preStm.setInt(1, nam);
+			preStm.setInt(2, thang);
+			rs = preStm.executeQuery();
+			while (rs.next()) {
+				tongTien = rs.getDouble(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+		}
+		return tongTien;
+	}
 
 
 	@Override

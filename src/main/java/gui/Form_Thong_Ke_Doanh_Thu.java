@@ -50,6 +50,7 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 	private JButton btnLoc;
 	private JLabel lblTongTien;
 	private ThongKeDoanhThuService thongKeDoanhThuService = new ThongKeDoanhThuServiceImpl();
+	private JLabel lblTongTien2;
 
 	/**
 	 * Launch the application.
@@ -152,6 +153,16 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 				lblTongTien.setBounds(637, 85, 174, 20);
 				panel_1.add(lblTongTien);
 				lblTongTien.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+				
+				JLabel lblNewLabel_4 = new JLabel("Tổng tiền lãi:");
+				lblNewLabel_4.setBounds(435, 120, 174, 20);
+				panel_1.add(lblNewLabel_4);
+				lblNewLabel_4.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+				
+				lblTongTien2 = new JLabel("0");
+				lblTongTien2.setBounds(637, 120, 180, 20);
+				panel_1.add(lblTongTien2);
+				lblTongTien2.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 286, 1314, 314);
@@ -198,6 +209,8 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		DecimalFormat formatTien = new DecimalFormat("###,###,### VND");
 		double tongTien = thongKeDoanhThuService.tinhTongTienBanDuocTheoThang(thang, nam);
 		lblTongTien.setText(formatTien.format(tongTien));
+		double tongTien2 = thongKeDoanhThuService.tinhTongTienLaiTheoThang(thang, nam);
+		lblTongTien2.setText(formatTien.format(tongTien2));
 		
 		List<HoaDon> hoaDons = thongKeDoanhThuService.layTatCaHoaDonTheoThangNam(thang, nam);
 		tablemodel.setRowCount(0);

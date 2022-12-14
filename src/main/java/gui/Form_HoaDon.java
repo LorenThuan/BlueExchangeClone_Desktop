@@ -63,7 +63,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 
 public class Form_HoaDon extends JFrame implements ActionListener, MouseListener, KeyListener, ItemListener {
-
 	public static JPanel contentPane;
 	private JTextField txtMaSanPham;
 	private JTextField txtSoLuong;
@@ -1134,7 +1133,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 						hd = taoHoaDon(maHD, true);
 						hoaDonService.themHoaDon(hd);
 						themCT_HoaDon(hd);
-						JOptionPane.showConfirmDialog(btnThanhToan, "Thanh toán thành công!");
+						JOptionPane.showMessageDialog(btnThanhToan, "Thanh toán thành công!");
 					} else {
 						if (txtPhanTramGiam.getText().equals("")) {
 							txtPhanTramGiam.setText("0");

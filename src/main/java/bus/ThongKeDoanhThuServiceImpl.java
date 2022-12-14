@@ -16,6 +16,11 @@ public class ThongKeDoanhThuServiceImpl implements ThongKeDoanhThuService{
 	}
 	
 	@Override
+	public double tinhTongTienLaiTheoThang(int thang, int nam) {
+		return thongKeDoanhThuDao.tinhTongTienLaiTheoThang(thang, nam);
+	}
+	
+	@Override
 	public HoaDon layHoaDonTheoMa(String maHoaDon) {
 		return thongKeDoanhThuDao.layHoaDonTheoMa(maHoaDon);
 	}

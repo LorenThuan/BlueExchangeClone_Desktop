@@ -260,7 +260,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		mnBanHang.addMenuListener(this);
 		mntmThongKeHoaDonLapTheoNhanVien.addActionListener(this);
 		mnTrangChu.addMenuListener(this);
-
+		mnHuongDanSuDung.addMenuListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {

@@ -13,14 +13,14 @@
 	<parameter name="tongTien" class="java.lang.Double"/>
 	<parameter name="soHoaDonTuDong" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT  Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.tenKhachHang, Khach_Hang.soDienThoai, San_Pham.maSanPham, San_Pham.tenSanPham, San_Pham.kichThuoc, San_Pham.mauSac, San_Pham.donGia, Chi_Tiet_Hoa_Don.soLuong, sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) + sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*0.1 - (sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*(Hoa_Don.giamGia))/100 AS ThanhTien    
+		<![CDATA[SELECT  Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.tenKhachHang, Khach_Hang.maKhachHang, San_Pham.maSanPham, San_Pham.tenSanPham, San_Pham.kichThuoc, San_Pham.mauSac, San_Pham.donGia, Chi_Tiet_Hoa_Don.soLuong, sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) + sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*0.1 - (sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*(Hoa_Don.giamGia))/100 AS ThanhTien    
 FROM            Chi_Tiet_Hoa_Don INNER JOIN
                          Hoa_Don ON Chi_Tiet_Hoa_Don.maHoaDon = Hoa_Don.maHoaDon INNER JOIN
                          San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham INNER JOIN
                          Khach_Hang ON Hoa_Don.maKhachHang = Khach_Hang.maKhachHang INNER JOIN
                          Nhan_Vien ON Hoa_Don.maNhanVien = Nhan_Vien.maNhanVien
 WHERE Nhan_Vien.maNhanVien = $P{maNhanVien} and ngayDat = $P{ngayHomNay} and Nhan_Vien.trangThai = 1
-GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.tenKhachHang, Khach_Hang.soDienThoai, San_Pham.maSanPham, San_Pham.tenSanPham, San_Pham.kichThuoc, San_Pham.mauSac, San_Pham.donGia, Chi_Tiet_Hoa_Don.soLuong, San_Pham.[giamGia], Hoa_Don.giamGia]]>
+GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.tenKhachHang, Khach_Hang.maKhachHang, San_Pham.maSanPham, San_Pham.tenSanPham, San_Pham.kichThuoc, San_Pham.mauSac, San_Pham.donGia, Chi_Tiet_Hoa_Don.soLuong, San_Pham.[giamGia], Hoa_Don.giamGia]]>
 	</queryString>
 	<field name="maHoaDon" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="maHoaDon"/>
@@ -38,9 +38,9 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 		<property name="com.jaspersoft.studio.field.name" value="tenKhachHang"/>
 		<property name="com.jaspersoft.studio.field.label" value="tenKhachHang"/>
 	</field>
-	<field name="soDienThoai" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="soDienThoai"/>
-		<property name="com.jaspersoft.studio.field.label" value="soDienThoai"/>
+	<field name="maKhachHang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="maKhachHang"/>
+		<property name="com.jaspersoft.studio.field.label" value="maKhachHang"/>
 	</field>
 	<field name="maSanPham" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="maSanPham"/>
@@ -147,14 +147,14 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 				<textElement>
 					<font fontName="DejaVu Sans" isStrikeThrough="false" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[Số điện thoại:]]></text>
+				<text><![CDATA[Mã KH:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="353" y="37" width="171" height="20" uuid="96b7868d-12d1-4748-98f6-22a26ef69206"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{soDienThoai}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{maKhachHang}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="280" y="57" width="73" height="20" uuid="c7c238c1-f3d7-4c61-8ae0-f90e1f501b90"/>
