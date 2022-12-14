@@ -477,15 +477,15 @@ public class Form_San_Pham extends JFrame {
 			}
 		});
 		
-		try {
-			sanPhamservice.themSanPhamTuExcel(new File("C:\\Users\\LorenThuan\\Desktop\\Nhom13_PTUD\\sanPham1.xlsx"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			sanPhamservice.themSanPhamTuExcel(new File("C:\\Users\\LorenThuan\\Desktop\\Nhom13_PTUD\\sanPham1.xlsx"));
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 			
 	}
 	

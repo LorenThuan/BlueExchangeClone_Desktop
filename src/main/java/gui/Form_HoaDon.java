@@ -88,6 +88,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 	private JButton btnThanhToan;
 	private JButton btnLocHDtheoSDT;
 	private JButton btnXoaHD;
+	private JButton btnXoaRong;
 	private JTextField txtNgayLap;
 	private JTextField txtMaHD;
 	private JTextField txtNhanVien;
@@ -120,6 +121,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 	private SanPham sanphamChon_DonHang;
 	private HoaDon hoadonChon;
 	private JComboBox cboTinhTrangHD;
+	
 
 	/**
 	 * Launch the application.
@@ -246,7 +248,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtSoLuong = new JTextField();
 		txtSoLuong.setFont(fntText);
 		txtSoLuong.setBackground(new Color(240, 240, 240));
-		txtSoLuong.setBounds(438, 500, 62, 30);
+		txtSoLuong.setBounds(349, 500, 62, 30);
 		txtSoLuong.setEditable(false);
 		contentPane.add(txtSoLuong);
 		txtSoLuong.setColumns(10);
@@ -258,7 +260,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 			}
 		});
-		btnThemVaoCT_Don.setBounds(512, 500, 62, 30);
+		btnThemVaoCT_Don.setBounds(421, 500, 62, 30);
 		contentPane.add(btnThemVaoCT_Don);
 
 		JPanel pnDonHang = new JPanel();
@@ -583,7 +585,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtSDT.setBounds(58, 54, 173, 26);
 		pnCongCu.add(txtSDT);
 
-		btnXuatBaoCao = new JButton("Xuất báo cáo");
+		btnXuatBaoCao = new JButton("In hóa đơn");
 		btnXuatBaoCao.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnXuatBaoCao.setEnabled(true);
 		btnXuatBaoCao.setBounds(191, 103, 127, 29);
@@ -609,24 +611,25 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		btnLuu = new JButton("Lưu tạm");
 		btnLuu.setBounds(1162, 334, 107, 30);
+		btnLuu.setEnabled(false);
 		contentPane.add(btnLuu);
 		btnLuu.setFont(fntText);
 
 		JLabel lblMaSPchon = new JLabel("Sản phẩm:");
 		lblMaSPchon.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblMaSPchon.setBounds(50, 500, 80, 30);
+		lblMaSPchon.setBounds(16, 500, 80, 30);
 		contentPane.add(lblMaSPchon);
 
 		txtSanPham = new JTextField();
 		txtSanPham.setEditable(false);
 		txtSanPham.setFont(new Font("Arial", Font.PLAIN, 14));
-		txtSanPham.setBounds(142, 500, 192, 30);
+		txtSanPham.setBounds(106, 500, 159, 30);
 		contentPane.add(txtSanPham);
 		txtSanPham.setColumns(10);
 
 		JLabel lblThmSl = new JLabel("Thêm SL");
 		lblThmSl.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblThmSl.setBounds(361, 500, 65, 30);
+		lblThmSl.setBounds(275, 500, 65, 30);
 		contentPane.add(lblThmSl);
 
 		JLabel lblMaSPban = new JLabel("Mã SP bán:");
@@ -639,6 +642,11 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtMaSPban.setBounds(779, 334, 175, 30);
 		contentPane.add(txtMaSPban);
 		txtMaSPban.setColumns(10);
+		
+		btnXoaRong = new JButton("Xoá Rỗng");
+		btnXoaRong.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnXoaRong.setBounds(493, 500, 114, 30);
+		contentPane.add(btnXoaRong);
 
 		addEvent();
 		allSanPham = hoaDonService.getTatCaSanPham();
@@ -668,6 +676,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtPhanTramGiam.addKeyListener(this);
 		cboTenKhachHang.addItemListener(this);
 		cboTinhTrangHD.addItemListener(this);
+		btnXoaRong.addActionListener(this);
 	}
 
 	private List<SanPham> dsSanPham() {
@@ -806,6 +815,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtVAT.setText(Double.toString(vat));
 		txtSoTienGiam.setText(Double.toString(giamHD));
 		txtThanhTien.setText(Double.toString((double) Math.round((tongTien + vat - giamHD) * 10) / 10));
+		tinhTienThua();
 	}
 
 	public void tinhTienThua() {
@@ -844,7 +854,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				s = s.substring(0, s.length() - 1);
 				txtSoTienKhachDua.setText(s);
 			}
-			tinhTienThua();
+			tinhToan();
 		} else if (o.equals(txtSoLuong)) {
 			if (o.equals(txtSoLuong)) {
 				if (e.getKeyChar() >= 'a' & e.getKeyChar() <= 'z') {
@@ -857,13 +867,19 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				btnThemVaoCT_Don.setEnabled(true);
 			}
 		} else if (o.equals(txtPhanTramGiam)) {
-			if (e.getKeyChar() >= 'a' & e.getKeyChar() <= 'z' & txtSoTienKhachDua.getText().length() >= 3) {
-				String s = txtSoTienKhachDua.getText();
+			if (e.getKeyChar() >= 'a' & e.getKeyChar() <= 'z') {
+				String s = txtPhanTramGiam.getText();
 				s = s.substring(0, s.length() - 1);
 				txtPhanTramGiam.setText(s);
 			}
+			else {
+				String s = txtPhanTramGiam.getText();
+				if(s.length() > 2) {
+					s = s.substring(0, s.length() - 1);
+					txtPhanTramGiam.setText(s);
+				}
+			}
 			tinhToan();
-			tinhTienThua();
 		}
 
 	}
@@ -909,7 +925,24 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			}
 			loadTableHoaDon(locHoaDon);
 			txtSDT.setText("");
-		} else if (o.equals(btnLamMoi)) {
+		} 
+		else if(o.equals(btnXoaRong)) {
+			int input = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?", "Xóa!", JOptionPane.YES_NO_OPTION);
+			if (input == 0) {
+				xoaRong();
+				xuLyNutThanhToan();
+
+				txtMaSanPham.setText("");
+				txtSanPham.setText("");
+				txtGiamSP.setText("");
+				txtSoLuong.setText(""); txtSoLuong.setEditable(false);
+				cboKichThuoc.setSelectedIndex(0);
+				loadDuLieuSanPham(allSanPham);
+				txtSDT.setText("");
+				cboTinhTrangHD.setSelectedIndex(0);
+			}
+		}
+		else if (o.equals(btnLamMoi)) {
 			txtMaSanPham.setText("");
 			cboKichThuoc.setSelectedIndex(0);
 			loadDuLieuSanPham(allSanPham);
@@ -1092,7 +1125,8 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			} 
 			else {
 			if (!txtTienThua.getText().equals("")) {
-				int input = JOptionPane.showConfirmDialog(btnThanhToan, "Đồng ý thanh toán?");
+//				int input = JOptionPane.showConfirmDialog(btnThanhToan, "Đồng ý thanh toán?");
+				int input = JOptionPane.showConfirmDialog(this, "Đồng ý thanh toán?", "Thanh toán", JOptionPane.YES_NO_OPTION);
 				if (input == 0) {
 					String maHD = txtMaHD.getText().trim();
 					if (maHD.equals("")) {
@@ -1113,14 +1147,14 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 					List<SanPham> ls = new ArrayList<>();
 					ls = hoaDonService.getTatCaSanPham();
 					loadDuLieuSanPham(ls);
-					txtMaSPban.setText("");
 					xoaRong();
 					xuLyNutThanhToan();
 				} else {
-					JOptionPane.showConfirmDialog(btnThanhToan, "Thanh toán không thành công!");
+					JOptionPane.showMessageDialog(btnThanhToan, "Thanh toán không thành công!");
 				}
 			} else {
-				JOptionPane.showConfirmDialog(btnThanhToan, "Chưa nhập đủ tiền!");
+				JOptionPane.showMessageDialog(btnThanhToan, "Chưa nhập đủ tiền!");             
+//				(btnThanhToan, "Chưa nhập đủ tiền!");
 			}
 		}
 		} else if (o.equals(btnSuaSoLuong)) {
@@ -1187,9 +1221,11 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			int index = tableHoaDon.getSelectedRow();
 			boolean flag = xoaHoaDon();
 			if (!flag) {
-				JOptionPane.showConfirmDialog(btnXoaHD, "Hoá đơn đã thanh toán không thể xoá!");
+//				JOptionPane.showConfirmDialog(btnXoaHD, "Hoá đơn đã thanh toán không thể xoá!");
+				JOptionPane.showConfirmDialog(this, "Hoá đơn đã thanh toán không thể xoá!?", "", JOptionPane.YES_NO_OPTION);
 			} else {
-				JOptionPane.showConfirmDialog(btnXoaHD, "Xoá thành công!");
+				JOptionPane.showConfirmDialog(this, "Xoá thành công!?", "", JOptionPane.YES_NO_OPTION);
+//				JOptionPane.showConfirmDialog(btnXoaHD, "Xoá thành công!");
 			}
 			xoaRong();
 			xuLyNutThanhToan();
@@ -1237,6 +1273,16 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtPhanTramGiam.setText("");
 		txtSoTienKhachDua.setText("");
 		txtTienThua.setText("");
+		txtMaSPban.setText("");
+		txtVAT.setText("");
+		txtTongTien.setText("");
+		txtThanhTien.setText("");
+		txtTenOrSDT.setText("");
+		btnSuaSoLuong.setEnabled(false);
+		btnXoaCT_Don.setEnabled(false);
+		txtSoTienGiam.setText("");
+		allSanPham = hoaDonService.getTatCaSanPham();
+		loadDuLieuSanPham(allSanPham);
 	}
 
 	public void themCT_HoaDon(HoaDon hd) {
@@ -1252,20 +1298,18 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 	public boolean xoaHoaDon() {
 		Boolean kq = false;
-		String maHD = "";
-		int index = tableHoaDon.getSelectedRow();
-		maHD = (String) dataModelHoaDon.getValueAt(index, 0);
-		HoaDon hd = hoaDonService.getHoaDon(maHD);
-		if (hd.isTrangThai() == false) {
+		if (hoadonChon.isTrangThai() == false) {
 			List<ChiTietHoaDon> list = new ArrayList<>();
-			list = hoaDonService.getCT_HoadonTheoHoaDon(maHD);
+			list = hoaDonService.getCT_HoadonTheoHoaDon(hoadonChon.getMaHoaDon());
 			for (ChiTietHoaDon ct : list) {
-				kq = hoaDonService.xoaCT_HD(maHD, ct.getSanPham().getMaSanPham());
-				kq = hoaDonService.capNhatSLSanPham(ct.getSanPham().getMaSanPham(),
-						ct.getSanPham().getSoLuong() + ct.getSoLuong());
+				SanPham sp = hoaDonService.laySanPhamTheoMa(ct.getSanPham().getMaSanPham());
+				kq = hoaDonService.capNhatSLSanPham(sp.getMaSanPham(),
+						sp.getSoLuong() + ct.getSoLuong());
+				kq = hoaDonService.xoaCT_HD(hoadonChon.getMaHoaDon(), sp.getMaSanPham());
 			}
-			kq = hoaDonService.xoaHD(maHD);
-			dataModelHoaDon.removeRow(index);
+			kq = hoaDonService.xoaHD(hoadonChon.getMaHoaDon());
+			allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
+			loadTableHoaDon(allHoaDon);
 		}
 		return kq;
 	}
@@ -1349,25 +1393,30 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				txtSoTienKhachDua.setEditable(false);
 				btnThanhToan.setEnabled(false);
 				txtPhanTramGiam.setEditable(false);
+				btnLuu.setEnabled(false);
 			} else {
 				txtSoTienKhachDua.setEditable(true);
 				btnThanhToan.setEnabled(true);
 				txtPhanTramGiam.setEditable(true);
+				btnLuu.setEnabled(true);
 			}
 		} else {
 			if (hoadonChon.isTrangThai()) {
 				txtPhanTramGiam.setEditable(false);
 				txtSoTienKhachDua.setEditable(false);
 				btnThanhToan.setEnabled(false);
+				btnLuu.setEnabled(false);
 			} else {
 				if (tableDonHang.getRowCount() == 0) {
 					txtSoTienKhachDua.setEditable(false);
 					btnThanhToan.setEnabled(false);
 					txtPhanTramGiam.setEditable(false);
+					btnLuu.setEnabled(false);
 				} else {
 					txtSoTienKhachDua.setEditable(true);
 					btnThanhToan.setEnabled(true);
 					txtPhanTramGiam.setEditable(true);
+					btnLuu.setEnabled(false);
 				}
 			}
 		}

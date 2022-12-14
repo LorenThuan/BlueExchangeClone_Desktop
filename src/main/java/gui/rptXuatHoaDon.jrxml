@@ -26,7 +26,7 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 		<property name="com.jaspersoft.studio.field.name" value="maHoaDon"/>
 		<property name="com.jaspersoft.studio.field.label" value="maHoaDon"/>
 	</field>
-	<field name="ngayDat" class="java.sql.Time">
+	<field name="ngayDat" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.name" value="ngayDat"/>
 		<property name="com.jaspersoft.studio.field.label" value="ngayDat"/>
 	</field>

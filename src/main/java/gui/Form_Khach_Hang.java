@@ -348,10 +348,16 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 			docDuLieu();
 			xoaRong();
 		} else if (o.equals(btnXoa)) {
-			 Boolean kq = xoaKhachHang();
-			 docDuLieu();
-			 xoaRong();
-			
+			if (tableKhachHang.getSelectedRow() != -1) {
+				int ask = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?", "Xóa!", JOptionPane.YES_NO_OPTION);
+				if (ask == JOptionPane.YES_OPTION) {
+					 Boolean kq = xoaKhachHang();
+					 docDuLieu();
+					 xoaRong();
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Phải chọn nhân viên!");
+			}
 		} else if (o.equals(btnTimKiem)) {
 			String noidungTim = textTimKiem.getText().trim();
 			if (noidungTim.equalsIgnoreCase("")) {

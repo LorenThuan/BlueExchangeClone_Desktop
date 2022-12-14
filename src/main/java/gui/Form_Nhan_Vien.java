@@ -380,10 +380,18 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			docDuLieu();
 			new Form_Cap_Mat_Khau().setVisible(true);
 		} else if (o.equals(btnXoa)) {
-			comboBoxTrangThai.setEnabled(false);
-			 Boolean kq = xoaNhanVien();
-			 docDuLieu();
-			 xoaRong();
+			if (tableNhanVien.getSelectedRow() != -1) {
+				int ask = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?", "Xóa!", JOptionPane.YES_NO_OPTION);
+				if (ask == JOptionPane.YES_OPTION) {
+					comboBoxTrangThai.setEnabled(false);
+					 Boolean kq = xoaNhanVien();
+					 docDuLieu();
+					 xoaRong();
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Phải chọn nhân viên!");
+			}
+			
 			
 		} else if (o.equals(btnTimKiem)) {
 			comboBoxTrangThai.setEnabled(false);
