@@ -63,6 +63,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 
 public class Form_HoaDon extends JFrame implements ActionListener, MouseListener, KeyListener, ItemListener {
+
 	public static JPanel contentPane;
 	private JTextField txtMaSanPham;
 	private JTextField txtSoLuong;
@@ -321,25 +322,25 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		txtNgayLap = new JTextField();
 		txtNgayLap.setText(homNay);
-		txtNgayLap.setForeground(Color.RED);
+		txtNgayLap.setForeground(new Color(0, 128, 255));
 		txtNgayLap.setEditable(false);
 		txtNgayLap.setFont(new Font("Arial", Font.ITALIC, 14));
-		txtNgayLap.setBounds(125, 47, 150, 30);
+		txtNgayLap.setBounds(123, 47, 150, 30);
 		pnDonHang.add(txtNgayLap);
 		txtNgayLap.setColumns(10);
 
 		txtMaHD = new JTextField();
 		txtMaHD.setText("");
-		txtMaHD.setForeground(Color.RED);
+		txtMaHD.setForeground(new Color(0, 128, 255));
 		txtMaHD.setEditable(true);
 		txtMaHD.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtMaHD.setColumns(10);
-		txtMaHD.setBounds(125, 89, 150, 30);
+		txtMaHD.setBounds(125, 89, 150, 30); txtMaHD.setEnabled(false);
 		pnDonHang.add(txtMaHD);
 
 		txtNhanVien = new JTextField();
 		txtNhanVien.setText(Form_Quan_Ly_Tai_Khoan.textTenNhanVien.getText().trim());
-		txtNhanVien.setForeground(Color.RED);
+		txtNhanVien.setForeground(new Color(0, 128, 255));
 		txtNhanVien.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtNhanVien.setEditable(false);
 		txtNhanVien.setColumns(10);
@@ -451,7 +452,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(btnThanhToan);
 
 		txtTongTien = new JTextField();
-		txtTongTien.setForeground(Color.RED);
+		txtTongTien.setForeground(new Color(0, 128, 255));
 		txtTongTien.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtTongTien.setEditable(false);
 		txtTongTien.setColumns(10);
@@ -459,7 +460,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtTongTien);
 
 		txtThanhTien = new JTextField();
-		txtThanhTien.setForeground(Color.RED);
+		txtThanhTien.setForeground(new Color(0, 128, 255));
 		txtThanhTien.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtThanhTien.setEditable(false);
 		txtThanhTien.setColumns(10);
@@ -468,7 +469,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		txtTienThua = new JTextField();
 		txtTienThua.setText("");
-		txtTienThua.setForeground(Color.RED);
+		txtTienThua.setForeground(new Color(0, 128, 255));
 		txtTienThua.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtTienThua.setEditable(false);
 		txtTienThua.setColumns(10);
@@ -476,7 +477,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtTienThua);
 
 		txtVAT = new JTextField();
-		txtVAT.setForeground(Color.RED);
+		txtVAT.setForeground(new Color(0, 128, 255));
 		txtVAT.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtVAT.setEditable(false);
 		txtVAT.setColumns(10);
@@ -484,7 +485,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtVAT);
 
 		txtSoTienGiam = new JTextField();
-		txtSoTienGiam.setForeground(Color.RED);
+		txtSoTienGiam.setForeground(new Color(0, 128, 255));
 		txtSoTienGiam.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtSoTienGiam.setEditable(false);
 		txtSoTienGiam.setColumns(10);
@@ -498,7 +499,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		txtPhanTramGiam = new JTextField();
 		txtPhanTramGiam.setBackground(new Color(240, 240, 240));
-		txtPhanTramGiam.setForeground(Color.RED);
+		txtPhanTramGiam.setForeground(new Color(0, 128, 255));
 		txtPhanTramGiam.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtPhanTramGiam.setColumns(10);
 		txtPhanTramGiam.setBounds(407, 44, 48, 30);
@@ -517,7 +518,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtGiamSP = new JTextField();
 		txtGiamSP.setEditable(false);
 		txtGiamSP.setFont(new Font("Arial", Font.ITALIC, 14));
-		txtGiamSP.setForeground(Color.RED);
+		txtGiamSP.setForeground(new Color(0, 128, 255));
 		txtGiamSP.setBounds(102, 7, 180, 30);
 		pnTinhToanTien.add(txtGiamSP);
 		txtGiamSP.setColumns(10);
@@ -646,11 +647,12 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		btnXoaRong.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnXoaRong.setBounds(493, 500, 114, 30);
 		contentPane.add(btnXoaRong);
-
+		
+		xoaHDChuaThanhToan();
 		addEvent();
 		allSanPham = hoaDonService.getTatCaSanPham();
 		loadDuLieuSanPham(allSanPham);
-		allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
+//		allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 		loadTableHoaDon(allHoaDon);
 	}
 
@@ -676,6 +678,18 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		cboTenKhachHang.addItemListener(this);
 		cboTinhTrangHD.addItemListener(this);
 		btnXoaRong.addActionListener(this);
+	}
+	private void xoaHDChuaThanhToan() {
+		allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
+		List<HoaDon> list_HD = new ArrayList<>();
+		for (HoaDon hd : allHoaDon) {
+			if(hd.isTrangThai() == false) {
+				list_HD.add(hd);
+			}
+		}
+		for (HoaDon hd : list_HD) {
+			xoaHoaDon(hd);
+		}
 	}
 
 	private List<SanPham> dsSanPham() {
@@ -926,14 +940,13 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			txtSDT.setText("");
 		} 
 		else if(o.equals(btnXoaRong)) {
-			int input = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?", "Xóa!", JOptionPane.YES_NO_OPTION);
+			int input = JOptionPane.showConfirmDialog(btnXoaRong, "Bạn có muốn xoá rỗng không?", "Lựa chọn của bạn", JOptionPane.YES_NO_OPTION);
 			if (input == 0) {
 				xoaRong();
 				xuLyNutThanhToan();
 
 				txtMaSanPham.setText("");
 				txtSanPham.setText("");
-				txtGiamSP.setText("");
 				txtSoLuong.setText(""); txtSoLuong.setEditable(false);
 				cboKichThuoc.setSelectedIndex(0);
 				loadDuLieuSanPham(allSanPham);
@@ -1124,8 +1137,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			} 
 			else {
 			if (!txtTienThua.getText().equals("")) {
-//				int input = JOptionPane.showConfirmDialog(btnThanhToan, "Đồng ý thanh toán?");
-				int input = JOptionPane.showConfirmDialog(this, "Đồng ý thanh toán?", "Thanh toán", JOptionPane.YES_NO_OPTION);
+				int input = JOptionPane.showConfirmDialog(btnThanhToan, "Đồng ý thanh toán?", "Lựa chọn của bạn", JOptionPane.YES_NO_OPTION);
 				if (input == 0) {
 					String maHD = txtMaHD.getText().trim();
 					if (maHD.equals("")) {
@@ -1152,8 +1164,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 					JOptionPane.showMessageDialog(btnThanhToan, "Thanh toán không thành công!");
 				}
 			} else {
-				JOptionPane.showMessageDialog(btnThanhToan, "Chưa nhập đủ tiền!");             
-//				(btnThanhToan, "Chưa nhập đủ tiền!");
+				JOptionPane.showMessageDialog(btnThanhToan, "Chưa nhập đủ tiền!");
 			}
 		}
 		} else if (o.equals(btnSuaSoLuong)) {
@@ -1217,14 +1228,11 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			btnXoaCT_Don.setEnabled(false);
 			xuLyNutThanhToan();
 		} else if (o.equals(btnXoaHD)) {
-			int index = tableHoaDon.getSelectedRow();
-			boolean flag = xoaHoaDon();
+			boolean flag = xoaHoaDon(hoadonChon);
 			if (!flag) {
-//				JOptionPane.showConfirmDialog(btnXoaHD, "Hoá đơn đã thanh toán không thể xoá!");
-				JOptionPane.showConfirmDialog(this, "Hoá đơn đã thanh toán không thể xoá!?", "", JOptionPane.YES_NO_OPTION);
+				JOptionPane.showMessageDialog(btnXoaHD, "Hoá đơn đã thanh toán không thể xoá!");
 			} else {
-				JOptionPane.showConfirmDialog(this, "Xoá thành công!?", "", JOptionPane.YES_NO_OPTION);
-//				JOptionPane.showConfirmDialog(btnXoaHD, "Xoá thành công!");
+				JOptionPane.showMessageDialog(btnXoaHD, "Xoá thành công!");
 			}
 			xoaRong();
 			xuLyNutThanhToan();
@@ -1281,6 +1289,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		btnXoaCT_Don.setEnabled(false);
 		txtSoTienGiam.setText("");
 		allSanPham = hoaDonService.getTatCaSanPham();
+		txtGiamSP.setText("");
 		loadDuLieuSanPham(allSanPham);
 	}
 
@@ -1295,18 +1304,18 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		}
 	}
 
-	public boolean xoaHoaDon() {
+	public boolean xoaHoaDon(HoaDon hd) {
 		Boolean kq = false;
-		if (hoadonChon.isTrangThai() == false) {
+		if (hd.isTrangThai() == false) {
 			List<ChiTietHoaDon> list = new ArrayList<>();
-			list = hoaDonService.getCT_HoadonTheoHoaDon(hoadonChon.getMaHoaDon());
+			list = hoaDonService.getCT_HoadonTheoHoaDon(hd.getMaHoaDon());
 			for (ChiTietHoaDon ct : list) {
 				SanPham sp = hoaDonService.laySanPhamTheoMa(ct.getSanPham().getMaSanPham());
 				kq = hoaDonService.capNhatSLSanPham(sp.getMaSanPham(),
 						sp.getSoLuong() + ct.getSoLuong());
-				kq = hoaDonService.xoaCT_HD(hoadonChon.getMaHoaDon(), sp.getMaSanPham());
+				kq = hoaDonService.xoaCT_HD(hd.getMaHoaDon(), sp.getMaSanPham());
 			}
-			kq = hoaDonService.xoaHD(hoadonChon.getMaHoaDon());
+			kq = hoaDonService.xoaHD(hd.getMaHoaDon());
 			allHoaDon = hoaDonService.getAllDSHoadon(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 			loadTableHoaDon(allHoaDon);
 		}
