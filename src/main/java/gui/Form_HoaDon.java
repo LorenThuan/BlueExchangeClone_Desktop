@@ -570,7 +570,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		btnXoaHD = new JButton("Xoá");
 		btnXoaHD.setEnabled(true);
 		btnXoaHD.setFont(fntText);
-		btnXoaHD.setBounds(57, 103, 96, 29);
+		btnXoaHD.setBounds(57, 103, 96, 29); btnXoaHD.setEnabled(false);
 		pnCongCu.add(btnXoaHD);
 
 		JLabel lblSdt = new JLabel("SDT: ");
@@ -585,7 +585,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtSDT.setBounds(58, 54, 173, 26);
 		pnCongCu.add(txtSDT);
 
-		btnXuatBaoCao = new JButton("In hóa đơn");
+		btnXuatBaoCao = new JButton("Xuất báo cáo");
 		btnXuatBaoCao.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnXuatBaoCao.setEnabled(true);
 		btnXuatBaoCao.setBounds(191, 103, 127, 29);
@@ -1228,14 +1228,21 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			btnXoaCT_Don.setEnabled(false);
 			xuLyNutThanhToan();
 		} else if (o.equals(btnXoaHD)) {
-			boolean flag = xoaHoaDon(hoadonChon);
-			if (!flag) {
-				JOptionPane.showMessageDialog(btnXoaHD, "Hoá đơn đã thanh toán không thể xoá!");
-			} else {
-				JOptionPane.showMessageDialog(btnXoaHD, "Xoá thành công!");
+			int input = JOptionPane.showConfirmDialog(btnXoaRong, "Bạn có muốn xoá không?", "Lựa chọn của bạn", JOptionPane.YES_NO_OPTION);
+			if (input == 0) {
+				boolean flag = xoaHoaDon(hoadonChon);
+				if (!flag) {
+					JOptionPane.showMessageDialog(btnXoaHD, "Hoá đơn đã thanh toán không thể xoá!");
+				} else {
+					JOptionPane.showMessageDialog(btnXoaHD, "Xoá thành công!");
+				}
+				xoaRong();
+				xuLyNutThanhToan();
 			}
-			xoaRong();
-			xuLyNutThanhToan();
+			else {
+				JOptionPane.showMessageDialog(btnXoaHD, "Không xoá!");
+			}
+			
 		} else if (o.equals(btnXuatBaoCao)) {
 			Date homnay = new Date(ngayHomNay.getTime());
 			tongTienBaoCao = thongKeDoanhThuService.tinhTongTienBanDuocTheoNgay(homnay,
@@ -1291,6 +1298,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		allSanPham = hoaDonService.getTatCaSanPham();
 		txtGiamSP.setText("");
 		loadDuLieuSanPham(allSanPham);
+		btnXoaHD.setEnabled(false);
 	}
 
 	public void themCT_HoaDon(HoaDon hd) {
@@ -1345,6 +1353,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 				loadDuLieuCT_HoaDon(hoadonChon);
 				tinhToan();
 				xuLyNutThanhToan();
+				btnXoaHD.setEnabled(true);
 			} catch (Exception e2) {
 				System.out.println("error mouse clicked");
 				e2.printStackTrace();
