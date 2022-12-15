@@ -86,7 +86,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 //		setBounds(100, 100, 450, 300);
 //		setSize(869, 427);
 		setBounds(100, 100, 450, 300);
-		setSize(1380, 780);
+		setSize(1380, 800);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -243,7 +243,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.RIGHT);
 		tabbedPane.setBackground(Color.WHITE);
-		tabbedPane.setBounds(0, 50, 1364, 691);
+		tabbedPane.setBounds(0, 50, 1364, 780);
 		contentPane.add(tabbedPane);
 		tabbedPane.setVisible(false);
 //		tabbedPane.remove(tabbedPane.getSelectedComponent());
