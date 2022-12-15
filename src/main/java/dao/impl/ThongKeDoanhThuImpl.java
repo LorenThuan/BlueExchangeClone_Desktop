@@ -153,7 +153,7 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 
 
 	@Override
-	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien) {
+	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien, String maHoaDon) {
 		double tongTien = 0;
 		try {
 			con = ConectDatabase.getInstance().getConnection();
@@ -163,11 +163,12 @@ public class ThongKeDoanhThuImpl implements ThongKeDoanhThuDao{
 					+ "									                        San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham INNER JOIN\r\n"
 					+ "								                       Khach_Hang ON Hoa_Don.maKhachHang = Khach_Hang.maKhachHang INNER JOIN\r\n"
 					+ "									                       Nhan_Vien ON Hoa_Don.maNhanVien = Nhan_Vien.maNhanVien\r\n"
-					+ "										WHERE Nhan_Vien.maNhanVien = ? and ngayDat = ?\r\n"
+					+ "										WHERE Nhan_Vien.maNhanVien = ? and ngayDat = ? and Hoa_Don.maHoaDon = ?\r\n"
 					+ "									GROUP by  San_Pham.[giamGia], Hoa_Don.giamGia";
 			preStm = con.prepareStatement(sql);
 			preStm.setString(1, maNhanVien);
 			preStm.setDate(2, ngayHienTai);
+			preStm.setString(3, maHoaDon);
 			rs = preStm.executeQuery();
 			while (rs.next()) {
 				tongTien += rs.getDouble(1);

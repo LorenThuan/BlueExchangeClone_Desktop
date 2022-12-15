@@ -471,11 +471,16 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		} else if (o.equals(btnXoa)) {
 			if (tableNhanVien.getSelectedRow() != -1) {
 				int ask = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?", "Xóa!", JOptionPane.YES_NO_OPTION);
+				
 				if (ask == JOptionPane.YES_OPTION) {
-					comboBoxTrangThai.setEnabled(false);
-					 Boolean kq = xoaNhanVien();
-					 docDuLieu();
-					 xoaRong();
+						try {
+							 comboBoxTrangThai.setEnabled(false);
+							 Boolean kq = xoaNhanVien();
+							 docDuLieu();
+							 xoaRong();
+						} catch (Exception e2) {
+							e2.printStackTrace();
+						}	
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Phải chọn nhân viên!");
@@ -623,11 +628,20 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 	    	maNhanVien = (String) model.getValueAt(i, 0);
 	          Boolean checked=(Boolean)model.getValueAt(i,7);
 	          
-	          if (checked!=null && checked) {
+	          
+	          if (checked!=null && checked && maNhanVien.equals(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim())) {
+	        	  JOptionPane.showMessageDialog(this, "không thể xóa nhân viên " + Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim() + " đang đăng nhập");
+//	  			  return false;
+	          } 
+	          else if (comboBoxTrangThai.getSelectedItem().equals("Đang làm việc")) {
+	        	  JOptionPane.showMessageDialog(this, "không thể xóa nhân viên " + " đang làm việc");
+	        	  break;
+	          }
+	          else if (checked!=null && checked) {
 	        	   kq = nhanVienService.xoaNhanVien(maNhanVien);
 	               model.removeRow(i);
 	               i--;
-	          }
+	          } 
 	    }
 	    	
 	    
@@ -639,11 +653,20 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		dataModelNhanVien.getDataVector().removeAllElements();
 	}
 	
+	public boolean kiemtraNhanVien() {
+		int row = tableNhanVien.getSelectedRow();
+		String maNhanVien = dataModelNhanVien.getValueAt(row, 0).toString();
+		if (maNhanVien.equals(Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim())) {
+			JOptionPane.showMessageDialog(this, "khong the xoa nhan vien dang nhap");
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean kiemTraDuLieu() {
 		String maNhanVien = textMaNhanVien.getText().trim();
 		String tenNhanVien = textTenNhanVien.getText().trim();
 		String email = textEmail.getText().trim();
-		
 		lblTBMaNhanVien.setText("");
 		lblTBTenNhanVien.setText("");
 		lblTBNgaySinh.setText("");
@@ -655,8 +678,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			return false;
 		}
 		
-		if (!(tenNhanVien.length() > 0 && tenNhanVien.length() < 20
-				&& maNhanVien.matches("[\\W\\w\\s]+"))) {
+		if (!(tenNhanVien.length() > 0 && tenNhanVien.length() < 100)) {
 			lblTBTenNhanVien.setText("* Không hợp lệ!");
 			return false;
 		}
@@ -666,6 +688,8 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 			lblTBEmail.setText("* Không hợp lệ!");
 			return false;
 		}
+		
+		
 		
 		if (dateChonNgaySinh.getDate().getYear() + 16 > Date.valueOf(LocalDate.now()).getYear()) {
 			lblTBNgaySinh.setText("* Phải từ 16 tuổi!");

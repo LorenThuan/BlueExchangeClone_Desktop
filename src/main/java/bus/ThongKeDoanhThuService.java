@@ -11,5 +11,5 @@ public interface ThongKeDoanhThuService {
 	public double tinhTongTienLaiTheoThang(int thang, int nam);
 	public List<HoaDon> layTatCaHoaDonTheoThangNam(int thang, int nam);
 	public HoaDon layHoaDonTheoMa(String maHoaDon);
-	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien);
+	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien, String maHoaDon);
 }

@@ -751,7 +751,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 	// Tạo hàm xuất hóa đơn
 	@SuppressWarnings("deprecation")
-	public void XuatHoaDon(Date ngayHomNay, double tongTien, String soHoaDonTuDong) {
+	public void XuatHoaDon(Date ngayHomNay, double tongTien, String hoadonChon) {
 		try {
 
 			Hashtable map = new Hashtable();
@@ -759,7 +759,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			map.put("maNhanVien", Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
 			map.put("ngayHomNay", ngayHomNay);
 			map.put("tongTien", tongTien);
-			map.put("soHoaDonTuDong", soHoaDonTuDong);
+			map.put("hoadonChon", hoadonChon);
 
 			JasperReport report = JasperCompileManager.compileReport("src/main/java/gui/rptXuatHoaDon.jrxml");
 
@@ -1301,10 +1301,10 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 			
 		} else if (o.equals(btnXuatBaoCao)) {
 			Date homnay = new Date(ngayHomNay.getTime());
+			String hoadonduocchon = hoadonChon.getMaHoaDon();
 			tongTienBaoCao = thongKeDoanhThuService.tinhTongTienBanDuocTheoNgay(homnay,
-					Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim());
-			String soHoaDonTuDong = taoSoHoaDonTuDong();
-			XuatHoaDon(homnay, tongTienBaoCao, soHoaDonTuDong);
+					Form_Quan_Ly_Tai_Khoan.textMaNhanVien.getText().trim(), hoadonduocchon);
+			XuatHoaDon(homnay, tongTienBaoCao, hoadonduocchon);
 //			System.out.println(homnay);
 //			System.out.println(Double.toString(tongTienBaoCao));
 		}

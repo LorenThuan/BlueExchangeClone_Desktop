@@ -18,7 +18,7 @@ public class ConectDatabase {
 		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String URL="jdbc:sqlserver://localhost:1433;databaseName=QuanLyCuaHangQuanAo";
+			String URL="jdbc:sqlserver://localhost:1433;databaseName=QuanLyCuaHangQuanAoTheSky";
 			con = DriverManager.getConnection(URL, "sa", "123456");
 			
 		} catch(SQLException e) {

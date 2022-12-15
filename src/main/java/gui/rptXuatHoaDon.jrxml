@@ -6,12 +6,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="266"/>
-	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="720"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="745"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="241"/>
 	<parameter name="maNhanVien" class="java.lang.String"/>
 	<parameter name="ngayHomNay" class="java.sql.Date"/>
 	<parameter name="tongTien" class="java.lang.Double"/>
-	<parameter name="soHoaDonTuDong" class="java.lang.String"/>
+	<parameter name="hoadonChon" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT  Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.tenKhachHang, Khach_Hang.maKhachHang, San_Pham.maSanPham, San_Pham.tenSanPham, San_Pham.kichThuoc, San_Pham.mauSac, San_Pham.donGia, Chi_Tiet_Hoa_Don.soLuong, sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia])) + sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*0.1 - (sum(Chi_Tiet_Hoa_Don.[soLuong] * [donGia] * (1 - San_Pham.[giamGia]))*(Hoa_Don.giamGia))/100 AS ThanhTien    
 FROM            Chi_Tiet_Hoa_Don INNER JOIN
@@ -19,7 +19,7 @@ FROM            Chi_Tiet_Hoa_Don INNER JOIN
                          San_Pham ON Chi_Tiet_Hoa_Don.maSanPham = San_Pham.maSanPham INNER JOIN
                          Khach_Hang ON Hoa_Don.maKhachHang = Khach_Hang.maKhachHang INNER JOIN
                          Nhan_Vien ON Hoa_Don.maNhanVien = Nhan_Vien.maNhanVien
-WHERE Nhan_Vien.maNhanVien = $P{maNhanVien} and ngayDat = $P{ngayHomNay} and Nhan_Vien.trangThai = 1
+WHERE Nhan_Vien.maNhanVien = $P{maNhanVien} and ngayDat = $P{ngayHomNay} and Hoa_Don.trangThai = 1 and Hoa_Don.maHoaDon = $P{hoadonChon}
 GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.tenKhachHang, Khach_Hang.maKhachHang, San_Pham.maSanPham, San_Pham.tenSanPham, San_Pham.kichThuoc, San_Pham.mauSac, San_Pham.donGia, Chi_Tiet_Hoa_Don.soLuong, San_Pham.[giamGia], Hoa_Don.giamGia]]>
 	</queryString>
 	<field name="maHoaDon" class="java.lang.String">
@@ -91,14 +91,14 @@ GROUP BY Chi_Tiet_Hoa_Don.maHoaDon, ngayDat, Nhan_Vien.tenNhanVien, Khach_Hang.t
 				<textElement>
 					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[Số hóa đơn:]]></text>
+				<text><![CDATA[Mã hóa đơn:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="93" y="17" width="129" height="20" uuid="ca3f253f-9be4-4dae-a16f-a898cad39b1d"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfFontName="DejaVu Sans" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{soHoaDonTuDong}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{hoadonChon}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="20" y="37" width="73" height="20" uuid="c5d122c1-468a-4e1b-b0e7-6fd3c7e6e44c"/>

@@ -577,7 +577,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		String maKhachHang = textMaKhachHang.getText().trim();
 		String tenKhachHang = textTenKhachHang.getText().trim();
 		String soDienThoai = textSoDienThoai.getText().trim();
-		
+
 		lblTBMaKhachHang.setText("");
 		lblTBTenKhachHang.setText("");
 		lblTBSoDienThoai.setText("");
@@ -593,10 +593,12 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 			}
 		}
 		
+	
+		
 		if (tenKhachHang.length() == 0) {
 			lblTBTenKhachHang.setText("* Không để trống!");
 			return false;
-		} else if (!(tenKhachHang.matches("[\\W\\w\\s]+") && tenKhachHang.length() < 50)) {
+		} else if (!(tenKhachHang.length() < 100)) {
 			lblTBTenKhachHang.setText("* Không hợp lệ!");
 			return false;
 		}

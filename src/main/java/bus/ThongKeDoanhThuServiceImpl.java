@@ -32,9 +32,11 @@ public class ThongKeDoanhThuServiceImpl implements ThongKeDoanhThuService{
 	}
 
 	@Override
-	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien) {
-		return thongKeDoanhThuDao.tinhTongTienBanDuocTheoNgay(ngayHienTai, maNhanVien);
+	public double tinhTongTienBanDuocTheoNgay(Date ngayHienTai, String maNhanVien, String maHoaDon) {
+		return thongKeDoanhThuDao.tinhTongTienBanDuocTheoNgay(ngayHienTai, maNhanVien, maHoaDon);
 	}
+
+	
 	
 
 }

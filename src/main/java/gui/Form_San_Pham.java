@@ -40,6 +40,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -52,7 +54,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 
-public class Form_San_Pham extends JFrame {
+public class Form_San_Pham extends JFrame implements KeyListener{
 
 	public static JPanel contentPane;
 	private JTextField textMaSanPham;
@@ -351,8 +353,7 @@ public class Form_San_Pham extends JFrame {
 		
 		lblHinhAnh = new JLabel();
 		lblHinhAnh.setBounds(38, 21, 207, 185);
-		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
-				+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
+		lblHinhAnh.setIcon(ResizeImage(""));
 //		System.out.println(lblHinhAnh.getText());
 		panelThongTinSanPham.add(lblHinhAnh);
 		
@@ -496,8 +497,10 @@ public class Form_San_Pham extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (textGiaNhap.getText().length() > 0 && textGiaNhap.getText().matches("[\\d.]+")) {
-					Double giaBan = Double.valueOf(textGiaNhap.getText()) * 5;
-					textDonGiaBan.setText(String.valueOf(giaBan));
+					
+//					Double giaBan = Double.valueOf(textGiaNhap.getText()) * 5;
+//					textDonGiaBan.setText(String.valueOf(giaBan));
+//					tinhToan();
 					lblTBGiaNhap.setText("");
 				}	
 				else {
@@ -737,6 +740,14 @@ public class Form_San_Pham extends JFrame {
 		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.setBounds(234, 10, 100, 30);
 		panelChucNang.add(btnThem);
+		btnThem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				themSanPham();
+				xoaRong();
+			}
+		});
 		
 		btnNhapExcel = new JButton("Nhập Excel");
 		btnNhapExcel.setBackground(new Color(255, 240, 245));
@@ -818,6 +829,8 @@ public class Form_San_Pham extends JFrame {
 				timKiemSanPham(tuKhoa);
 			}
 		});
+		
+		textGiaNhap.addKeyListener(this);
 		
 			
 	}
@@ -986,8 +999,8 @@ public class Form_San_Pham extends JFrame {
 	}
 		
 	private void xoaRong () {
-		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
-							+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
+//		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
+//							+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
 					textMaSanPham.setText("Tự động khi để trống");
 					textMaSanPham.setEditable(true);
 					textMaSanPham.setForeground(new Color(153, 153, 153));
@@ -1018,6 +1031,8 @@ public class Form_San_Pham extends JFrame {
 					lblTBGioiTinh.setText("");
 					lblTBGiaNhap.setText("");
 					lblTBGiaBan.setText("");
+					lblHinhAnh.setIcon(ResizeImage(""));
+					lblHinhAnh.setText("");
 	}
 	
 	private void isSelected () {
@@ -1054,6 +1069,7 @@ public class Form_San_Pham extends JFrame {
 				chckbxNu.setSelected(true);
 			}
 			lblHinhAnh.setIcon(ResizeImage(sanPham.getHinhAnh()));
+			lblHinhAnh.setText(sanPham.getHinhAnh());
 			textChatLieu.setText(sanPham.getChatLieu());
 			if (sanPham.getNhaCungCap() != null) {
 				comboNhaCungCap.setSelectedItem(sanPham.getNhaCungCap().getMaNhaCungCap() + " " + sanPham.getNhaCungCap().getTenNhaCungCap());
@@ -1175,6 +1191,38 @@ public class Form_San_Pham extends JFrame {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		Object o = e.getSource();
+		if (o.equals(textGiaNhap)) {
+			if (e.getKeyChar() >= 'a' & e.getKeyChar() <= 'z') {
+				String s = textGiaNhap.getText();
+				s = s.substring(0, s.length() - 1);
+				textGiaNhap.setText(s);
+			}
+			tinhToan();
+		}
+	}
+	
+	public void tinhToan() {
+		double giaNhap = 0;
+		giaNhap = (double) Math.round((Double.parseDouble(textGiaNhap.getText()) * 10) / 10) * 5;
+
+		textDonGiaBan.setText(Double.toString(giaNhap));
 	}
 }
 

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>QuanLyCuaHangQuanAo</groupId>
-	<artifactId>QuanLyCuaHangQuanAo</artifactId>
+	<groupId>PTUD_2022_Nhom13_DHKTPM16A</groupId>
+	<artifactId>PTUD_2022_Nhom13_DHKTPM16A</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/com.jgoodies/forms -->

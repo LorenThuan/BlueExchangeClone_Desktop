@@ -23,7 +23,7 @@ public class HDSDImpl implements HDSDDao{
 	public HDSDImpl() {
 		super();
 		HDSD hdsd = new HDSD();
-		hdsd = new HDSD("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\ImageHelp\\FormBanHang.png", "1. Sau khi bạn nhập thông tin tìm kiếm theo tên hoặc theo mã sản phẩm hoặc chọn size ấn nút tìm kiếm sẽ hiện thông tin được tìm thấy lên bảng danh sách sản phẩm \r\n"
+		hdsd = new HDSD("./HinhAnh/ImageHelp/FormBanHang.png", "1. Sau khi bạn nhập thông tin tìm kiếm theo tên hoặc theo mã sản phẩm hoặc chọn size ấn nút tìm kiếm sẽ hiện thông tin được tìm thấy lên bảng danh sách sản phẩm \r\n"
 				+ "2. Sau khi ấn nút làm mới bảng danh sách sản phẩm sẽ hiển thị tất cả sản phẩm của cửa hàng \r\n"
 				+ "3. Danh sách sản phẩm đang kinh doanh của cửa hàng \r\n"
 				+ "4. Sau khi nhập số lượng ở ô bên trên ấn nút + ứng dụng sẽ thêm sản phẩm khách hàng muốn mua vào bảng chi tiết hóa đơn tạm nằm ở bên phải \r\n"
@@ -44,7 +44,7 @@ public class HDSDImpl implements HDSDDao{
 				+ "");
 		
 		HDSD hdsd1 = new HDSD();
-		hdsd1 = new HDSD("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\ImageHelp\\FormSanPham.png", "1. Khi ấn nút Chọn hình người dùng có thể chọn hình tồn tại trên máy tính \r\n"
+		hdsd1 = new HDSD("./HinhAnh/ImageHelp/FormSanPham.png", "1. Khi ấn nút Chọn hình người dùng có thể chọn hình tồn tại trên máy tính \r\n"
 				+ "2. Các chức năng thêm, xóa, sửa, xóa rỗng, hoàn tác tương tác trên ứng dụng \r\n"
 				+ "3. Danh sách lọc tìm kiếm thả xuống, người dùng có thể lọc để hiển thị danh sách sản phẩm theo tên cần tìm, mặc định tất cả nghĩa là hiển thị tất cả danh sách sản phẩm \r\n"
 				+ "4. Ô tìm kiếm giúp tìm sản phẩm theo mã sản phẩm \r\n"
@@ -53,7 +53,7 @@ public class HDSDImpl implements HDSDDao{
 				+ "");
 		
 		HDSD hdsd2 = new HDSD();
-		hdsd2 = new HDSD("D:\\Student\\IUH\\PhatTrienUngDung\\QuanLyCuaHangQuanAo\\HinhAnh\\ImageHelp\\FormNhanVien.png", "1. Thông tin nhân viên, nhân viên quản lý thực hiện thao tác với các chức năng của ứng dụng \r\n"
+		hdsd2 = new HDSD("./HinhAnh/ImageHelp/FormNhanVien.png", "1. Thông tin nhân viên, nhân viên quản lý thực hiện thao tác với các chức năng của ứng dụng \r\n"
 				+ "2. Các chức năng thêm, xóa, sửa, xóa rỗng, hoàn tác tương tác trên ứng dụng \r\n"
 				+ "3. Ô nhập giúp tìm kiếm thông tin nhân viên theo mã nhân viên, tên nhân viên hoặc email, khi ấn nút tìm kiếm bên phải sẽ hiển thị thông tin nhân viên tìm được hiển thị lên danh sách nhân viên \r\n"
 				+ "4. Danh sách nhân viên đang làm việc của cửa hàng");
