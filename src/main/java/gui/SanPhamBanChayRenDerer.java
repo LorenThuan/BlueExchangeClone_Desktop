@@ -41,7 +41,7 @@ public class SanPhamBanChayRenDerer extends JPanel implements ListCellRenderer<S
 	
 	public SanPhamBanChayRenDerer () {
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(0, 0, 5, 25));
+		contentPane.setBorder(new EmptyBorder(0, 0, 5, 15));
 
 		contentPane.setLayout(new BorderLayout(5, 5));
 		

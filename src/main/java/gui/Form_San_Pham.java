@@ -353,7 +353,7 @@ public class Form_San_Pham extends JFrame {
 		lblHinhAnh.setBounds(38, 21, 207, 185);
 		lblHinhAnh.setIcon(ResizeImage("C:/Users/trong/Downloads/Compressed/"
 				+ "QuanLyCuaHangQuanAo-master/QuanLyCuaHangQuanAo-master/HinhAnh/icon/iconSanPham.png"));
-		System.out.println(lblHinhAnh.getText());
+//		System.out.println(lblHinhAnh.getText());
 		panelThongTinSanPham.add(lblHinhAnh);
 		
 		JButton btnHinhAnh = new JButton("Chọn hình");

@@ -61,7 +61,7 @@ public class Form_HDSD extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 255, 255));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 //		contentPane.setPreferredSize(new Dimension(200,100));
 //		scrollHDSD = new JScrollPane(contentPane);
 //		scrollHDSD.setBorder(null);
@@ -76,7 +76,7 @@ public class Form_HDSD extends JFrame {
 		panel.setBackground(new Color(240, 255, 255));
 		panel.setForeground(Color.BLACK);
 		panel.setBounds(0, 0, 1362, 686);
-		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setBorder(new EmptyBorder(0, 0, 0, 0));
 //		panel.setLayout(null);
 		panel.setBorder(null);
 		
@@ -90,7 +90,7 @@ public class Form_HDSD extends JFrame {
 		scrollHDSD = new JScrollPane(listHDSD);
 //		scrollHDSD.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 //		scrollHDSD.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		panel.add(scrollHDSD, BorderLayout.CENTER);	
+		panel.add(scrollHDSD, BorderLayout.WEST);	
 		contentPane.add(panel);
 		createListHDSD();
 	}
@@ -100,7 +100,7 @@ public class Form_HDSD extends JFrame {
 		ArrayList<HDSD> danhSachHDSD = hdsdService.getTatCaHuongDan();
 		for (HDSD hdsd : danhSachHDSD) {
 			listModelHDSD.addElement(hdsd);
-			System.out.println(hdsd);
+//			System.out.println(hdsd);
 		}
 		
 		listHDSD.setBackground(new Color(240, 255, 255));

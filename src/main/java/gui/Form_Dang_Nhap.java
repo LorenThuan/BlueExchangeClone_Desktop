@@ -247,8 +247,8 @@ public class Form_Dang_Nhap extends JFrame implements ActionListener, KeyListene
 				taiKhoan.setNhanVien(nhanVien);
 				taiKhoan.setMatKhau(matKhauNV);
 				nhanVien.setChucVu(chucVu);
-				System.out.println(taiKhoan);
-				System.out.println(nhanVien);
+//				System.out.println(taiKhoan);
+//				System.out.println(nhanVien);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

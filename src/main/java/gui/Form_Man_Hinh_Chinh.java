@@ -246,10 +246,10 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 		tabbedPane.setBounds(0, 50, 1364, 780);
 		contentPane.add(tabbedPane);
 		tabbedPane.setVisible(false);
-//		tabbedPane.remove(tabbedPane.getSelectedComponent());
-//		tabbedPane.add(form_Trang_Chu.contentPane);
-//		tabbedPane.setSelectedComponent(form_Trang_Chu.contentPane);
-//		tabbedPane.setVisible(true);
+		tabbedPane.remove(tabbedPane.getSelectedComponent());
+		tabbedPane.add(form_Trang_Chu.contentPane);
+		tabbedPane.setSelectedComponent(form_Trang_Chu.contentPane);
+		tabbedPane.setVisible(true);
 		
 		mntmQuanLyTaiKhoan.addActionListener(this);
 		mntmDangXuat.addActionListener(this);

@@ -44,7 +44,7 @@ public class HDSDRenDerer extends JPanel implements ListCellRenderer<HDSD> {
 		
 		lblHinhAnh = new JLabel();
 //		lblHinhAnh.setSize(200, 1340);
-		lblHinhAnh.setPreferredSize(new Dimension(1000, 800));
+		lblHinhAnh.setPreferredSize(new Dimension(1310, 800));
 		contentPane.add(lblHinhAnh, BorderLayout.NORTH);
 		
 		panel = new JPanel();
@@ -60,7 +60,7 @@ public class HDSDRenDerer extends JPanel implements ListCellRenderer<HDSD> {
 //		lblNoiDung = new JLabel();
 //		lblNoiDung.setFont(new Font("Tahoma", Font.PLAIN, 20));
 //		panel.add(lblNoiDung);
-		area= new JTextArea(30, 0);
+		area= new JTextArea(20, 0);
 		        panel.add(area);
 		add(contentPane);
 	}
@@ -100,7 +100,7 @@ public class HDSDRenDerer extends JPanel implements ListCellRenderer<HDSD> {
 	private ImageIcon  ResizeImage (String ImagePath){
 		ImageIcon MyImage = new ImageIcon(ImagePath);
 		Image img = MyImage.getImage();
-		Image newImg = img.getScaledInstance(1000, 800, Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance(1310, 800, Image.SCALE_SMOOTH);
 		ImageIcon image = new ImageIcon(newImg);
 		return image;		 
 	 }
