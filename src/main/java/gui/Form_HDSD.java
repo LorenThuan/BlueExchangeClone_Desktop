@@ -14,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 import bus.HDSDService;
 import bus.HDSDServiceImpl;
 
-import dao.ConectDatabaseHDSD;
 import dto.HDSD;
 import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
@@ -52,11 +51,11 @@ public class Form_HDSD extends JFrame {
 	 */
 	public Form_HDSD() {
 		//DAO
-		try {
-			ConectDatabaseHDSD.getInstance().connect();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			ConectDatabaseHDSD.getInstance().connect();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -82,12 +81,13 @@ public class Form_HDSD extends JFrame {
 		listModelHDSD = new DefaultListModel<HDSD>();
 		listHDSD = new JList<HDSD>(listModelHDSD);
 		listHDSD.setForeground(new Color(240, 240, 240));
-		listHDSD.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+//		listHDSD.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		listHDSD.setVisibleRowCount(0);
 	
 //		panel.add(listHDSD, BorderLayout.CENTER);	
 		scrollHDSD = new JScrollPane(listHDSD);
-		scrollHDSD.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollHDSD.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollHDSD.setVerticalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		panel.add(scrollHDSD, BorderLayout.CENTER);	
 		contentPane.add(panel);
 		createListHDSD();

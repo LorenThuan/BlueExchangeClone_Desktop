@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import dao.ConectDatabaseHDSD;
+
 import dao.HDSDDao;
 import dto.HDSD;
 
@@ -90,31 +90,31 @@ public class HDSDImpl implements HDSDDao{
 	public ArrayList<HDSD> getTatCaHuongDan() {
 		HDSD hdsd = new HDSD();	
 	
-		ArrayList<HDSD> danhSachHdsds = new ArrayList<HDSD>();	
-				try {
-					con = ConectDatabaseHDSD.getInstance().getConnection();
-					
-					String sql="SELECT * FROM hdsd";
-					preStm = con.prepareStatement(sql);
-					rs = preStm.executeQuery();
-//					String temp = null;
-				
-						while (rs.next()) {					
-							hinhAnh = rs.getString(1);
-//							for (String noiDung : noiDungHD) {
-//								temp = noiDung;
-//								System.out.println("132" + temp);
-//								hdsd = new HDSD(hinhAnh, temp);
-//								danhSachHdsds.add(hdsd);
-//							hdsd = new HDSD(hinhAnh, i);
-//							danhSachHdsds.add(hdsd);
-//							}
-							
-						}
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+//		ArrayList<HDSD> danhSachHdsds = new ArrayList<HDSD>();	
+//				try {
+////					con = ConectDatabaseHDSD.getInstance().getConnection();
+////					
+////					String sql="SELECT * FROM hdsd";
+////					preStm = con.prepareStatement(sql);
+////					rs = preStm.executeQuery();
+//////					String temp = null;
+////				
+////						while (rs.next()) {					
+////							hinhAnh = rs.getString(1);
+//////							for (String noiDung : noiDungHD) {
+//////								temp = noiDung;
+//////								System.out.println("132" + temp);
+//////								hdsd = new HDSD(hinhAnh, temp);
+//////								danhSachHdsds.add(hdsd);
+//////							hdsd = new HDSD(hinhAnh, i);
+//////							danhSachHdsds.add(hdsd);
+//////							}
+////							
+////						}
+//					
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
 				return noiDungHD;
 	}
 

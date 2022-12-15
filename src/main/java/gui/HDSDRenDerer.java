@@ -44,7 +44,7 @@ public class HDSDRenDerer extends JPanel implements ListCellRenderer<HDSD> {
 		
 		lblHinhAnh = new JLabel();
 //		lblHinhAnh.setSize(200, 1340);
-		lblHinhAnh.setPreferredSize(new Dimension(1340, 800));
+		lblHinhAnh.setPreferredSize(new Dimension(1000, 800));
 		contentPane.add(lblHinhAnh, BorderLayout.NORTH);
 		
 		panel = new JPanel();
