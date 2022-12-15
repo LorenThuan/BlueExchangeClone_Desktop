@@ -83,7 +83,7 @@ public class Form_HDSD extends JFrame {
 		listModelHDSD = new DefaultListModel<HDSD>();
 		listHDSD = new JList<HDSD>(listModelHDSD);
 		listHDSD.setForeground(new Color(0, 0, 0));
-		listHDSD.setLayoutOrientation(JList.VERTICAL_WRAP);
+//		listHDSD.setLayoutOrientation(JList.VERTICAL_WRAP);
 		listHDSD.setVisibleRowCount(0);
 	
 //		panel.add(listHDSD, BorderLayout.CENTER);	

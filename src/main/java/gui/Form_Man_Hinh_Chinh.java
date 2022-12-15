@@ -36,7 +36,7 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 	private Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien = new Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien();
 	private Form_Trang_Chu form_Trang_Chu = new Form_Trang_Chu();
 	private Form_HoaDon form_HoaDon = new Form_HoaDon();
-//	private Form_HDSD form_HDSD = new Form_HDSD();
+	private Form_HDSD form_HDSD = new Form_HDSD();
 	public static JTabbedPane tabbedPane;
 	public static JMenuItem mntmQuanLyTaiKhoan;
 	private JMenuItem mntmDangXuat;
@@ -322,8 +322,8 @@ public class Form_Man_Hinh_Chinh extends JFrame implements ActionListener, MenuL
 			tabbedPane.setVisible(true);
 		} else if (o.equals(mnHuongDanSuDung)) {
 			tabbedPane.remove(tabbedPane.getSelectedComponent());
-//			tabbedPane.add(form_HDSD.contentPane);
-//			tabbedPane.setSelectedComponent(form_HDSD.contentPane);
+			tabbedPane.add(form_HDSD.contentPane);
+			tabbedPane.setSelectedComponent(form_HDSD.contentPane);
 			tabbedPane.setVisible(true);
 		}
 		

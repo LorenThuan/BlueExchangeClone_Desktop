@@ -143,13 +143,6 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 				lblTongSanPham.setBounds(643, 85, 174, 20);
 				panel_1.add(lblTongSanPham);
 				lblTongSanPham.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-				
-				JButton btnInBaoCao = new JButton("In báo cáo");
-				btnInBaoCao.setForeground(Color.BLACK);
-				btnInBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				btnInBaoCao.setBackground(new Color(255, 240, 245));
-				btnInBaoCao.setBounds(1019, 23, 140, 33);
-				panel_1.add(btnInBaoCao);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 286, 1314, 314);
