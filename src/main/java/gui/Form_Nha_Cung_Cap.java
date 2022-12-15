@@ -88,12 +88,14 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 897, 518);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panelNhaCungCap = new JPanel();
+		panelNhaCungCap.setBackground(new Color(240, 255, 255));
 		panelNhaCungCap.setBorder(new TitledBorder(null, "Nh\u00E0 cung c\u1EA5p", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelNhaCungCap.setBounds(29, 50, 303, 303);
 		contentPane.add(panelNhaCungCap);
@@ -104,6 +106,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblMaNhaCungCap);
 		
 		textMaNhaCungCap = new JTextField();
+		textMaNhaCungCap.setBackground(Color.WHITE);
 		textMaNhaCungCap.setBounds(125, 23, 149, 19);
 		textMaNhaCungCap.setText("Tự động khi để trống");
 		textMaNhaCungCap.setForeground(new Color(153, 153, 153));
@@ -158,6 +161,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblTenNhaCungCap);
 		
 		textTenNhaCungCap = new JTextField();
+		textTenNhaCungCap.setBackground(Color.WHITE);
 		textTenNhaCungCap.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -191,6 +195,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblNgayHopTac);
 		
 		dateNgayHopTac = new JDateChooser();
+		dateNgayHopTac.setBackground(Color.WHITE);
 		dateNgayHopTac.setBounds(125, 98, 149, 19);
 		dateNgayHopTac.setDate(Date.valueOf(LocalDate.now()));
 		panelNhaCungCap.add(dateNgayHopTac);
@@ -200,6 +205,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblDiaChi);
 		
 		textDiaChi = new JTextField();
+		textDiaChi.setBackground(Color.WHITE);
 		textDiaChi.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -233,6 +239,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblSoDienThoai);
 		
 		textSoDienThoai = new JTextField();
+		textSoDienThoai.setBackground(Color.WHITE);
 		textSoDienThoai.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -266,6 +273,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelNhaCungCap.add(lblEmail);
 		
 		textEmail = new JTextField();
+		textEmail.setBackground(Color.WHITE);
 		textEmail.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -337,11 +345,13 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		
 		
 		JPanel panelChucNang = new JPanel();
+		panelChucNang.setBackground(new Color(240, 255, 255));
 		panelChucNang.setBounds(29, 379, 303, 92);
 		contentPane.add(panelChucNang);
 		panelChucNang.setLayout(null);
 		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				themNhaCungCap();
@@ -351,6 +361,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelChucNang.add(btnThem);
 		
 		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				xoaNhaCungCap();
@@ -360,6 +371,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelChucNang.add(btnXoa);
 		
 		JButton btnSua = new JButton("Sửa");
+		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				suaNhaCungCap();
@@ -369,16 +381,18 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelChucNang.add(btnSua);
 		
 		JButton btnXoaRong = new JButton("Xóa rỗng");
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				xoaRong();
 			}
 		});
-		btnXoaRong.setBounds(60, 62, 90, 20);
+		btnXoaRong.setBounds(46, 50, 90, 32);
 		panelChucNang.add(btnXoaRong);
 		
 		JButton btnHoanTac = new JButton("Hoàn tác");
-		btnHoanTac.setBounds(160, 62, 90, 20);
+		btnHoanTac.setBackground(new Color(255, 240, 245));
+		btnHoanTac.setBounds(160, 50, 90, 32);
 		
 		btnHoanTac.addActionListener(new ActionListener() {
 			
@@ -392,6 +406,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		panelChucNang.add(btnHoanTac);
 		
 		JPanel panelDanhSach = new JPanel();
+		panelDanhSach.setBackground(new Color(240, 255, 255));
 		panelDanhSach.setBorder(new TitledBorder(null, "Danh sách Nhà cung cấp", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDanhSach.setBounds(363, 50, 510, 421);
 		contentPane.add(panelDanhSach);
@@ -403,6 +418,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		String[] colHeader = {"STT", "Mã Nhà cung cấp", "Tên Nhà cung cấp", "Ngày hợp tác", "Địa chỉ", "Số điện thoại", "Email"};
 		modelNhaCungCap = new DefaultTableModel(colHeader, 0);
 		tableDanhSachNhaCungCap = new JTable(modelNhaCungCap);
+		tableDanhSachNhaCungCap.setBackground(new Color(240, 255, 255));
 		
 		tableDanhSachNhaCungCap.addMouseListener(new MouseListener() {
 			
@@ -434,6 +450,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				int row = tableDanhSachNhaCungCap.getSelectedRow();
+				textMaNhaCungCap.setEditable(false);
 				textMaNhaCungCap.setText(modelNhaCungCap.getValueAt(row, 1).toString());
 				textTenNhaCungCap.setText(modelNhaCungCap.getValueAt(row, 2).toString());
 				dateNgayHopTac.setDate(Date.valueOf(modelNhaCungCap.getValueAt(row, 3).toString()));
@@ -454,10 +471,12 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		scrollPane.setViewportView(tableDanhSachNhaCungCap);
 		
 		JButton btnTim = new JButton("Tìm kiếm");
+		btnTim.setBackground(new Color(255, 240, 245));
 		btnTim.setBounds(783, 20, 90, 20);
 		contentPane.add(btnTim);
 		
 		textTimKiem = new JTextField();
+		textTimKiem.setBackground(Color.WHITE);
 		textTimKiem.setBounds(616, 21, 136, 19);
 		contentPane.add(textTimKiem);
 		textTimKiem.setColumns(10);
@@ -574,6 +593,7 @@ public class Form_Nha_Cung_Cap extends JFrame {
 	
 	private void xoaRong () {
 		textMaNhaCungCap.setText("Tự động khi để trống");
+		textMaNhaCungCap.setEditable(true);
 		textMaNhaCungCap.setForeground(new Color(153, 153, 153));
 		textTenNhaCungCap.setText("");
 		dateNgayHopTac.setDate(Date.valueOf(LocalDate.now()));
@@ -582,6 +602,13 @@ public class Form_Nha_Cung_Cap extends JFrame {
 		textEmail.setText("");
 		dateNgayHopTac.setDate(Date.valueOf(LocalDate.now()));
 		textMaNhaCungCap.requestFocus();
+		
+		lblTBMaNhaCungCap.setText("");
+		lblTBTenNhaCungCap.setText("");
+		lblTBNgayHopTac.setText("");
+		lblTBSoDienThoai.setText("");
+		lblTBDiaChi.setText("");
+		lblTBEmail.setText("");
 	}
 	
 	private void selectedRow(int row) {

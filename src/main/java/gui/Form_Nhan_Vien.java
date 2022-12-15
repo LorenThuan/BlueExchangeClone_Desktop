@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
@@ -63,10 +62,10 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 	private JButton btnHoanTac;
 	private static JComboBox<String> comboBoxTrangThai;
 	private static JDateChooser dateChonNgaySinh;
-	private JLabel lblTBMaNhanVien;
-	private JLabel lblTBTenNhanVien;
-	private JLabel lblTBEmail;
-	private JLabel lblTBNgaySinh;
+	private static JLabel lblTBMaNhanVien;
+	private static JLabel lblTBTenNhanVien;
+	private static JLabel lblTBEmail;
+	private static JLabel lblTBNgaySinh;
 
 	/**
 	 * Launch the application.
@@ -98,6 +97,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(1380, 780);
 		setLocationRelativeTo(null);
@@ -105,6 +105,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		contentPane.setLayout(null);
 		
 		JPanel panelThongTinNhanVien = new JPanel();
+		panelThongTinNhanVien.setBackground(new Color(240, 255, 255));
 		panelThongTinNhanVien.setBorder(new TitledBorder(null, "Thông tin nhân viên", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelThongTinNhanVien.setBounds(49, 79, 1249, 130);
 		contentPane.add(panelThongTinNhanVien);
@@ -120,6 +121,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		
 		
 		textMaNhanVien = new JTextField();
+		textMaNhanVien.setBackground(Color.WHITE);
 		textMaNhanVien.setBounds(177, 32, 197, 20);
 		textMaNhanVien.addFocusListener(new FocusAdapter() {
 			@Override
@@ -146,6 +148,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		textMaNhanVien.setColumns(10);
 		
 		textTenNhanVien = new JTextField();
+		textTenNhanVien.setBackground(Color.WHITE);
 		textTenNhanVien.setColumns(10);
 		textTenNhanVien.setBounds(177, 81, 197, 20);
 		panelThongTinNhanVien.add(textTenNhanVien);
@@ -180,10 +183,12 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lblGioiTinh);
 		
 		rdbtnNam = new JRadioButton("Nam");
+		rdbtnNam.setBackground(new Color(240, 255, 255));
 		rdbtnNam.setBounds(555, 31, 60, 23);
 		panelThongTinNhanVien.add(rdbtnNam);
 		
 		rdbtnNu = new JRadioButton("Nữ");
+		rdbtnNu.setBackground(new Color(240, 255, 255));
 		rdbtnNu.setBounds(636, 31, 47, 23);
 		panelThongTinNhanVien.add(rdbtnNu);
 		
@@ -198,6 +203,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lblNgaySinh);
 		
 		dateChonNgaySinh = new JDateChooser();
+		dateChonNgaySinh.setBackground(Color.WHITE);
 		dateChonNgaySinh.setDateFormatString("yyyy-MM-dd");
 		dateChonNgaySinh.setBounds(979, 16, 123, 36);
 		panelThongTinNhanVien.add(dateChonNgaySinh);
@@ -208,6 +214,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lblEmail);
 		
 		textEmail = new JTextField();
+		textEmail.setBackground(Color.WHITE);
 		textEmail.setColumns(10);
 		textEmail.setBounds(555, 81, 197, 20);
 		panelThongTinNhanVien.add(textEmail);
@@ -246,6 +253,7 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lbTrangThai);
 		
 		comboBoxTrangThai = new JComboBox<String>();
+		comboBoxTrangThai.setBackground(Color.WHITE);
 		comboBoxTrangThai.setEnabled(false);
 		comboBoxTrangThai.addItem("Đang làm việc");
 		comboBoxTrangThai.addItem("Thôi việc");
@@ -277,40 +285,49 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		panelThongTinNhanVien.add(lblTBNgaySinh);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(240, 255, 255));
 		panel.setBounds(126, 230, 1098, 45);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.setBounds(29, 11, 89, 23);
 		panel.add(btnThem);
 		
 		btnXoa = new JButton("Xóa");
+		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.setBounds(153, 11, 89, 23);
 		panel.add(btnXoa);
 		
 		btnSua = new JButton("Sửa");
+		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.setBounds(284, 11, 89, 23);
 		panel.add(btnSua);
 		
 		btnXoaRong = new JButton("Xóa Rỗng");
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.setBounds(418, 11, 89, 23);
 		panel.add(btnXoaRong);
 		
 		btnHoanTac = new JButton("Hoàn Tác");
+		btnHoanTac.setBackground(new Color(255, 240, 245));
 		btnHoanTac.setBounds(545, 11, 89, 23);
 		panel.add(btnHoanTac);
 		
 		btnTimKiem = new JButton("Tìm kiếm");
+		btnTimKiem.setBackground(new Color(255, 240, 245));
 		btnTimKiem.setBounds(999, 11, 89, 23);
 		panel.add(btnTimKiem);
 		
 		textTimKiem = new RoundJTextField(15);
+		textTimKiem.setBackground(Color.WHITE);
 		textTimKiem.setBounds(805, 12, 184, 20);
 		panel.add(textTimKiem);
 		textTimKiem.setColumns(10);
 		
 		JPanel panelDanhSachNhanVien = new JPanel();
+		panelDanhSachNhanVien.setBackground(new Color(240, 255, 255));
 		panelDanhSachNhanVien.setBounds(10, 309, 1330, 385);
 		panelDanhSachNhanVien.setBorder(new TitledBorder(null, "Danh sách nhân viên", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panelDanhSachNhanVien);
@@ -358,9 +375,10 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		scrollNhanVien = new JScrollPane();
 		scrollNhanVien.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollNhanVien.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollNhanVien.setBounds(10, 20, 1309, 355);
+		scrollNhanVien.setBounds(37, 10, 1309, 355);
 		panelDanhSachNhanVien.add(scrollNhanVien);
 		tableNhanVien = new JTable(dataModelNhanVien);
+		tableNhanVien.setBackground(new Color(240, 255, 255));
 		tableNhanVien.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollNhanVien.setViewportView(tableNhanVien);	
 		
@@ -505,6 +523,11 @@ public class Form_Nhan_Vien extends JFrame implements ActionListener, MouseListe
 		textTimKiem.setText("");
 		dateChonNgaySinh.setDate(null);
 		textMaNhanVien.setEditable(true);
+		
+		lblTBMaNhanVien.setText("");
+		lblTBTenNhanVien.setText("");
+		lblTBNgaySinh.setText("");
+		lblTBEmail.setText("");
 	}
 	
 	public static boolean themMoiNhanVien() {

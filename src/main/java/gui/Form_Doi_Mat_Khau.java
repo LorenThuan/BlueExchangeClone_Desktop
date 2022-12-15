@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -22,10 +21,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -71,6 +67,7 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 432);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -78,19 +75,19 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 
 		JPanel pnTieuDe = new JPanel();
 		pnTieuDe.setBounds(10, 10, 566, 55);
-		pnTieuDe.setBackground(Color.LIGHT_GRAY);
+		pnTieuDe.setBackground(new Color(255, 240, 245));
 		contentPane.add(pnTieuDe);
 		pnTieuDe.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("ĐỔI MẬT KHẨU");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(new Color(0, 0, 0));
 		lblNewLabel.setBounds(156, 0, 259, 55);
 		pnTieuDe.add(lblNewLabel);
 
 		JPanel pnThemTK = new JPanel();
 		pnThemTK.setBounds(10, 75, 566, 318);
-		pnThemTK.setBackground(new Color(91,165,156));
+		pnThemTK.setBackground(new Color(240, 255, 255));
 		contentPane.add(pnThemTK);
 		pnThemTK.setLayout(null);
 
@@ -105,6 +102,7 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 		pnThemTK.add(lblNewLabel_2);
 
 		textMaNhanVien = new JTextField();
+		textMaNhanVien.setBackground(new Color(255, 255, 255));
 		textMaNhanVien.setEditable(false);
 		textMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textMaNhanVien.setBounds(200, 11, 300, 25);
@@ -112,16 +110,19 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 		textMaNhanVien.setColumns(10);
 
 		pwdMatKhauCu = new JPasswordField();
+		pwdMatKhauCu.setBackground(new Color(255, 255, 255));
 		pwdMatKhauCu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		pwdMatKhauCu.setBounds(200, 65, 300, 25);
 		pnThemTK.add(pwdMatKhauCu);
 
 		btnDoiMatKhau = new JButton("Đổi mật khẩu");
+		btnDoiMatKhau.setBackground(new Color(255, 240, 245));
 		btnDoiMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnDoiMatKhau.setBounds(210, 268, 141, 39);
 		pnThemTK.add(btnDoiMatKhau);
 		
 		pwdMatKhauMoi = new JPasswordField();
+		pwdMatKhauMoi.setBackground(new Color(255, 255, 255));
 		pwdMatKhauMoi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		pwdMatKhauMoi.setBounds(200, 119, 300, 25);
 		pnThemTK.add(pwdMatKhauMoi);
@@ -137,6 +138,7 @@ public class Form_Doi_Mat_Khau extends JFrame implements ActionListener {
 		pnThemTK.add(lblNewLabel_2_1_1);
 		
 		pwdNhapLaiMatKhauMoi = new JPasswordField();
+		pwdNhapLaiMatKhauMoi.setBackground(new Color(255, 255, 255));
 		pwdNhapLaiMatKhauMoi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		pwdNhapLaiMatKhauMoi.setBounds(200, 179, 300, 25);
 		pnThemTK.add(pwdNhapLaiMatKhauMoi);

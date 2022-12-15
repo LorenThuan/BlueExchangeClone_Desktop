@@ -17,10 +17,6 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import org.bouncycastle.util.encoders.UTF8;
-
-import com.toedter.calendar.JDateChooser;
-
 import bus.HoaDonService;
 import bus.HoaDonServiceImpl;
 import bus.ThongKeDoanhThuService;
@@ -36,8 +32,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JRDesignStyle;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.view.JasperViewer;
 
 import javax.swing.border.EtchedBorder;
@@ -52,7 +46,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -155,7 +148,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1360, 780);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(254, 255, 255));
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(1380, 780);
 		setLocationRelativeTo(null);
@@ -164,7 +157,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		contentPane.setLayout(null);
 
 		JPanel pnTimKiem = new JPanel();
-		pnTimKiem.setBackground(new Color(255, 255, 255));
+		pnTimKiem.setBackground(new Color(240, 255, 255));
 		pnTimKiem.setBorder(new TitledBorder(
 				new TitledBorder(
 						new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00ECm ki\u1EBFm",
@@ -183,6 +176,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTimKiem.add(lblMaSanPham);
 
 		txtMaSanPham = new JTextField();
+		txtMaSanPham.setBackground(new Color(255, 255, 255));
 		txtMaSanPham.setFont(fntText);
 		txtMaSanPham.setBounds(278, 29, 170, 26);
 		pnTimKiem.add(txtMaSanPham);
@@ -194,6 +188,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTimKiem.add(lblKichThuoc);
 
 		cboKichThuoc = new JComboBox();
+		cboKichThuoc.setBackground(new Color(255, 255, 255));
 		cboKichThuoc.setModel(
 				new DefaultComboBoxModel(new String[] { "Chọn Size", "S", "M", "L", "XL", "XXL", "FreeSize" }));
 		cboKichThuoc.setFont(fntText);
@@ -201,16 +196,19 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTimKiem.add(cboKichThuoc);
 
 		btnTimKiemSP = new JButton("Tìm kiếm");
+		btnTimKiemSP.setBackground(new Color(255, 240, 245));
 		btnTimKiemSP.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnTimKiemSP.setBounds(186, 118, 117, 29);
 		pnTimKiem.add(btnTimKiemSP);
 
 		btnLamMoi = new JButton("Làm mới");
+		btnLamMoi.setBackground(new Color(255, 240, 245));
 		btnLamMoi.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnLamMoi.setBounds(315, 118, 117, 29);
 		pnTimKiem.add(btnLamMoi);
 
 		JPanel pnList_SanPham = new JPanel();
+		pnList_SanPham.setBackground(new Color(240, 255, 255));
 		pnList_SanPham.setBorder(new TitledBorder(null, "Danh s\u00E1ch s\u1EA3n ph\u1EA9m", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		pnList_SanPham.setBounds(6, 189, 607, 300);
@@ -221,6 +219,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnList_SanPham.add(scrollSanPam);
 
 		tableSanPham = new JTable();
+		tableSanPham.setBackground(new Color(240, 255, 255));
 		tableSanPham.setFont(fntText);
 		tableSanPham.setModel(dataModelSanPham = new DefaultTableModel(new Object[][] {},
 				new String[] { "STT", "Mã sản phẩm", "Tên sản phẩm", "Size", "Màu", "Đơn giá", "SL" }) {
@@ -247,13 +246,14 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		txtSoLuong = new JTextField();
 		txtSoLuong.setFont(fntText);
-		txtSoLuong.setBackground(new Color(240, 240, 240));
+		txtSoLuong.setBackground(new Color(255, 255, 255));
 		txtSoLuong.setBounds(349, 500, 62, 30);
 		txtSoLuong.setEditable(false);
 		contentPane.add(txtSoLuong);
 		txtSoLuong.setColumns(10);
 
 		btnThemVaoCT_Don = new JButton("+");
+		btnThemVaoCT_Don.setBackground(new Color(255, 240, 245));
 		btnThemVaoCT_Don.setFont(fntText);
 		btnThemVaoCT_Don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -264,7 +264,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		contentPane.add(btnThemVaoCT_Don);
 
 		JPanel pnDonHang = new JPanel();
-		pnDonHang.setBackground(new Color(254, 255, 255));
+		pnDonHang.setBackground(new Color(240, 255, 255));
 		pnDonHang.setBorder(new TitledBorder(null, "Th\u00F4ng tin \u0111\u01A1n h\u00E0ng", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		pnDonHang.setBounds(625, 6, 717, 184);
@@ -299,7 +299,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		txtSDT_KhachHang = new JTextField();
 		txtSDT_KhachHang.setEditable(false);
-		txtSDT_KhachHang.setBackground(new Color(241, 241, 246));
+		txtSDT_KhachHang.setBackground(new Color(255, 255, 255));
 		txtSDT_KhachHang.setFont(fntText);
 		txtSDT_KhachHang.setBounds(434, 131, 150, 30);
 		pnDonHang.add(txtSDT_KhachHang);
@@ -311,16 +311,19 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnDonHang.add(lblKhachHang);
 
 		btnTimKH = new JButton("Tìm kiếm");
+		btnTimKH.setBackground(new Color(255, 240, 245));
 		btnTimKH.setFont(fntText);
 		btnTimKH.setBounds(596, 47, 109, 30);
 		pnDonHang.add(btnTimKH);
 
 		btnThemKH = new JButton("Thêm KH");
+		btnThemKH.setBackground(new Color(255, 240, 245));
 		btnThemKH.setFont(fntText);
 		btnThemKH.setBounds(596, 89, 109, 30);
 		pnDonHang.add(btnThemKH);
 
 		txtNgayLap = new JTextField();
+		txtNgayLap.setBackground(new Color(255, 255, 255));
 		txtNgayLap.setText(homNay);
 		txtNgayLap.setForeground(new Color(0, 128, 255));
 		txtNgayLap.setEditable(false);
@@ -330,6 +333,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtNgayLap.setColumns(10);
 
 		txtMaHD = new JTextField();
+		txtMaHD.setBackground(new Color(255, 255, 255));
 		txtMaHD.setText("");
 		txtMaHD.setForeground(new Color(0, 128, 255));
 		txtMaHD.setEditable(true);
@@ -339,6 +343,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnDonHang.add(txtMaHD);
 
 		txtNhanVien = new JTextField();
+		txtNhanVien.setBackground(new Color(255, 255, 255));
 		txtNhanVien.setText(Form_Quan_Ly_Tai_Khoan.textTenNhanVien.getText().trim());
 		txtNhanVien.setForeground(new Color(0, 128, 255));
 		txtNhanVien.setFont(new Font("Arial", Font.ITALIC, 14));
@@ -348,13 +353,14 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnDonHang.add(txtNhanVien);
 
 		cboTenKhachHang = new JComboBox();
+		cboTenKhachHang.setBackground(new Color(255, 255, 255));
 		cboTenKhachHang.setBounds(434, 89, 150, 30);
 		pnDonHang.add(cboTenKhachHang);
 
 		txtTenOrSDT = new JTextField();
 		txtTenOrSDT.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtTenOrSDT.setColumns(10);
-		txtTenOrSDT.setBackground(new Color(241, 241, 246));
+		txtTenOrSDT.setBackground(new Color(255, 255, 255));
 		txtTenOrSDT.setBounds(434, 47, 150, 30);
 		pnDonHang.add(txtTenOrSDT);
 
@@ -381,6 +387,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnCT_DonHang.add(scrollDonHang);
 
 		tableDonHang = new JTable();
+		tableDonHang.setBackground(new Color(240, 255, 255));
 		tableDonHang.setFont(fntText);
 		tableDonHang.setModel(dataModelDonHang = new DefaultTableModel(new Object[][] {}, new String[] { "Mã sản phẩm",
 				"Tên sản phẩm", "Size", "Màu", "Đơn giá", "Giảm", "SL", "Thành tiền" }) {
@@ -408,7 +415,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		JPanel pnTinhToanTien = new JPanel();
 		pnTinhToanTien.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pnTinhToanTien.setBackground(new Color(254, 255, 255));
+		pnTinhToanTien.setBackground(new Color(240, 255, 255));
 		pnTinhToanTien.setBounds(625, 373, 717, 165);
 		contentPane.add(pnTinhToanTien);
 		pnTinhToanTien.setLayout(null);
@@ -435,7 +442,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		txtSoTienKhachDua = new JTextField();
 		txtSoTienKhachDua.setFont(fntText);
-		txtSoTienKhachDua.setBackground(new Color(241, 241, 246));
+		txtSoTienKhachDua.setBackground(Color.WHITE);
 		txtSoTienKhachDua.setBounds(472, 81, 180, 30);
 		pnTinhToanTien.add(txtSoTienKhachDua);
 		txtSoTienKhachDua.setColumns(10);
@@ -446,12 +453,14 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(lblTienThua);
 
 		btnThanhToan = new JButton("Thanh toán");
+		btnThanhToan.setBackground(new Color(255, 240, 245));
 		btnThanhToan.setEnabled(false);
 		btnThanhToan.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnThanhToan.setBounds(422, 118, 117, 30);
 		pnTinhToanTien.add(btnThanhToan);
 
 		txtTongTien = new JTextField();
+		txtTongTien.setBackground(Color.WHITE);
 		txtTongTien.setForeground(new Color(0, 128, 255));
 		txtTongTien.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtTongTien.setEditable(false);
@@ -460,6 +469,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtTongTien);
 
 		txtThanhTien = new JTextField();
+		txtThanhTien.setBackground(Color.WHITE);
 		txtThanhTien.setForeground(new Color(0, 128, 255));
 		txtThanhTien.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtThanhTien.setEditable(false);
@@ -468,6 +478,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtThanhTien);
 
 		txtTienThua = new JTextField();
+		txtTienThua.setBackground(Color.WHITE);
 		txtTienThua.setText("");
 		txtTienThua.setForeground(new Color(0, 128, 255));
 		txtTienThua.setFont(new Font("Arial", Font.ITALIC, 14));
@@ -477,6 +488,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtTienThua);
 
 		txtVAT = new JTextField();
+		txtVAT.setBackground(Color.WHITE);
 		txtVAT.setForeground(new Color(0, 128, 255));
 		txtVAT.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtVAT.setEditable(false);
@@ -485,6 +497,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(txtVAT);
 
 		txtSoTienGiam = new JTextField();
+		txtSoTienGiam.setBackground(Color.WHITE);
 		txtSoTienGiam.setForeground(new Color(0, 128, 255));
 		txtSoTienGiam.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtSoTienGiam.setEditable(false);
@@ -498,7 +511,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(lblGiamHoaDon);
 
 		txtPhanTramGiam = new JTextField();
-		txtPhanTramGiam.setBackground(new Color(240, 240, 240));
+		txtPhanTramGiam.setBackground(Color.WHITE);
 		txtPhanTramGiam.setForeground(new Color(0, 128, 255));
 		txtPhanTramGiam.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtPhanTramGiam.setColumns(10);
@@ -516,6 +529,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnTinhToanTien.add(lblGiamSp);
 
 		txtGiamSP = new JTextField();
+		txtGiamSP.setBackground(Color.WHITE);
 		txtGiamSP.setEditable(false);
 		txtGiamSP.setFont(new Font("Arial", Font.ITALIC, 14));
 		txtGiamSP.setForeground(new Color(0, 128, 255));
@@ -524,6 +538,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtGiamSP.setColumns(10);
 
 		JPanel pnHoaDonTrongNgay = new JPanel();
+		pnHoaDonTrongNgay.setBackground(new Color(240, 255, 255));
 		pnHoaDonTrongNgay.setBounds(8, 544, 971, 155);
 		contentPane.add(pnHoaDonTrongNgay);
 		pnHoaDonTrongNgay.setLayout(new BorderLayout(0, 0));
@@ -532,6 +547,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		pnHoaDonTrongNgay.add(scrollHoaDon);
 
 		tableHoaDon = new JTable();
+		tableHoaDon.setBackground(new Color(240, 255, 255));
 		tableHoaDon.setFont(fntText);
 		tableHoaDon.setModel(dataModelHoaDon = new DefaultTableModel(new Object[][] {}, new String[] { "Mã hoá đơn",
 				"Mã khách hàng", "Số điện thoại", "Ngày lập", "Thành tiền", "Trạng thái" }) {
@@ -557,17 +573,19 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 
 		JPanel pnCongCu = new JPanel();
 		pnCongCu.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pnCongCu.setBackground(new Color(255, 255, 255));
+		pnCongCu.setBackground(new Color(240, 255, 255));
 		pnCongCu.setBounds(989, 544, 353, 155);
 		contentPane.add(pnCongCu);
 		pnCongCu.setLayout(null);
 
 		btnLocHDtheoSDT = new JButton("Tìm kiếm");
+		btnLocHDtheoSDT.setBackground(new Color(255, 240, 245));
 		btnLocHDtheoSDT.setFont(fntText);
 		btnLocHDtheoSDT.setBounds(241, 53, 102, 29);
 		pnCongCu.add(btnLocHDtheoSDT);
 
 		btnXoaHD = new JButton("Xoá");
+		btnXoaHD.setBackground(new Color(255, 240, 245));
 		btnXoaHD.setEnabled(true);
 		btnXoaHD.setFont(fntText);
 		btnXoaHD.setBounds(57, 103, 96, 29); btnXoaHD.setEnabled(false);
@@ -581,35 +599,40 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		txtSDT = new JTextField();
 		txtSDT.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtSDT.setColumns(10);
-		txtSDT.setBackground(new Color(241, 241, 246));
+		txtSDT.setBackground(Color.WHITE);
 		txtSDT.setBounds(58, 54, 173, 26);
 		pnCongCu.add(txtSDT);
 
 		btnXuatBaoCao = new JButton("Xuất báo cáo");
+		btnXuatBaoCao.setBackground(new Color(255, 240, 245));
 		btnXuatBaoCao.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnXuatBaoCao.setEnabled(true);
 		btnXuatBaoCao.setBounds(191, 103, 127, 29);
 		pnCongCu.add(btnXuatBaoCao);
 
 		cboTinhTrangHD = new JComboBox();
+		cboTinhTrangHD.setBackground(Color.WHITE);
 		cboTinhTrangHD.setFont(new Font("Arial", Font.PLAIN, 14));
 		cboTinhTrangHD.setModel(new DefaultComboBoxModel(new String[] { "Đã thanh toán", "Chưa thanh toán" }));
 		cboTinhTrangHD.setBounds(58, 16, 173, 27);
 		pnCongCu.add(cboTinhTrangHD);
 
 		btnSuaSoLuong = new JButton("Sửa SL");
+		btnSuaSoLuong.setBackground(new Color(255, 240, 245));
 		btnSuaSoLuong.setEnabled(false);
 		btnSuaSoLuong.setBounds(986, 334, 91, 30);
 		contentPane.add(btnSuaSoLuong);
 		btnSuaSoLuong.setFont(fntText);
 
 		btnXoaCT_Don = new JButton("Xoá");
+		btnXoaCT_Don.setBackground(new Color(255, 240, 245));
 		btnXoaCT_Don.setEnabled(false);
 		btnXoaCT_Don.setBounds(1087, 334, 65, 30);
 		contentPane.add(btnXoaCT_Don);
 		btnXoaCT_Don.setFont(fntText);
 
 		btnLuu = new JButton("Lưu tạm");
+		btnLuu.setBackground(new Color(255, 240, 245));
 		btnLuu.setBounds(1162, 334, 107, 30);
 		btnLuu.setEnabled(false);
 		contentPane.add(btnLuu);
@@ -621,6 +644,7 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		contentPane.add(lblMaSPchon);
 
 		txtSanPham = new JTextField();
+		txtSanPham.setBackground(new Color(255, 255, 255));
 		txtSanPham.setEditable(false);
 		txtSanPham.setFont(new Font("Arial", Font.PLAIN, 14));
 		txtSanPham.setBounds(106, 500, 159, 30);
@@ -638,12 +662,14 @@ public class Form_HoaDon extends JFrame implements ActionListener, MouseListener
 		contentPane.add(lblMaSPban);
 
 		txtMaSPban = new JTextField();
+		txtMaSPban.setBackground(new Color(255, 255, 255));
 		txtMaSPban.setEditable(false);
 		txtMaSPban.setBounds(779, 334, 175, 30);
 		contentPane.add(txtMaSPban);
 		txtMaSPban.setColumns(10);
 		
 		btnXoaRong = new JButton("Xoá Rỗng");
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnXoaRong.setBounds(493, 500, 114, 30);
 		contentPane.add(btnXoaRong);

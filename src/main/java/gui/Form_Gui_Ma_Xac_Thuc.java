@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -8,13 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bus.NhanVienService;
-import bus.NhanVienServiceImpl;
 import bus.TaiKhoanService;
 import bus.TaiKhoanServiceImpl;
 import dao.ConectDatabase;
-import dto.NhanVien;
-import dto.TaiKhoan;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,9 +17,6 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.Security;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -33,9 +25,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 public class Form_Gui_Ma_Xac_Thuc extends JFrame implements ActionListener {
@@ -80,6 +70,7 @@ public class Form_Gui_Ma_Xac_Thuc extends JFrame implements ActionListener {
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 432);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -87,19 +78,19 @@ public class Form_Gui_Ma_Xac_Thuc extends JFrame implements ActionListener {
 
 		JPanel pnTieuDe = new JPanel();
 		pnTieuDe.setBounds(10, 10, 566, 55);
-		pnTieuDe.setBackground(Color.LIGHT_GRAY);
+		pnTieuDe.setBackground(new Color(255, 240, 245));
 		contentPane.add(pnTieuDe);
 		pnTieuDe.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("GỬI MÃ XÁC THỰC");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(new Color(0, 0, 0));
 		lblNewLabel.setBounds(130, 0, 325, 55);
 		pnTieuDe.add(lblNewLabel);
 
 		JPanel pnThemTK = new JPanel();
 		pnThemTK.setBounds(10, 75, 566, 318);
-		pnThemTK.setBackground(new Color(91,165,156));
+		pnThemTK.setBackground(new Color(240, 255, 255));
 		contentPane.add(pnThemTK);
 		pnThemTK.setLayout(null);
 
@@ -109,12 +100,14 @@ public class Form_Gui_Ma_Xac_Thuc extends JFrame implements ActionListener {
 		pnThemTK.add(lblNewLabel_1);
 
 		textMaNhanVien = new JTextField();
+		textMaNhanVien.setBackground(new Color(255, 255, 255));
 		textMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textMaNhanVien.setBounds(200, 11, 300, 25);
 		pnThemTK.add(textMaNhanVien);
 		textMaNhanVien.setColumns(10);
 
 		btnXacThuc = new JButton("Xác thực");
+		btnXacThuc.setBackground(new Color(255, 240, 245));
 		btnXacThuc.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnXacThuc.setBounds(200, 113, 141, 39);
 		pnThemTK.add(btnXacThuc);
@@ -130,17 +123,20 @@ public class Form_Gui_Ma_Xac_Thuc extends JFrame implements ActionListener {
 		pnThemTK.add(lblNewLabel_2_1_1);
 		
 		btnGuiMaXacThuc = new JButton("Gửi mã xác thực");
+		btnGuiMaXacThuc.setBackground(new Color(255, 240, 245));
 		btnGuiMaXacThuc.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnGuiMaXacThuc.setBounds(200, 231, 141, 39);
 		pnThemTK.add(btnGuiMaXacThuc);
 		
 		textEmail = new JTextField();
+		textEmail.setBackground(new Color(255, 255, 255));
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textEmail.setColumns(10);
 		textEmail.setBounds(200, 58, 300, 25);
 		pnThemTK.add(textEmail);
 		
 		textMaXacThuc = new JTextField();
+		textMaXacThuc.setBackground(new Color(255, 255, 255));
 		textMaXacThuc.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textMaXacThuc.setColumns(10);
 		textMaXacThuc.setBounds(200, 183, 300, 25);

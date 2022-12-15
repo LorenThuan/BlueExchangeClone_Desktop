@@ -130,15 +130,15 @@ public class SanPhamBanChayRenDerer extends JPanel implements ListCellRenderer<S
 		lblDonGia.setOpaque(true);
 
 		if (isSelected) {
-			lblHinhAnh.setBackground(list.getSelectionBackground());
-			lblTenSanPham.setBackground(list.getSelectionBackground());
-			lblDonGia.setBackground(list.getSelectionBackground());
-			contentPane.setBackground(list.getSelectionBackground());
-			panel.setBackground(list.getSelectionBackground());
-			panel_1.setBackground(list.getSelectionBackground());
-//			lblNewLabel.setBackground(list.getSelectionBackground());
-//			lblNewLabel_1.setBackground(list.getSelectionBackground());
-//			lblNewLabel_2.setBackground(list.getSelectionBackground());
+			lblHinhAnh.setBackground(new Color(255, 240, 245));
+			lblTenSanPham.setBackground(new Color(255, 240, 245));
+			lblDonGia.setBackground(new Color(255, 240, 245));
+			contentPane.setBackground(new Color(255, 240, 245));
+			panel.setBackground(new Color(255, 240, 245));
+			panel_1.setBackground(new Color(255, 240, 245));
+//			lblNewLabel.setBackground(new Color(255, 240, 245));
+//			lblNewLabel_1.setBackground(new Color(255, 240, 245));
+//			lblNewLabel_2.setBackground(new Color(255, 240, 245));
 			
 			setBackground(list.getSelectionBackground());
 		} else { // when don't select

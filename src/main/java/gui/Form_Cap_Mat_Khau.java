@@ -70,6 +70,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -77,19 +78,20 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 
 		JPanel pnTieuDe = new JPanel();
 		pnTieuDe.setBounds(10, 10, 566, 55);
-		pnTieuDe.setBackground(Color.LIGHT_GRAY);
+		pnTieuDe.setBackground(new Color(255, 245, 238));
 		contentPane.add(pnTieuDe);
 		pnTieuDe.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("CẤP MẬT KHẨU");
+		lblNewLabel.setBackground(new Color(0, 0, 0));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setForeground(new Color(0, 0, 0));
 		lblNewLabel.setBounds(156, 0, 259, 55);
 		pnTieuDe.add(lblNewLabel);
 
 		JPanel pnThemTK = new JPanel();
 		pnThemTK.setBounds(10, 75, 566, 278);
-		pnThemTK.setBackground(Color.CYAN);
+		pnThemTK.setBackground(new Color(240, 255, 255));
 		contentPane.add(pnThemTK);
 		pnThemTK.setLayout(null);
 
@@ -104,6 +106,7 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 		pnThemTK.add(lblNewLabel_2);
 
 		textMaNhanVien = new JTextField();
+		textMaNhanVien.setBackground(new Color(255, 255, 255));
 		textMaNhanVien.setEditable(false);
 		textMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textMaNhanVien.setBounds(200, 70, 300, 25);
@@ -111,11 +114,13 @@ public class Form_Cap_Mat_Khau extends JFrame implements ActionListener {
 		textMaNhanVien.setColumns(10);
 
 		pwdMatKhau = new JPasswordField();
+		pwdMatKhau.setBackground(new Color(255, 255, 255));
 		pwdMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		pwdMatKhau.setBounds(200, 150, 300, 25);
 		pnThemTK.add(pwdMatKhau);
 
 		btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnThem.setBounds(246, 207, 105, 39);
 		pnThemTK.add(btnThem);

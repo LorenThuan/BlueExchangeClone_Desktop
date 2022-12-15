@@ -91,6 +91,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(1380, 780);
 		setLocationRelativeTo(null);
@@ -98,6 +99,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		contentPane.setLayout(null);
 		
 		JPanel panelThongTinKhachHang = new JPanel();
+		panelThongTinKhachHang.setBackground(new Color(240, 255, 255));
 		panelThongTinKhachHang.setBorder(new TitledBorder(null, "Thông tin khách hàng", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelThongTinKhachHang.setBounds(306, 87, 784, 130);
 		contentPane.add(panelThongTinKhachHang);
@@ -113,6 +115,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		
 		
 		textMaKhachHang = new JTextField();
+		textMaKhachHang.setBackground(Color.WHITE);
 		textMaKhachHang.setText("Tự động khi để trống");
 		textMaKhachHang.addMouseListener(new MouseAdapter() {
 			@Override
@@ -164,6 +167,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		textMaKhachHang.setColumns(10);
 		
 		textTenKhachHang = new JTextField();
+		textTenKhachHang.setBackground(Color.WHITE);
 		textTenKhachHang.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -197,11 +201,13 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		panelThongTinKhachHang.add(lblGioiTinh);
 		
 		rdbtnNam = new JRadioButton("Nam");
+		rdbtnNam.setBackground(new Color(240, 255, 255));
 		rdbtnNam.setBounds(555, 31, 60, 23);
 		panelThongTinKhachHang.add(rdbtnNam);
 		rdbtnNam.setSelected(true);
 		
 		rdbtnNu = new JRadioButton("Nữ");
+		rdbtnNu.setBackground(new Color(240, 255, 255));
 		rdbtnNu.setBounds(636, 31, 47, 23);
 		panelThongTinKhachHang.add(rdbtnNu);
 		
@@ -214,6 +220,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		panelThongTinKhachHang.add(lblSoDienThoai);
 		
 		textSoDienThoai = new JTextField();
+		textSoDienThoai.setBackground(Color.WHITE);
 		textSoDienThoai.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -263,31 +270,38 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(240, 255, 255));
 		panel.setBounds(157, 235, 1037, 45);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.setBounds(58, 11, 89, 23);
 		panel.add(btnThem);
 		
 		btnXoa = new JButton("Xóa");
+		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.setBounds(186, 11, 89, 23);
 		panel.add(btnXoa);
 		
 		btnSua = new JButton("Sửa");
+		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.setBounds(321, 11, 89, 23);
 		panel.add(btnSua);
 		
 		btnXoaRong = new JButton("Xóa Rỗng");
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.setBounds(451, 11, 89, 23);
 		panel.add(btnXoaRong);
 		
 		btnHoanTac = new JButton("Hoàn Tác");
+		btnHoanTac.setBackground(new Color(255, 240, 245));
 		btnHoanTac.setBounds(579, 11, 89, 23);
 		panel.add(btnHoanTac);
 		
 		btnTimKiem = new JButton("Tìm Kiếm");
+		btnTimKiem.setBackground(new Color(255, 240, 245));
 		btnTimKiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -296,11 +310,13 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		panel.add(btnTimKiem);
 		
 		textTimKiem = new RoundJTextField(15);
+		textTimKiem.setBackground(Color.WHITE);
 		textTimKiem.setBounds(716, 12, 154, 20);
 		panel.add(textTimKiem);
 		textTimKiem.setColumns(10);
 		
 		JPanel panelDanhSachKhachHang = new JPanel();
+		panelDanhSachKhachHang.setBackground(new Color(240, 255, 255));
 		panelDanhSachKhachHang.setBounds(10, 309, 1330, 385);
 		panelDanhSachKhachHang.setBorder(new TitledBorder(null, "Danh sách khách hàng", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panelDanhSachKhachHang);
@@ -345,6 +361,7 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 		scrollKhachHang.setBounds(10, 20, 1309, 355);
 		panelDanhSachKhachHang.add(scrollKhachHang);
 		tableKhachHang = new JTable(dataModelKhachHang);
+		tableKhachHang.setBackground(new Color(240, 255, 255));
 		tableKhachHang.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollKhachHang.setViewportView(tableKhachHang);	
 		
@@ -370,11 +387,14 @@ public class Form_Khach_Hang extends JFrame implements ActionListener, MouseList
 	}
 	
 	private void xoaRong() {
-		textMaKhachHang.setText("");
+		textMaKhachHang.setText("Tự động khi để trống");
 		textTenKhachHang.setText("");
 		textSoDienThoai.setText("");
 		rdbtnNam.setSelected(true);
 		textTimKiem.setText("");
+		lblTBMaKhachHang.setText("");
+		lblTBSoDienThoai.setText("");
+		lblTBTenKhachHang.setText("");
 		textMaKhachHang.setEditable(true);
 	}
 	

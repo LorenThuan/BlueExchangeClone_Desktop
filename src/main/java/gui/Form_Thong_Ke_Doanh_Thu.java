@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,13 +10,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.ScrollPane;
-import java.awt.Label;
-import java.awt.Panel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
-import java.awt.TextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -25,19 +20,14 @@ import javax.swing.table.DefaultTableModel;
 import bus.ThongKeDoanhThuService;
 import bus.ThongKeDoanhThuServiceImpl;
 import dao.ConectDatabase;
-import dao.ThongKeDoanhThuDao;
 import dto.HoaDon;
-import handle.RoundJTextField;
 
 
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 
 public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
@@ -80,13 +70,14 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1350, 650);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 1334, 87);
-		panel.setBackground(Color.CYAN);
+		panel.setBackground(new Color(255, 240, 245));
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -98,6 +89,7 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		panel.add(lblNewLabel);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(240, 255, 255));
 		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin th\u1ED1ng k\u00EA", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel_1.setBounds(51, 108, 1241, 167);
 		contentPane.add(panel_1);
@@ -114,6 +106,7 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		panel_1.add(lblNewLabel_2);
 
 		txtNam = new JTextField();
+		txtNam.setBackground(Color.WHITE);
 		txtNam.setBounds(700, 29, 108, 23);
 		panel_1.add(txtNam);
 		txtNam.setColumns(10);
@@ -122,11 +115,12 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		btnLoc.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLoc.addActionListener(this);
 		btnLoc.setForeground(Color.BLACK);
-		btnLoc.setBackground(Color.CYAN);
+		btnLoc.setBackground(new Color(255, 240, 245));
 		btnLoc.setBounds(844, 23, 114, 33);
 		panel_1.add(btnLoc);
 
 		 comboBox = new JComboBox();
+		 comboBox.setBackground(Color.WHITE);
 	
 		comboBox.addItem("1");
 		comboBox.addItem("2");
@@ -169,6 +163,7 @@ public class Form_Thong_Ke_Doanh_Thu extends JFrame implements ActionListener{
 		contentPane.add(scrollPane);
 
 		table = new JTable();
+		table.setBackground(new Color(240, 255, 255));
 		
 		
 

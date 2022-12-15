@@ -1,25 +1,15 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JRadioButton;
-import com.toedter.calendar.JDateChooserBeanInfo;
 
 import bus.NhanVienService;
 import bus.NhanVienServiceImpl;
@@ -29,15 +19,11 @@ import dao.ConectDatabase;
 import dto.NhanVien;
 import dto.TaiKhoan;
 
-import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JPasswordField;
-import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
+import java.awt.Color;
 
 public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 
@@ -82,6 +68,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(1380, 780);
 		setLocationRelativeTo(null);
@@ -89,6 +76,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 		
 		JPanel panelThongTinTaiKhoan = new JPanel();
+		panelThongTinTaiKhoan.setBackground(new Color(240, 255, 255));
 		panelThongTinTaiKhoan.setBorder(new TitledBorder(null, "Thông tin tài khoản", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelThongTinTaiKhoan.setBounds(141, 91, 1154, 130);
 		contentPane.add(panelThongTinTaiKhoan);
@@ -104,12 +92,14 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		
 		
 		textMaNhanVien = new JTextField();
+		textMaNhanVien.setBackground(Color.WHITE);
 		textMaNhanVien.setEditable(false);
 		textMaNhanVien.setBounds(177, 32, 197, 20);
 		panelThongTinTaiKhoan.add(textMaNhanVien);
 		textMaNhanVien.setColumns(10);
 		
 		textTenNhanVien = new JTextField();
+		textTenNhanVien.setBackground(Color.WHITE);
 		textTenNhanVien.setEditable(false);
 		textTenNhanVien.setColumns(10);
 		textTenNhanVien.setBounds(177, 88, 197, 20);
@@ -124,6 +114,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		panelThongTinTaiKhoan.add(lblMatKhau);
 		
 		passwordNhanVien = new JPasswordField();
+		passwordNhanVien.setBackground(Color.WHITE);
 		passwordNhanVien.setEchoChar('•');
 		passwordNhanVien.setEditable(false);
 		passwordNhanVien.setBounds(555, 32, 197, 20);
@@ -132,6 +123,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		
 		
 		comboBox = new JComboBox<String>();
+		comboBox.setBackground(Color.WHITE);
 		comboBox.setEnabled(false);
 //		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nhân Viên Quản Lý", "Nhân Viên Bán Hàng"}));
 		comboBox.addItem("Nhân Viên Quản Lý");
@@ -150,6 +142,7 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		panelThongTinTaiKhoan.add(textEmail);
 		
 		JCheckBox chckbxHienMatKhau = new JCheckBox();
+		chckbxHienMatKhau.setBackground(new Color(240, 255, 255));
 		chckbxHienMatKhau.setBounds(555, 57, 21, 23);
 		chckbxHienMatKhau.addActionListener(new ActionListener() {
 			   public void actionPerformed(ActionEvent e) {
@@ -170,15 +163,18 @@ public class Form_Quan_Ly_Tai_Khoan extends JFrame implements ActionListener{
 		panelThongTinTaiKhoan.add(lbHienMatKhau);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(240, 255, 255));
 		panel.setBounds(457, 232, 401, 45);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		btnDoiMatKhau = new JButton("Đổi mật khẩu");
+		btnDoiMatKhau.setBackground(new Color(255, 240, 245));
 		btnDoiMatKhau.setBounds(40, 11, 159, 23);
 		panel.add(btnDoiMatKhau);
 		
 		btnThoat = new JButton("Thoát");
+		btnThoat.setBackground(new Color(255, 240, 245));
 		btnThoat.setBounds(233, 11, 121, 23);
 		panel.add(btnThoat);
 		
