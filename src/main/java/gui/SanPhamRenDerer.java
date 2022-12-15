@@ -37,7 +37,7 @@ public class SanPhamRenDerer extends JPanel implements ListCellRenderer<SanPham>
 	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 5, 0));
-
+		contentPane.setBackground(new Color(255, 240, 245));
 		contentPane.setLayout(new BorderLayout(5, 5));
 		
 		lblHinhAnh = new JLabel();
@@ -108,19 +108,19 @@ public class SanPhamRenDerer extends JPanel implements ListCellRenderer<SanPham>
 		lblDonGia.setOpaque(true);
 
 		if (isSelected) {
-			lblHinhAnh.setBackground(list.getSelectionBackground());
-			lblMaSanPham.setBackground(list.getSelectionBackground());
-			lblTenSanPham.setBackground(list.getSelectionBackground());
-			lblKichThuoc.setBackground(list.getSelectionBackground());
-			lblMauSac.setBackground(list.getSelectionBackground());
-			lblSoLuong.setBackground(list.getSelectionBackground());
-			lblDonGia.setBackground(list.getSelectionBackground());
-			contentPane.setBackground(list.getSelectionBackground());
-			panel.setBackground(list.getSelectionBackground());
-			panel_1.setBackground(list.getSelectionBackground());
-			lblNewLabel.setBackground(list.getSelectionBackground());
-			lblNewLabel_1.setBackground(list.getSelectionBackground());
-			lblNewLabel_2.setBackground(list.getSelectionBackground());
+			lblHinhAnh.setBackground(new Color(255, 240, 245));
+			lblMaSanPham.setBackground(new Color(255, 240, 245));
+			lblTenSanPham.setBackground(new Color(255, 240, 245));
+			lblKichThuoc.setBackground(new Color(255, 240, 245));
+			lblMauSac.setBackground(new Color(255, 240, 245));
+			lblSoLuong.setBackground(new Color(255, 240, 245));
+			lblDonGia.setBackground(new Color(255, 240, 245));
+			contentPane.setBackground(new Color(255, 240, 245));
+			panel.setBackground(new Color(255, 240, 245));
+			panel_1.setBackground(new Color(255, 240, 245));
+			lblNewLabel.setBackground(new Color(255, 240, 245));
+			lblNewLabel_1.setBackground(new Color(255, 240, 245));
+			lblNewLabel_2.setBackground(new Color(255, 240, 245));
 			
 			setBackground(list.getSelectionBackground());
 		} else { // when don't select

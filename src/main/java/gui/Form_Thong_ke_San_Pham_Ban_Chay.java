@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,13 +10,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.ScrollPane;
-import java.awt.Label;
-import java.awt.Panel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
-import java.awt.TextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -26,15 +21,11 @@ import bus.ThongKeSanPhamSersvice;
 import bus.ThongKeSanPhamServiceImpl;
 import dao.ConectDatabase;
 import dto.ChiTietHoaDon;
-import dto.HoaDon;
-import handle.RoundJTextField;
 
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 
 public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionListener{
@@ -75,13 +66,14 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1350, 650);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 1334, 56);
-		panel.setBackground(Color.CYAN);
+		panel.setBackground(new Color(255, 240, 245));
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -93,6 +85,7 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 		panel.add(lblNewLabel);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(240, 255, 255));
 		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin th\u1ED1ng k\u00EA", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel_1.setBounds(57, 67, 1241, 167);
 		contentPane.add(panel_1);
@@ -109,6 +102,7 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 		panel_1.add(lblNewLabel_2);
 
 		txtNam = new JTextField();
+		txtNam.setBackground(Color.WHITE);
 		txtNam.setBounds(519, 32, 307, 23);
 		panel_1.add(txtNam);
 		txtNam.setColumns(10);
@@ -117,11 +111,12 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 		btnLoc.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnLoc.addActionListener(this);
 		btnLoc.setForeground(Color.BLACK);
-		btnLoc.setBackground(Color.CYAN);
+		btnLoc.setBackground(new Color(255, 240, 245));
 		btnLoc.setBounds(872, 23, 114, 33);
 		panel_1.add(btnLoc);
 
 		 comboBox = new JComboBox();
+		 comboBox.setBackground(Color.WHITE);
 	
 		comboBox.addItem("1");
 		comboBox.addItem("2");
@@ -152,7 +147,7 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 				JButton btnInBaoCao = new JButton("In báo cáo");
 				btnInBaoCao.setForeground(Color.BLACK);
 				btnInBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				btnInBaoCao.setBackground(Color.CYAN);
+				btnInBaoCao.setBackground(new Color(255, 240, 245));
 				btnInBaoCao.setBounds(1019, 23, 140, 33);
 				panel_1.add(btnInBaoCao);
 
@@ -160,10 +155,12 @@ public class Form_Thong_ke_San_Pham_Ban_Chay extends JFrame implements ActionLis
 		scrollPane.setBounds(10, 286, 1314, 314);
 		contentPane.add(scrollPane);
 		table = new JTable();
+		table.setBackground(new Color(240, 255, 255));
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng" }));
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(240, 255, 255));
 		panel_2.setBounds(377, 245, 582, 30);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);

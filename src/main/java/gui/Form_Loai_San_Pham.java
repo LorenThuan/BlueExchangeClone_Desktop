@@ -74,12 +74,14 @@ public class Form_Loai_San_Pham extends JFrame {
 		
 		setBounds(100, 100, 971, 654);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panelNhaCungCap = new JPanel();
+		panelNhaCungCap.setBackground(new Color(240, 255, 255));
 		panelNhaCungCap.setBorder(new TitledBorder(null, "Loại sản phẩm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelNhaCungCap.setBounds(31, 159, 355, 152);
 		contentPane.add(panelNhaCungCap);
@@ -90,6 +92,7 @@ public class Form_Loai_San_Pham extends JFrame {
 		panelNhaCungCap.add(lblMaLoaiSanPham);
 		
 		textMaLoaiSanPham = new JTextField();
+		textMaLoaiSanPham.setBackground(Color.WHITE);
 		textMaLoaiSanPham.setBounds(151, 36, 149, 19);
 		textMaLoaiSanPham.setText("Tự động khi để trống");
 		textMaLoaiSanPham.setForeground(new Color(153, 153, 153));
@@ -142,6 +145,7 @@ public class Form_Loai_San_Pham extends JFrame {
 		panelNhaCungCap.add(lblTenLoaiSanPham);
 		
 		textTenLoaiSanPham = new JTextField();
+		textTenLoaiSanPham.setBackground(Color.WHITE);
 		textTenLoaiSanPham.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -183,11 +187,13 @@ public class Form_Loai_San_Pham extends JFrame {
 		panelNhaCungCap.add(lblTBTenLoai);
 		
 		JPanel panelChucNang = new JPanel();
+		panelChucNang.setBackground(new Color(240, 255, 255));
 		panelChucNang.setBounds(31, 390, 355, 138);
 		contentPane.add(panelChucNang);
 		panelChucNang.setLayout(null);
 		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.setBounds(10, 10, 100, 30);
 		panelChucNang.add(btnThem);
 		
@@ -201,6 +207,7 @@ public class Form_Loai_San_Pham extends JFrame {
 		});
 		
 		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				xoaLoaiSanPham();
@@ -210,6 +217,7 @@ public class Form_Loai_San_Pham extends JFrame {
 		panelChucNang.add(btnXoa);
 		
 		JButton btnSua = new JButton("Sửa");
+		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.setBounds(230, 10, 100, 30);
 		panelChucNang.add(btnSua);
 		btnSua.addActionListener(new ActionListener() {
@@ -222,25 +230,28 @@ public class Form_Loai_San_Pham extends JFrame {
 		});
 		
 		JButton btnXoaRong = new JButton("Xóa rỗng");
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				xoaRong();
 			}
 		});
-		btnXoaRong.setBounds(71, 74, 90, 20);
+		btnXoaRong.setBounds(120, 64, 100, 30);
 		panelChucNang.add(btnXoaRong);
 		
 		JButton btnHoanTac = new JButton("Hoàn tác");
+		btnHoanTac.setBackground(new Color(255, 240, 245));
 		btnHoanTac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = tableDanhSachLoaiSanPham.getSelectedRow();
 				hoanTac(row);
 			}
 		});
-		btnHoanTac.setBounds(195, 74, 90, 20);
+		btnHoanTac.setBounds(230, 64, 100, 30);
 		panelChucNang.add(btnHoanTac);
 		
 		JPanel panelDanhSach = new JPanel();
+		panelDanhSach.setBackground(new Color(240, 255, 255));
 		panelDanhSach.setBorder(new TitledBorder(null, "Danh sách Loại sản phẩm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDanhSach.setBounds(419, 64, 488, 512);
 		contentPane.add(panelDanhSach);
@@ -252,6 +263,7 @@ public class Form_Loai_San_Pham extends JFrame {
 		String[] colHeader = {"STT", "Mã Loại sản phẩm", "Tên Loại"};
 		modelLoaiSanPham = new DefaultTableModel(colHeader, 0);
 		tableDanhSachLoaiSanPham = new JTable(modelLoaiSanPham);
+		tableDanhSachLoaiSanPham.setBackground(new Color(240, 255, 255));
 		tableDanhSachLoaiSanPham.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -284,6 +296,7 @@ public class Form_Loai_San_Pham extends JFrame {
 				int row = tableDanhSachLoaiSanPham.getSelectedRow();
 				textMaLoaiSanPham.setText(modelLoaiSanPham.getValueAt(row, 1).toString());
 				textTenLoaiSanPham.setText(modelLoaiSanPham.getValueAt(row, 2).toString());
+				textMaLoaiSanPham.setEditable(false);
 			}
 		});
 		scrollPane.setViewportView(tableDanhSachLoaiSanPham);
@@ -291,11 +304,13 @@ public class Form_Loai_San_Pham extends JFrame {
 		scrollPane.setViewportView(tableDanhSachLoaiSanPham);
 		
 		textTimKiem = new JTextField();
-		textTimKiem.setBounds(557, 33, 217, 19);
+		textTimKiem.setBackground(Color.WHITE);
+		textTimKiem.setBounds(595, 33, 179, 19);
 		contentPane.add(textTimKiem);
 		textTimKiem.setColumns(10);
 		
 		JButton btnTimKiem = new JButton("Tìm Kiếm");
+		btnTimKiem.setBackground(new Color(255, 240, 245));
 		btnTimKiem.setBounds(803, 32, 104, 21);
 		contentPane.add(btnTimKiem);	
 		btnTimKiem.addActionListener(new ActionListener() {
@@ -400,8 +415,11 @@ public class Form_Loai_San_Pham extends JFrame {
 	private void xoaRong () {
 		textMaLoaiSanPham.setText("Tự động khi để trống");
 		textMaLoaiSanPham.setForeground(new Color(153, 153, 153));
+		textMaLoaiSanPham.setEditable(true);
 		textTenLoaiSanPham.setText("");
 		textMaLoaiSanPham.requestFocus();
+		lblTBMaLoai.setText("");
+		lblTBTenLoai.setText("");
 	}
 	
 	private void selectedRow(int row) {

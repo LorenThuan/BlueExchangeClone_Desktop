@@ -1,7 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -82,12 +82,10 @@ public class HDSDRenDerer extends JPanel implements ListCellRenderer<HDSD> {
 		lblNoiDung.setOpaque(true);
 
 		if (isSelected) {
-			lblHinhAnh.setBackground(list.getSelectionBackground());
-			lblNoiDung.setBackground(list.getSelectionBackground());
-			contentPane.setBackground(list.getSelectionBackground());
-			panel.setBackground(list.getSelectionBackground());
-		
-			
+			lblHinhAnh.setBackground(new Color(255, 240, 245));
+			lblNoiDung.setBackground(new Color(255, 240, 245));
+			contentPane.setBackground(new Color(255, 240, 245));
+			panel.setBackground(new Color(255, 240, 245));
 			setBackground(list.getSelectionBackground());
 		} else { // when don't select
 			lblHinhAnh.setBackground(list.getBackground());

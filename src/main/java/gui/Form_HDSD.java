@@ -61,6 +61,7 @@ public class Form_HDSD extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		contentPane.setPreferredSize(new Dimension(200,100));
 //		scrollHDSD = new JScrollPane(contentPane);
@@ -73,6 +74,7 @@ public class Form_HDSD extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel(new BorderLayout());
+		panel.setBackground(new Color(240, 255, 255));
 		panel.setForeground(Color.BLACK);
 		panel.setBounds(0, 0, 1362, 686);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,7 +83,7 @@ public class Form_HDSD extends JFrame {
 		
 		listModelHDSD = new DefaultListModel<HDSD>();
 		listHDSD = new JList<HDSD>(listModelHDSD);
-		listHDSD.setForeground(new Color(240, 240, 240));
+		listHDSD.setForeground(new Color(0, 0, 0));
 		listHDSD.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		listHDSD.setVisibleRowCount(0);
 	
@@ -101,7 +103,7 @@ public class Form_HDSD extends JFrame {
 			System.out.println(hdsd);
 		}
 		
-		listHDSD.setBackground(new Color(240, 240, 240));
+		listHDSD.setBackground(new Color(240, 255, 255));
 		listHDSD.setModel(listModelHDSD);
 		listHDSD.setCellRenderer(new HDSDRenDerer());	
 	}

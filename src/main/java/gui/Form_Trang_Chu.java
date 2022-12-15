@@ -11,16 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import bus.SanPhamService;
-import bus.SanPhamServiceImpl;
 import bus.ThongKeSanPhamSersvice;
 import bus.ThongKeSanPhamServiceImpl;
 import dao.ConectDatabase;
 import dto.SanPham;
 import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextField;
 
 public class Form_Trang_Chu extends JFrame {
 
@@ -59,6 +54,7 @@ public class Form_Trang_Chu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		contentPane.setPreferredSize(new Dimension(200,100));
 //		scrollSP = new JScrollPane(contentPane);
@@ -71,6 +67,7 @@ public class Form_Trang_Chu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel(new BorderLayout());
+		panel.setBackground(new Color(240, 255, 255));
 		panel.setForeground(Color.BLACK);
 		panel.setBounds(0, 0, 1362, 686);
 		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -97,7 +94,7 @@ public class Form_Trang_Chu extends JFrame {
 			listModelSanPham.addElement(sanPham);
 		}
 		
-		listSanPham.setBackground(new Color(240, 240, 240));
+		listSanPham.setBackground(new Color(240, 255, 255));
 		listSanPham.setModel(listModelSanPham);
 		listSanPham.setCellRenderer(new SanPhamBanChayRenDerer());	
 	}

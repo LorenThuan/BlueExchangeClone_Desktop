@@ -121,12 +121,14 @@ public class Form_San_Pham extends JFrame {
 		setSize(1380, 780);	
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panelThongTinSanPham = new JPanel();
+		panelThongTinSanPham.setBackground(new Color(240, 255, 255));
 		panelThongTinSanPham.setBorder(new TitledBorder(null, "Thông tin sản phẩm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelThongTinSanPham.setBounds(69, 33, 571, 529);
 		contentPane.add(panelThongTinSanPham);
@@ -295,10 +297,12 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblGioiTinh);
 		
 		chckbxNam = new JCheckBox("Nam");
+		chckbxNam.setBackground(new Color(224, 255, 255));
 		chckbxNam.setBounds(110, 257, 69, 21);
 		panelThongTinSanPham.add(chckbxNam);
 		
 		chckbxNu = new JCheckBox("Nữ");
+		chckbxNu.setBackground(new Color(224, 255, 255));
 		chckbxNu.setBounds(189, 257, 69, 21);
 		panelThongTinSanPham.add(chckbxNu);
 		
@@ -307,6 +311,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblKichThuoc);
 		
 		comboKichThuoc = new JComboBox();
+		comboKichThuoc.setBackground(new Color(255, 255, 255));
 		comboKichThuoc.setModel(new DefaultComboBoxModel(new String[] {"XS", "S", "M", "L", "XL", "XXL", "XXXL", "FreeSize"}));
 		comboKichThuoc.setBounds(110, 300, 148, 21);
 		panelThongTinSanPham.add(comboKichThuoc);
@@ -352,6 +357,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblHinhAnh);
 		
 		JButton btnHinhAnh = new JButton("Chọn hình");
+		btnHinhAnh.setBackground(new Color(255, 240, 245));
 		
 		btnHinhAnh.addActionListener(new ActionListener() {
 
@@ -506,6 +512,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblDonGiaBan);
 		
 		textDonGiaBan = new JTextField();
+		textDonGiaBan.setBackground(new Color(255, 255, 255));
 		textDonGiaBan.setEditable(false);
 		textDonGiaBan.setForeground(Color.BLACK);
 		textDonGiaBan.setBounds(382, 341, 155, 19);
@@ -517,6 +524,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblTrangThai);
 		
 		comboTrangThai = new JComboBox();
+		comboTrangThai.setBackground(new Color(255, 255, 255));
 		comboTrangThai.setModel(new DefaultComboBoxModel(new String[] {"Đang kinh doanh", "Ngừng kinh doanh"}));
 		comboTrangThai.setBounds(182, 388, 230, 21);
 		panelThongTinSanPham.add(comboTrangThai);
@@ -526,6 +534,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblLoaiSanPham);
 		
 		comboLoaiSanPham = new JComboBox();
+		comboLoaiSanPham.setBackground(new Color(255, 255, 255));
 		comboLoaiSanPham.setBounds(182, 435, 230, 21);
 		panelThongTinSanPham.add(comboLoaiSanPham);
 		
@@ -540,6 +549,7 @@ public class Form_San_Pham extends JFrame {
 		panelThongTinSanPham.add(lblNhaCungCap);
 		
 		comboNhaCungCap = new JComboBox();
+		comboNhaCungCap.setBackground(new Color(255, 255, 255));
 		comboNhaCungCap.setBounds(182, 484, 230, 21);
 		panelThongTinSanPham.add(comboNhaCungCap);
 		
@@ -550,6 +560,7 @@ public class Form_San_Pham extends JFrame {
 		}
 		
 		JButton btnThemLoaiSanPham = new JButton("+");
+		btnThemLoaiSanPham.setBackground(new Color(255, 240, 245));
 		btnThemLoaiSanPham.setBounds(434, 435, 85, 21);
 		panelThongTinSanPham.add(btnThemLoaiSanPham);
 		
@@ -563,6 +574,7 @@ public class Form_San_Pham extends JFrame {
 		});
 		
 		JButton btnThemNhaCungCap = new JButton("+");
+		btnThemNhaCungCap.setBackground(new Color(255, 240, 245));
 		btnThemNhaCungCap.setBounds(434, 484, 85, 21);
 		panelThongTinSanPham.add(btnThemNhaCungCap);
 		
@@ -642,12 +654,14 @@ public class Form_San_Pham extends JFrame {
 		});
 		
 		JPanel panelDanhSachSanPam = new JPanel(new BorderLayout());
+		panelDanhSachSanPam.setBackground(new Color(240, 255, 255));
 		panelDanhSachSanPam.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelDanhSachSanPam.setBorder(new TitledBorder(null, "Danh sách Sản phẩm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDanhSachSanPam.setBounds(663, 33, 647, 646);
 		
 		listModelSanPham = new DefaultListModel<SanPham>();
 		listSanPham = new JList<SanPham>(listModelSanPham);
+		listSanPham.setBackground(new Color(240, 255, 255));
 		JScrollPane scrollSP = new JScrollPane(listSanPham);
 		panelDanhSachSanPam.add(scrollSP, BorderLayout.CENTER);	
 		contentPane.add(panelDanhSachSanPam);
@@ -664,11 +678,13 @@ public class Form_San_Pham extends JFrame {
 		createListSanPham();
 		
 		JPanel panelChucNang = new JPanel();
+		panelChucNang.setBackground(new Color(240, 255, 255));
 		panelChucNang.setBounds(69, 572, 571, 107);
 		contentPane.add(panelChucNang);
 		panelChucNang.setLayout(null);
 		
 		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setBackground(new Color(255, 240, 245));
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				xoaSanPham();
@@ -678,6 +694,7 @@ public class Form_San_Pham extends JFrame {
 		panelChucNang.add(btnXoa);
 		
 		JButton btnSua = new JButton("Sửa");
+		btnSua.setBackground(new Color(255, 240, 245));
 		btnSua.setBounds(461, 10, 100, 30);
 		panelChucNang.add(btnSua);
 		
@@ -691,6 +708,7 @@ public class Form_San_Pham extends JFrame {
 		});
 		
 		JButton btnXoaRong = new JButton("Xóa rỗng");
+		btnXoaRong.setBackground(new Color(255, 240, 245));
 		btnXoaRong.setBounds(351, 50, 100, 30);
 		panelChucNang.add(btnXoaRong);
 		
@@ -706,6 +724,7 @@ public class Form_San_Pham extends JFrame {
 		});
 		
 		JButton btnHoanTac = new JButton("Hoàn tác");
+		btnHoanTac.setBackground(new Color(255, 240, 245));
 		btnHoanTac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				isSelected();
@@ -715,10 +734,12 @@ public class Form_San_Pham extends JFrame {
 		panelChucNang.add(btnHoanTac);
 		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(255, 240, 245));
 		btnThem.setBounds(234, 10, 100, 30);
 		panelChucNang.add(btnThem);
 		
 		btnNhapExcel = new JButton("Nhập Excel");
+		btnNhapExcel.setBackground(new Color(255, 240, 245));
 		btnNhapExcel.setBounds(234, 50, 100, 30);
 		panelChucNang.add(btnNhapExcel);
 		
@@ -749,6 +770,7 @@ public class Form_San_Pham extends JFrame {
 		});
 		
 		JComboBox<String> comboLocLoaiSanPham = new JComboBox<String>();
+		comboLocLoaiSanPham.setBackground(new Color(255, 255, 255));
 		comboLocLoaiSanPham.setBounds(663, 10, 186, 20);
 		contentPane.add(comboLocLoaiSanPham);
 		comboLocLoaiSanPham.setModel(new DefaultComboBoxModel<String>(new String[] {"Tất cả"}));
@@ -774,6 +796,7 @@ public class Form_San_Pham extends JFrame {
 
 	
 		JButton btnTim = new JButton("Tìm kiếm");
+		btnTim.setBackground(new Color(255, 240, 245));
 		btnTim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -983,6 +1006,18 @@ public class Form_San_Pham extends JFrame {
 					comboLoaiSanPham.setSelectedIndex(0);
 					comboNhaCungCap.setSelectedIndex(0);
 					textMaSanPham.requestFocus();
+					
+					lblTBMaSanPham.setText("");
+					lblTBTenSanPham.setText("");
+					lblTBMoTa.setText("");
+					lblTBChatLieu.setText("");
+					lblTBMauSac.setText("");
+					lblTBSoLuong.setText("");
+					lblTBGiamGia.setText("");
+					lblTBHinhAnh.setText("");
+					lblTBGioiTinh.setText("");
+					lblTBGiaNhap.setText("");
+					lblTBGiaBan.setText("");
 	}
 	
 	private void isSelected () {

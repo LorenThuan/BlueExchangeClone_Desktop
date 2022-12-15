@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.KeyboardFocusManager;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -19,26 +18,19 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
-import javax.swing.event.AncestorListener;
 
 import bus.NhanVienService;
 import bus.NhanVienServiceImpl;
-import bus.TaiKhoanService;
-import bus.TaiKhoanServiceImpl;
 import dao.ConectDatabase;
 import dto.NhanVien;
 import dto.TaiKhoan;
 
-import javax.swing.event.AncestorEvent;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

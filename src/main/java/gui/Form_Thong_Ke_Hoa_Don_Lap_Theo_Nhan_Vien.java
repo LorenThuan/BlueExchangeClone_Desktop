@@ -1,19 +1,16 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.toedter.calendar.JDateChooser;
 
 import bus.ThongKeHoaDonLapTheoNhanVienService;
 import bus.ThongKeHoaDonLapTheoNhanVienServiceImpl;
 import dao.ConectDatabase;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.border.TitledBorder;
 import java.awt.ScrollPane;
 import java.awt.Label;
@@ -33,9 +30,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-import javax.swing.JSpinner;
 
 public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 
@@ -71,6 +66,7 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 	 * Create the frame.
 	 */
 	public Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien() {
+		setBackground(new Color(240, 255, 255));
 		try {
 			ConectDatabase.getInstance().connect();
 		} catch (Exception e) {
@@ -79,13 +75,13 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1320, 650);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(175, 238, 238));
+		contentPane.setBackground(new Color(240, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel pnthemHD = new JPanel();
-		pnthemHD.setBackground(new Color(175, 238, 238));
+		pnthemHD.setBackground(new Color(240, 255, 255));
 		pnthemHD.setBorder(new TitledBorder(null, "Th\u00F4ng tin chung", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnthemHD.setBounds(10, 97, 660, 147);
 		contentPane.add(pnthemHD);
@@ -93,7 +89,7 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Ngày:");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblNewLabel.setBounds(10, 22, 47, 20);
+		lblNewLabel.setBounds(10, 22, 62, 20);
 		pnthemHD.add(lblNewLabel);
 		
 		Button XemBC = new Button("Xem Báo Cáo");
@@ -124,12 +120,13 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 				
 			}
 		});
-		XemBC.setBackground(new Color(64, 224, 208));
+		XemBC.setBackground(new Color(255, 240, 245));
 		XemBC.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		XemBC.setBounds(252, 80, 142, 45);
 		pnthemHD.add(XemBC);
 		
 		 cboNgay = new JComboBox();
+		 cboNgay.setBackground(Color.WHITE);
 		cboNgay.addItem("1");
 		cboNgay.addItem("2");
 		cboNgay.addItem("3");
@@ -164,7 +161,7 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 		
 		cboNgay.setMaximumRowCount(10);
 		cboNgay.setEditable(true);
-		cboNgay.setBounds(67, 21, 104, 20);
+		cboNgay.setBounds(82, 21, 89, 20);
 		pnthemHD.add(cboNgay);
 		
 		JLabel lblNewLabel_6 = new JLabel("Tháng: ");
@@ -173,6 +170,7 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 		pnthemHD.add(lblNewLabel_6);
 		
 		 cboThang = new JComboBox();
+		 cboThang.setBackground(Color.WHITE);
 		 cboThang.addItem("1");
 		 cboThang.addItem("2");
 		 cboThang.addItem("3");
@@ -196,25 +194,26 @@ public class Form_Thong_Ke_Hoa_Don_Lap_Theo_Nhan_Vien extends JFrame {
 		pnthemHD.add(lblNewLabel_7);
 		
 		txtnam = new JTextField();
+		txtnam.setBackground(Color.WHITE);
 		txtnam.setBounds(458, 22, 192, 20);
 		pnthemHD.add(txtnam);
 		txtnam.setColumns(10);
 		
 		Label label = new Label("THỐNG KÊ NHÂN VIÊN LẬP HÓA ĐƠN THEO NGÀY");
-		label.setForeground(Color.CYAN);
+		label.setForeground(new Color(0, 0, 0));
 		label.setFont(new Font("Arial", Font.BOLD, 25));
-		label.setBackground(Color.BLUE);
+		label.setBackground(new Color(255, 240, 245));
 		label.setBounds(361, 36, 730, 32);
 		contentPane.add(label);
 		
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setBackground(Color.BLUE);
+		scrollPane.setBackground(new Color(255, 240, 245));
 		scrollPane.setBounds(10, 10, 1284, 81);
 		contentPane.add(scrollPane);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Th\u00F4ng tin chi ti\u1EBFt", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBackground(new Color(175, 238, 238));
+		panel.setBackground(new Color(240, 255, 255));
 		panel.setBounds(680, 97, 614, 147);
 		contentPane.add(panel);
 		panel.setLayout(null);
