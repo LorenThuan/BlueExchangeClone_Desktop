@@ -744,8 +744,11 @@ public class Form_San_Pham extends JFrame implements KeyListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				themSanPham();
-				xoaRong();
+				if (kiemTraDuLieu()) {
+					themSanPham();
+					xoaRong();
+				}
+				
 			}
 		});
 		
